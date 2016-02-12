@@ -43,7 +43,7 @@ public class BattleField implements Field {
         return "End";
     }
 
-    void turnTheSun() {
+    public void turnTheSun() {
         sun = !sun;
         if (sun) {
             System.out.println("the sun is up");

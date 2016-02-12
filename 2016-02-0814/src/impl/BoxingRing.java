@@ -43,7 +43,7 @@ public class BoxingRing implements Field {
         return "End";
     }
 
-    void turnTheLights() {
+    public void turnTheLights() {
         lights = !lights;
         if (lights) {
             System.out.println("the lights were turned up");

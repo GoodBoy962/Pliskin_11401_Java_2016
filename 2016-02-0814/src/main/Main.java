@@ -17,6 +17,7 @@ public class Main {
         hero.setWeapon(heroWeapon);
         hero.setOpponent(monster);
         monster.setOpponent(hero);
+        ((BattleField) field).turnTheSun();
         field.setAudience(audience);
         field.setFighters(hero, monster);
         field.startBattle("The battle is starting!!!");
@@ -33,6 +34,7 @@ public class Main {
         } else {
             System.out.println(monster.surrender());
         }
+        ((BattleField) field).turnTheSun();
 
         System.out.println();
         System.out.println();
@@ -50,6 +52,7 @@ public class Main {
         field1.setFighters(superHero, monster1);
         field1.setAudience(audience1);
         field1.startBattle("Wolverine vs Gungster");
+        ((BoxingRing) field1).turnTheLights();
         String monsterAttack1 = monster1.makeAttack();
         String superHeroAttack = superHero.makeAttack();
         while (!superHeroAttack.equals("LOST") && !monsterAttack1.equals("LOST")) {
@@ -63,5 +66,6 @@ public class Main {
         } else {
             System.out.println(monster1.surrender());
         }
+        ((BoxingRing) field1).turnTheLights();
     }
 }
