@@ -52,7 +52,7 @@ public class Main {
         field1.startBattle("Wolverine vs Gungster");
         String monsterAttack1 = monster1.makeAttack();
         String superHeroAttack = superHero.makeAttack();
-        while (!heroAttack.equals("LOST") && !monsterAttack.equals("LOST")) {
+        while (!superHeroAttack.equals("LOST") && !monsterAttack1.equals("LOST")) {
             System.out.println(monsterAttack1);
             System.out.println(superHeroAttack);
             monsterAttack1 = monster1.makeAttack();

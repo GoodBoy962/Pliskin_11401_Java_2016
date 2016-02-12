@@ -21,7 +21,7 @@ public class Wolverine implements SuperHero, Regeneratable {
 
     public Wolverine(String name) {
         this.name = name;
-        System.out.println("i am dragon the " + name + " and I'll kill you");
+        System.out.println("i am wolverine the " + name + " and I'll kill you");
     }
 
     @Override
