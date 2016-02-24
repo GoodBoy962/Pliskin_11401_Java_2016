@@ -27,7 +27,7 @@ public class Matrix2x2Test {
         Matrix2x2 matrix2x2 = new Matrix2x2();
         Assert.assertTrue(Arrays.deepEquals(
                 matrix2x2.getArr(),
-                new double[2][2]
+                new double[][]{{0.0, 0.0}, {0.0, 0.0}}
         ));
     }
 

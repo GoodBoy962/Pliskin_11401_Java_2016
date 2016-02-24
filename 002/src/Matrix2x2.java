@@ -3,7 +3,7 @@ public class Matrix2x2 {
     private double[][] arr;
 
     public Matrix2x2() {
-        arr = new double[2][2];
+        arr = new double[][]{{0.0, 0.0}, {0.0, 0.0}};
     }
 
     public Matrix2x2(double[][] arr) {
