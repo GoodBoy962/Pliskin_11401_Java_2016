@@ -51,4 +51,16 @@ public class BoxingRing implements Field {
             System.out.println("the lights were turned down");
         }
     }
+
+    public Audience getAudience() {
+        return audience;
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
 }

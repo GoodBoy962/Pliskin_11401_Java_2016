@@ -52,4 +52,19 @@ public class BattleField implements Field {
         }
     }
 
+    public Audience getAudience() {
+        return audience;
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public boolean isSun() {
+        return sun;
+    }
 }
