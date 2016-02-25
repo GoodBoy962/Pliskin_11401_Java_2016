@@ -3,7 +3,7 @@ public class Matrix2x2 {
     private double[][] arr;
 
     public Matrix2x2() {
-        arr = new double[][]{{0.0, 0.0}, {0.0, 0.0}};
+        this(new double[][]{{0.0, 0.0}, {0.0, 0.0}});
     }
 
     public Matrix2x2(double[][] arr) {
@@ -11,11 +11,11 @@ public class Matrix2x2 {
     }
 
     public Matrix2x2(double a11, double a12, double a21, double a22) {
-        arr = new double[][]{{a11, a12}, {a21, a22}};
+        this(new double[][]{{a11, a12}, {a21, a22}});
     }
 
     public Matrix2x2(double a) {
-        arr = new double[][]{{a, a}, {a, a}};
+        this(new double[][]{{a, a}, {a, a}});
     }
 
     public Matrix2x2 add(Matrix2x2 matrix2) {
