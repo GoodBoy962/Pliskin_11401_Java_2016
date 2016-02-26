@@ -53,5 +53,18 @@ public class Clutches implements Weapon {
     public boolean isBroken() {
         return lifetime <= 0 && restAttacksBeforeReload <= 0;
     }
+
+    public int getLifetime() {
+        return lifetime;
+    }
+
+    public byte getRestAttacksBeforeReload() {
+        return restAttacksBeforeReload;
+    }
+
+    public boolean isSharpened() {
+        return sharpened;
+    }
+
 }
 

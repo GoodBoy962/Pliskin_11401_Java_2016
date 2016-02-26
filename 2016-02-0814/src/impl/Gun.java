@@ -53,4 +53,16 @@ public class Gun implements Weapon {
     public boolean isBroken() {
         return lifetime <= 0 && restAttacksBeforeReload <= 0;
     }
+
+    public byte getRestAttacksBeforeReload() {
+        return restAttacksBeforeReload;
+    }
+
+    public int getLifetime() {
+        return lifetime;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
 }

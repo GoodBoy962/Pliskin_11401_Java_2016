@@ -53,4 +53,16 @@ public class FireBallsStroker implements Weapon {
     public boolean isBroken() {
         return lifetime <= 0 && restAttacksBeforeReload <= 0;
     }
+
+    public int getLifetime() {
+        return lifetime;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    public byte getRestAttacksBeforeReload() {
+        return restAttacksBeforeReload;
+    }
 }

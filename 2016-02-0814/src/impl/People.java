@@ -24,7 +24,7 @@ public class People implements Audience {
 
     @Override
     public boolean isReady() {
-        return isReady();
+        return isReady;
     }
 
     @Override
@@ -35,5 +35,17 @@ public class People implements Audience {
     @Override
     public void goAway() {
         System.out.println("Good Fight");
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getWords() {
+        return words;
     }
 }

@@ -24,7 +24,7 @@ public class Orgs implements Audience {
 
     @Override
     public boolean isReady() {
-        return isReady();
+        return isReady;
     }
 
     @Override
@@ -35,5 +35,17 @@ public class Orgs implements Audience {
     @Override
     public void goAway() {
         System.out.println("sdghsilhsvhegsesev[e");
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getWords() {
+        return words;
     }
 }

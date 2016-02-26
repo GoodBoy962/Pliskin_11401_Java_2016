@@ -1,4 +1,4 @@
-package test;
+package impl;
 
 import impl.*;
 import interfaces.Audience;
@@ -61,6 +61,14 @@ public class BoxingRingTest {
     @Test
     public void endBattleWorksGood() {
         Assert.assertEquals("End", new BattleField().endBattle("end"));
+    }
+
+    @Test
+    public void theLightsShouldTurningGood() {
+        BoxingRing boxingRing = new BoxingRing();
+        boxingRing.turnTheLights();
+        boxingRing.turnTheLights();
+        Assert.assertEquals("the lights were turned up\n" + "the lights were turned down\n", outContent.toString());
     }
 
 
