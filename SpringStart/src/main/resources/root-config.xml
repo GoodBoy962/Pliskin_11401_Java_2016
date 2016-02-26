@@ -16,10 +16,10 @@
         <property name="name" value="Alex"/>
         <property name="institute" ref="kpfu"/>
         <property name="lessons">
-            <list>
-                <value>maths</value>
-                <value>informatics</value>
-                <value>databases</value>
+            <list value-type="com.pliskin.Lesson">
+                <ref bean="maths"/>
+                <ref bean="informatics"/>
+                <ref bean="databases"/>
             </list>
         </property>
     </bean>
@@ -28,10 +28,10 @@
         <property name="name" value="Denis"/>
         <property name="institute" ref="mfti"/>
         <property name="lessons">
-            <list>
-                <value>maths</value>
-                <value>physics</value>
-                <value>databases</value>
+            <list value-type="com.pliskin.Lesson">
+                <ref bean="maths"/>
+                <ref bean="physics"/>
+                <ref bean="databases"/>
             </list>
         </property>
     </bean>
@@ -51,6 +51,8 @@
     <bean id="databases" class="com.pliskin.Lesson">
         <constructor-arg value="databases"/>
     </bean>
+
+    <!--<bean id="superLesson" class="com.pliskin.Lesson" factory-method="getLesson()"/>-->
 
 
     <!--<context:component-scan base-package=""/>-->

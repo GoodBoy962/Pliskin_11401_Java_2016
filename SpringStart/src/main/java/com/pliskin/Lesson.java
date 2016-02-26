@@ -18,4 +18,8 @@ public class Lesson {
     public String getName() {
         return name;
     }
+
+    public static Lesson getLesson() {
+        return new Lesson();
+    }
 }
