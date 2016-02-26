@@ -11,6 +11,9 @@ public class Main {
         Student student1 = (Student) context.getBean("student1");
         Student student2 = (Student) context.getBean("student2");
 
+        Lesson databases = (Lesson) context.getBean("databases");
+        System.out.println(student1.getLessons());
+
     }
 
 }

@@ -19,6 +19,7 @@
             <list>
                 <value>maths</value>
                 <value>informatics</value>
+                <value>databases</value>
             </list>
         </property>
     </bean>
@@ -30,6 +31,7 @@
             <list>
                 <value>maths</value>
                 <value>physics</value>
+                <value>databases</value>
             </list>
         </property>
     </bean>
@@ -44,6 +46,10 @@
 
     <bean id="physics" class="com.pliskin.Lesson">
         <property name="name" value="physics"/>
+    </bean>
+
+    <bean id="databases" class="com.pliskin.Lesson">
+        <constructor-arg value="databases"/>
     </bean>
 
 
