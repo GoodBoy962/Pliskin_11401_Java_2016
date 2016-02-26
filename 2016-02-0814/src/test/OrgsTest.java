@@ -1,6 +1,8 @@
-package impl;
+package test;
 
-import interfaces.Hero;
+import impl.Dragon;
+import impl.Orgs;
+import interfaces.Monster;
 import org.junit.*;
 
 import java.io.ByteArrayOutputStream;
@@ -8,10 +10,10 @@ import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
 
-public class PeopleTest {
+public class OrgsTest {
 
-    private static Hero hero;
-    private static People people;
+    private static Monster monster;
+    private static Orgs orgs;
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -31,29 +33,29 @@ public class PeopleTest {
 
     @BeforeClass
     public static void initObjects() {
-        hero = mock(Wolverine.class);
-        people = new People("UHUHU", hero, 10000);
+        monster = mock(Dragon.class);
+        orgs = new Orgs("Orgs!!!!", monster, 100);
     }
 
     @Test
     public void orgsShouldBeGoodCreated() {
-        Assert.assertTrue(people.isReady() &&
-                people.getHero() == hero &&
-                people.getNumber() == 10000 &&
-                people.getWords().equals("UHUHU")
+        Assert.assertTrue(orgs.isReady() &&
+                orgs.getMonster() == monster &&
+                orgs.getNumber() == 100 &&
+                orgs.getWords().equals("Orgs!!!!")
         );
     }
 
     @Test
     public void orgsShouldSay() {
-        people.say("qwerty");
+        orgs.say("qwerty");
         Assert.assertEquals("qwerty\n", outContent.toString());
     }
 
     @Test
     public void orgsShouldSaySomethingNotUnderstandableWhileGoingAway() {
-        people.goAway();
-        Assert.assertTrue(outContent.toString().contains("Good"));
+        orgs.goAway();
+        Assert.assertTrue(outContent.toString().contains("sev["));
     }
 
 }

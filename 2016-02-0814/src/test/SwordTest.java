@@ -1,5 +1,6 @@
-package impl;
+package test;
 
+import impl.Sword;
 import interfaces.Weapon;
 import org.junit.After;
 import org.junit.Assert;

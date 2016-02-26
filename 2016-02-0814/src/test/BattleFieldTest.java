@@ -1,5 +1,9 @@
-package impl;
+package test;
 
+import impl.BattleField;
+import impl.Dragon;
+import impl.Knight;
+import impl.People;
 import interfaces.Audience;
 import interfaces.Hero;
 import interfaces.Monster;
@@ -52,14 +56,14 @@ public class BattleFieldTest {
 
     @Test
     public void setAndGetFightersWorksOk() {
-        BoxingRing boxingRing = new BoxingRing();
-        boxingRing.setFighters(hero, monster);
-        Assert.assertTrue(hero.equals(boxingRing.getHero()) && monster.equals(boxingRing.getMonster()));
+        BattleField battleField = new BattleField();
+        battleField.setFighters(hero, monster);
+        Assert.assertTrue(hero.equals(battleField.getHero()) && monster.equals(battleField.getMonster()));
     }
 
     @Test
     public void endBattleWorksGood() {
-        Assert.assertEquals("End", new BoxingRing().endBattle("end"));
+        Assert.assertEquals("End", new BattleField().endBattle("end"));
     }
 
     @Test
@@ -68,6 +72,12 @@ public class BattleFieldTest {
         battleField.turnTheSun();
         battleField.turnTheSun();
         Assert.assertEquals("the sun is up\n" + "the sun is down\n", outContent.toString());
+    }
+
+    @Test
+    public void theSunShouldBe() {
+        BattleField battleField = new BattleField();
+        Assert.assertTrue(!battleField.isSun());
     }
 
 }

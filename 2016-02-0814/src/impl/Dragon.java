@@ -50,6 +50,7 @@ public class Dragon implements Monster, Regeneratable {
         if (lives > 0) {
             if (weapon.isBroken()) {
                 setWeapon(weapon);
+                lives--;
             }
         } else {
             System.out.println(surrender());
@@ -61,5 +62,21 @@ public class Dragon implements Monster, Regeneratable {
         if (weapon.isBroken() && lives == 0) {
             System.out.println("the " + name + " lives level is over");
         }
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
 }

@@ -40,7 +40,7 @@ public class Main {
         System.out.println();
         System.out.println("Fight 2");
         Field field1 = new BoxingRing();
-        Monster monster1 = new Gungster();
+        Monster monster1 = new Gungster("Mica");
         SuperHero superHero = new Wolverine("Hugh Jackman");
         Weapon monsterWeapon1 = new Gun();
         Weapon superHeroWeapon = new Clutches();

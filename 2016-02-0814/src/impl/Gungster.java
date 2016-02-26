@@ -12,7 +12,11 @@ public class Gungster implements Monster {
 
     private String name;
 
-    private int extraLives = 0;
+    private final int extraLives = 0;
+
+    public Gungster(String name) {
+        this.name = name;
+    }
 
     @Override
     public void setWeapon(Weapon weapon) {
@@ -37,4 +41,22 @@ public class Gungster implements Monster {
     public void setOpponent(Hero hero) {
         this.hero = hero;
     }
+
+    public int getExtraLives() {
+        return extraLives;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+
 }

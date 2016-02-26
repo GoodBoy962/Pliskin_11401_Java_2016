@@ -38,4 +38,24 @@ public class Knight implements Hero {
     public void setOpponent(Monster monster) {
         this.monster = monster;
     }
+
+    public int getExtraLives() {
+        return extraLives;
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
 }

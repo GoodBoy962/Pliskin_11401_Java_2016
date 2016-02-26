@@ -1,6 +1,9 @@
-package impl;
+package test;
 
-import impl.*;
+import impl.BoxingRing;
+import impl.Gungster;
+import impl.Orgs;
+import impl.Wolverine;
 import interfaces.Audience;
 import interfaces.Hero;
 import interfaces.Monster;
@@ -60,7 +63,7 @@ public class BoxingRingTest {
 
     @Test
     public void endBattleWorksGood() {
-        Assert.assertEquals("End", new BattleField().endBattle("end"));
+        Assert.assertEquals("End", new BoxingRing().endBattle("end"));
     }
 
     @Test

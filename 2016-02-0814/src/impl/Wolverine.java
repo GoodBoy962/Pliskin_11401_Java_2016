@@ -37,6 +37,7 @@ public class Wolverine implements SuperHero, Regeneratable {
             if (lives > 0) {
                 regenerate();
                 updateWeapon(new Clutches());
+                lives--;
                 return "regenerating";
             } else {
                 return "LOST";
@@ -48,7 +49,6 @@ public class Wolverine implements SuperHero, Regeneratable {
     public String runaway() {
         return "I'd like to run away";
     }
-
 
     @Override
     public void setOpponent(Monster monster) {
@@ -87,8 +87,8 @@ public class Wolverine implements SuperHero, Regeneratable {
     @Override
     public String makeSuperAttack() {
         String superAttack = "";
-        for (Weapon weap : weapons) {
-            superAttack += weap.attack();
+        for (int i = 0; i < weapons.size(); i++) {
+            superAttack += weapons.get(i).attack();
         }
         return superAttack;
     }
@@ -96,5 +96,25 @@ public class Wolverine implements SuperHero, Regeneratable {
     @Override
     public String flyAway(String finalWords) {
         return finalWords;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public String getName() {
+        return name;
     }
 }
