@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="kpfu" class="com.pliskin.Institute">
+        <property name="name" value="kpfu"/>
+    </bean>
+
+    <bean id="mfti" class="com.pliskin.Institute">
+        <property name="name" value="mfti"/>
+    </bean>
+
+
+    <bean id="student1" class="com.pliskin.Student">
+        <property name="name" value="Alex"/>
+        <property name="institute" ref="kpfu"/>
+        <property name="lessons">
+            <list value-type="com.pliskin.Lesson">
+                <ref bean="maths"/>
+                <ref bean="informatics"/>
+                <ref bean="databases"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="student2" class="com.pliskin.Student">
+        <property name="name" value="Denis"/>
+        <property name="institute" ref="mfti"/>
+        <property name="lessons">
+            <list value-type="com.pliskin.Lesson">
+                <ref bean="maths"/>
+                <ref bean="physics"/>
+                <ref bean="databases"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="maths" class="com.pliskin.Lesson">
+        <property name="name" value="maths"/>
+    </bean>
+
+    <bean id="informatics" class="com.pliskin.Lesson">
+        <property name="name" value="informatics"/>
+    </bean>
+
+    <bean id="physics" class="com.pliskin.Lesson">
+        <property name="name" value="physics"/>
+    </bean>
+
+    <bean id="databases" class="com.pliskin.Lesson">
+        <constructor-arg value="databases"/>
+    </bean>
+
+    <!--<bean id="superLesson" class="com.pliskin.Lesson" factory-method="getLesson()"/>-->
+
+
+    <!--<context:component-scan base-package=""/>-->
+
+</beans>
