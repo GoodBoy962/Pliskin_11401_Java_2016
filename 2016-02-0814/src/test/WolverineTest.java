@@ -47,7 +47,7 @@ public class WolverineTest {
         weapon1 = mock(Gun.class);
         when(weapon.attack()).thenReturn("Ok");
         when(weapon1.attack()).thenReturn("ey");
-        wolverine = context.getBean(Wolverine.class);
+        wolverine = (Wolverine) context.getBean("wolwerine");
 //        gungster = new Gungster("Mica");
         weapons = mock(LinkedList.class);
         when(weapons.get(0)).thenReturn(weapon);
@@ -59,9 +59,17 @@ public class WolverineTest {
     @Test
     public void wolverineShouldBeGoodInitialized() {
         context = new ClassPathXmlApplicationContext("spring-config.xml");
-        wolverine = context.getBean(Wolverine.class);
+        wolverine = (Wolverine) context.getBean("wolwerine");
         Assert.assertTrue(wolverine.getName().equals("Hugh Jackman") &&
                 outContent.toString().contains("i am wolverine the " + wolverine.getName() + " and I'll kill you\n")
+        );
+    }
+
+    @Test
+    public void defaultWolverineShouldBeGoodInitialized() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
+        wolverine = (Wolverine) context.getBean("wolverine1");
+        Assert.assertTrue(outContent.toString().contains("i am wolverine the " + wolverine.getName() + " and I'll kill you\n")
         );
     }
 
@@ -103,7 +111,7 @@ public class WolverineTest {
 
     @Test
     public void wolverineShouldUpdateWeaponOnlyOnce() {
-        wolverine = context.getBean(Wolverine.class);
+        wolverine = (Wolverine) context.getBean("wolwerine");
         when(weapon.isBroken()).thenReturn(true);
         wolverine.setWeapon(weapon);
         wolverine.updateWeapon(weapon);
@@ -115,7 +123,7 @@ public class WolverineTest {
     @Test
     public void impossibleToDoShouldWorkWhenNoLives() {
         context = new ClassPathXmlApplicationContext("spring-config.xml");
-        wolverine = context.getBean(Wolverine.class);
+        wolverine = (Wolverine) context.getBean("wolwerine");
         when(weapon.isBroken()).thenReturn(true);
         wolverine.updateWeapon(weapon);
         wolverine.impossibleToDo();
@@ -125,7 +133,7 @@ public class WolverineTest {
 
     @Test
     public void getLivesShouldWorkOk() {
-        Assert.assertEquals(wolverine.getLives(), 0);
+        Assert.assertEquals(wolverine.getLives(), 1);
     }
 
     @Test

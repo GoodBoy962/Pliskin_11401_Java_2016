@@ -62,6 +62,8 @@
         </property>
     </bean>
 
+    <bean id="wolverine1" class="impl.Wolverine"/>
+
     <bean id="clutches" class="impl.Clutches"/>
 
     <bean id="gun" class="impl.Gun"/>
@@ -74,5 +76,6 @@
     <bean id="clutches2" class="impl.Clutches"/>
     <bean id="clutches1" class="impl.Clutches"/>
 
+    <bean id="defaultPeople" class="impl.People"/>
 
 </beans>

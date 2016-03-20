@@ -48,7 +48,7 @@ public class ComplexMatrix2x2 {
     }
 
     public ComplexNumber det() {
-        return (arr[0][0].mult(arr[1][1])).div((arr[0][1].mult(arr[1][0])));
+        return (arr[0][0].mult(arr[1][1])).sub((arr[0][1].mult(arr[1][0])));
     }
 
     public ComplexVector2D multVector(ComplexVector2D vector) {

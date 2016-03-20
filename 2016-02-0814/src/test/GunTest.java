@@ -34,6 +34,7 @@ public class GunTest {
 
     @Test
     public void gunShouldBeGoodInit() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
         Gun gun = (Gun) context.getBean("gun");
         Assert.assertTrue(gun.getLifetime() == 20 && gun.getRestAttacksBeforeReload() == 5);
     }
@@ -59,6 +60,13 @@ public class GunTest {
             gun.attack();
         }
         Assert.assertTrue(gun.getLifetime() == 0);
+    }
+
+    @Test
+    public void getRestAttacksBeforeReloadShouldWork() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
+        Gun gun = (Gun) context.getBean("gun");
+        Assert.assertEquals(gun.getRestAttacksBeforeReload(), 5);
     }
 
 }

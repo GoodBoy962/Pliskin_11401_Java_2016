@@ -37,13 +37,15 @@ public class PeopleTest {
     public static void initObjects() {
         context = new ClassPathXmlApplicationContext("spring-config.xml");
         hero = mock(Wolverine.class);
-        people = context.getBean(People.class);
+        people = (People) context.getBean("people");
     }
 
     @Test
     public void peopleShouldBeGoodCreated() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
+        people = (People) context.getBean("people");
         Assert.assertTrue(people.isReady() &&
-                people.getHero() == context.getBean(Wolverine.class) &&
+                people.getHero() == context.getBean("wolwerine") &&
                 people.getNumber() == 1000 &&
                 people.getWords().equals("UHUHU")
         );
@@ -59,6 +61,32 @@ public class PeopleTest {
     public void peopleShouldSaySomethingNotUnderstandableWhileGoingAway() {
         people.goAway();
         Assert.assertTrue(outContent.toString().contains("Good"));
+    }
+
+    @Test
+    public void setAndGetPeopleShouldSetOkey() {
+        people.setNumber(100);
+        Assert.assertEquals(people.getNumber(), 100);
+    }
+
+    @Test
+    public void defaultPeopleShouldBeGoodInit() {
+        People people = (People) context.getBean("defaultPeople");
+        Assert.assertNull(people.getHero());
+    }
+
+    @Test
+    public void setWordWorkOkey() {
+        People people = (People) context.getBean("defaultPeople");
+        people.setWords("alo");
+        Assert.assertEquals(people.getWords(), "alo");
+    }
+
+    @Test
+    public void setHeroWorkOkey() {
+        People people = (People) context.getBean("defaultPeople");
+        people.setHero(hero);
+        Assert.assertEquals(people.getHero(), hero);
     }
 
 }

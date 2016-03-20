@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="num1" class="com.pliskin.ComplexNumber">
+        <constructor-arg index="0" value="1.0" type="double"/>
+        <constructor-arg index="1" value="2.0" type="double"/>
+    </bean>
+    <bean id="num2" class="com.pliskin.ComplexNumber">
+        <constructor-arg index="0" value="2.0" type="double"/>
+        <constructor-arg index="1" value="4.0" type="double"/>
+    </bean>
+    <bean id="num3" class="com.pliskin.ComplexNumber">
+        <constructor-arg index="0" value="-3.0" type="double"/>
+        <constructor-arg index="1" value="4.0" type="double"/>
+    </bean>
+    <bean id="zeroNum" class="com.pliskin.ComplexNumber">
+        <constructor-arg index="0" value="0.0" type="double"/>
+        <constructor-arg index="1" value="0.0" type="double"/>
+    </bean>
+
+    <util:list id="arr">
+        <util:list>
+            <ref bean="num1"/>
+            <ref bean="num1"/>
+        </util:list>
+        <util:list>
+            <ref bean="num1"/>
+            <ref bean="num1"/>
+        </util:list>
+    </util:list>
+
+    <util:list id="arr2">
+        <util:list>
+            <ref bean="num2"/>
+            <ref bean="num2"/>
+        </util:list>
+        <util:list>
+            <ref bean="num2"/>
+            <ref bean="num2"/>
+        </util:list>
+    </util:list>
+
+    <util:list id="zeroArr">
+        <util:list>
+            <ref bean="zeroNum"/>
+            <ref bean="zeroNum"/>
+        </util:list>
+        <util:list>
+            <ref bean="zeroNum"/>
+            <ref bean="zeroNum"/>
+        </util:list>
+    </util:list>
+
+    <bean id="matrix2x2" class="com.pliskin.ComplexMatrix2x2" scope="prototype">
+        <constructor-arg index="0" ref="arr"/>
+    </bean>
+
+    <bean id="num1Matrix" class="com.pliskin.ComplexMatrix2x2" scope="prototype">
+        <constructor-arg index="0" ref="num1"/>
+        <constructor-arg index="1" ref="num1"/>
+        <constructor-arg index="2" ref="num1"/>
+        <constructor-arg index="3" ref="num1"/>
+    </bean>
+
+    <bean id="matrixZero" class="com.pliskin.ComplexMatrix2x2" scope="prototype">
+        <constructor-arg index="0" ref="zeroArr"/>
+    </bean>
+
+    <bean id="vector" class="com.pliskin.ComplexVector2D" scope="prototype">
+        <constructor-arg index="0" ref="num1"/>
+        <constructor-arg index="1" ref="zeroNum"/>
+    </bean>
+
+    <bean id="defaultMatrix" class="com.pliskin.ComplexMatrix2x2" scope="prototype"/>
 
 </beans>

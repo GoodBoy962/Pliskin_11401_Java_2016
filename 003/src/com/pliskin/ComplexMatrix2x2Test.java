@@ -24,7 +24,7 @@ public class ComplexMatrix2x2Test {
 
     @BeforeClass
     public static void initComplexNumbers() {
-        context = new ClassPathXmlApplicationContext("spring-config");
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
         num1 = mock(ComplexNumber.class);
         num2 = mock(ComplexNumber.class);
         num3 = mock(ComplexNumber.class);
@@ -44,9 +44,9 @@ public class ComplexMatrix2x2Test {
         when(num3.length()).thenReturn(5.0);
         when(zeroNum.length()).thenReturn((double) 0);
 
-        arr = new ComplexNumber[][]{{num1, num1}, {num1, num1}};//TODO as bean
-        arr2 = new ComplexNumber[][]{{num2, num2}, {num2, num2}};//TODO as bean
-        zeroArr = new ComplexNumber[][]{{zeroNum, zeroNum}, {zeroNum, zeroNum}};//TODO as bean
+        arr = new ComplexNumber[][]{{num1, num1}, {num1, num1}};
+        arr2 = new ComplexNumber[][]{{num2, num2}, {num2, num2}};
+        zeroArr = new ComplexNumber[][]{{zeroNum, zeroNum}, {zeroNum, zeroNum}};
 
         when(num1.add(num1)).thenReturn(num2);
         when(num1.mult(num1)).thenReturn(num3);
@@ -58,8 +58,8 @@ public class ComplexMatrix2x2Test {
         when(num2.mult(zeroNum)).thenReturn(zeroNum);
 
         when(num3.add(zeroNum)).thenReturn(num3);
-        when(num3.div(num3)).thenReturn(zeroNum);
-        when(num3.div(zeroNum)).thenReturn(num3);
+        when(num3.sub(num3)).thenReturn(zeroNum);
+        when(num3.sub(zeroNum)).thenReturn(num3);
 
         when(zeroNum.add(num1)).thenReturn(num1);
         when(zeroNum.add(num2)).thenReturn(num2);
