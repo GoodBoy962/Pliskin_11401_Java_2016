@@ -7,20 +7,24 @@ import interfaces.Weapon;
 
 import java.util.List;
 
-
 public class Wolverine implements SuperHero, Regeneratable {
-    Weapon weapon;
 
-    String name;
+    private Weapon weapon;
 
-    Monster monster;
+    private String name;
 
-    int lives = 1;
+    private Monster monster;
 
-    List<Weapon> weapons;
+    private int lives = 1;
+
+    private List<Weapon> weapons;
 
     public Wolverine(String name) {
         this.name = name;
+        System.out.println("i am wolverine the " + name + " and I'll kill you");
+    }
+
+    public Wolverine() {
         System.out.println("i am wolverine the " + name + " and I'll kill you");
     }
 

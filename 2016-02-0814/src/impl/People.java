@@ -3,7 +3,6 @@ package impl;
 import interfaces.Audience;
 import interfaces.Hero;
 
-
 public class People implements Audience {
 
     private boolean isReady;
@@ -19,6 +18,10 @@ public class People implements Audience {
         this.hero = hero;
         this.number = number;
         isReady = true;
+    }
+
+    public People() {
+
     }
 
 
@@ -47,5 +50,17 @@ public class People implements Audience {
 
     public String getWords() {
         return words;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void setWords(String words) {
+        this.words = words;
     }
 }

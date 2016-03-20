@@ -1,8 +1,12 @@
+package com.pliskin;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Arrays;
 
@@ -16,9 +20,11 @@ public class ComplexMatrix2x2Test {
     private static ComplexNumber arr[][], arr2[][], zeroArr[][];
     private static ComplexMatrix2x2 matrix2x2, matrixZero;
     private static ComplexVector2D vector;
+    private static ApplicationContext context;
 
     @BeforeClass
     public static void initComplexNumbers() {
+        context = new ClassPathXmlApplicationContext("spring-config");
         num1 = mock(ComplexNumber.class);
         num2 = mock(ComplexNumber.class);
         num3 = mock(ComplexNumber.class);
@@ -38,9 +44,9 @@ public class ComplexMatrix2x2Test {
         when(num3.length()).thenReturn(5.0);
         when(zeroNum.length()).thenReturn((double) 0);
 
-        arr = new ComplexNumber[][]{{num1, num1}, {num1, num1}};
-        arr2 = new ComplexNumber[][]{{num2, num2}, {num2, num2}};
-        zeroArr = new ComplexNumber[][]{{zeroNum, zeroNum}, {zeroNum, zeroNum}};
+        arr = new ComplexNumber[][]{{num1, num1}, {num1, num1}};//TODO as bean
+        arr2 = new ComplexNumber[][]{{num2, num2}, {num2, num2}};//TODO as bean
+        zeroArr = new ComplexNumber[][]{{zeroNum, zeroNum}, {zeroNum, zeroNum}};//TODO as bean
 
         when(num1.add(num1)).thenReturn(num2);
         when(num1.mult(num1)).thenReturn(num3);

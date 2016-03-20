@@ -2,7 +2,6 @@ package impl;
 
 import interfaces.Weapon;
 
-
 public class Gun implements Weapon {
     private final byte FULL_ATTACKS = 5;
 

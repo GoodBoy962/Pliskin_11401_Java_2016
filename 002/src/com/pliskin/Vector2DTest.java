@@ -1,4 +1,10 @@
-import org.junit.*;
+package com.pliskin;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Vector2DTest {
 
@@ -6,28 +12,14 @@ public class Vector2DTest {
 
     private static Vector2D v;
     private static Vector2D vDefault;
+    private static ApplicationContext context;
 
     @BeforeClass
     public static void beforeClass() {
-        v = new Vector2D(3, 4);
-        vDefault = new Vector2D();
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
+        v = (Vector2D) context.getBean("vector");
+        vDefault = (Vector2D) context.getBean("defaultVector");
     }
-
-    @AfterClass
-    public static void afterClass() {
-        System.out.println("AfterClass");
-    }
-
-    @Before
-    public void before() {
-        System.out.println("before");
-    }
-
-    @After
-    public void after() {
-        System.out.println("after");
-    }
-
 
     @Test
     public void defaultVectorShouldHaveZeroLength() {
@@ -41,19 +33,22 @@ public class Vector2DTest {
 
     @Test
     public void firstParameterShouldBeSavedInX() {
-        Vector2D v = new Vector2D(3, 4);
+//        Vector2D v = new Vector2D(3, 4);
+        Vector2D v = (Vector2D) context.getBean("vector");
         Assert.assertEquals(3, v.getX(), EPS);
     }
 
     @Test
     public void secondParameterShouldBeSavedInY() {
-        Vector2D v = new Vector2D(3, 4);
+//        Vector2D v = new Vector2D(3, 4);
+        Vector2D v = (Vector2D) context.getBean("vector");
         Assert.assertEquals(4, v.getY(), EPS);
     }
 
     @Test
     public void afterAddingVectorCoordinatesShouldBeGood() {
-        Vector2D v1 = new Vector2D(1, 1);
+//        Vector2D v1 = new Vector2D(1, 1);
+        Vector2D v1 = (Vector2D) context.getBean("vector1");
         v1.addVector(v);
         Assert.assertTrue(v1.getX() == 4 && v1.getY() == 5);
     }

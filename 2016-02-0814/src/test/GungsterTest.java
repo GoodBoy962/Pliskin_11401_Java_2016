@@ -6,6 +6,8 @@ import impl.Wolverine;
 import interfaces.Hero;
 import interfaces.Weapon;
 import org.junit.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -21,6 +23,7 @@ public class GungsterTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private static ApplicationContext context;
 
     @Before
     public void setUpStreams() {
@@ -36,16 +39,18 @@ public class GungsterTest {
 
     @BeforeClass
     public static void initVariables() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
         weapon = mock(FireBallsStroker.class);
         when(weapon.attack()).thenReturn("Ok");
         hero = mock(Wolverine.class);
-        gungster = new Gungster("Mica");
+        gungster = context.getBean(Gungster.class);
     }
 
 
     @Test
     public void gungsterShouldBeGoodInitialized() {
-        gungster = new Gungster("Mica");
+//        gungster = new Gungster("Mica");
+        gungster = context.getBean(Gungster.class);
         Assert.assertTrue(gungster.getName().equals("Mica"));
     }
 
@@ -68,7 +73,7 @@ public class GungsterTest {
     }
 
     @Test
-    public void dragonCanMakeAnAttack() {
+    public void gungsterCanMakeAnAttack() {
         gungster.setWeapon(weapon);
         gungster.makeAttack();
         when(weapon.isBroken()).thenReturn(true);

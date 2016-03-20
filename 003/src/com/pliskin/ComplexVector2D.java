@@ -1,3 +1,5 @@
+package com.pliskin;
+
 public class ComplexVector2D {
     private ComplexNumber x, y;
 

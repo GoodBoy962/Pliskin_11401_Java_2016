@@ -2,10 +2,9 @@ package test;
 
 import impl.Gun;
 import interfaces.Weapon;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,7 +13,12 @@ public class GunTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private static ApplicationContext context;
 
+    @BeforeClass
+    public static void beforeClass() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
+    }
 
     @Before
     public void setUpStreams() {
@@ -29,28 +33,28 @@ public class GunTest {
     }
 
     @Test
-    public void clutchesShouldBeGoodInit() {
-        Gun gun = new Gun();
+    public void gunShouldBeGoodInit() {
+        Gun gun = (Gun) context.getBean("gun");
         Assert.assertTrue(gun.getLifetime() == 20 && gun.getRestAttacksBeforeReload() == 5);
     }
 
     @Test
     public void tuneIsOk() {
-        Weapon weapon = new Gun();
+        Weapon weapon = (Weapon) context.getBean("gun");
         weapon.tune();
         Assert.assertEquals("gun is ready\n", outContent.toString());
     }
 
     @Test
     public void tuneIsOk2() {
-        Gun gun = new Gun();
+        Gun gun = (Gun) context.getBean("gun");
         gun.tune();
         Assert.assertEquals(true, gun.isLoaded());
     }
 
     @Test
-    public void attackWithClutchesShouldBeOk() {
-        Gun gun = new Gun();
+    public void attackWithGunShouldBeOk() {
+        Gun gun = (Gun) context.getBean("gun");
         for (int i = 0; i < 30; i++) {
             gun.attack();
         }

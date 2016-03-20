@@ -2,11 +2,12 @@ package test;
 
 import impl.Clutches;
 import impl.Gun;
-import impl.Gungster;
 import impl.Wolverine;
 import interfaces.Monster;
 import interfaces.Weapon;
 import org.junit.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -25,6 +26,7 @@ public class WolverineTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private static ApplicationContext context;
 
     @Before
     public void setUpStreams() {
@@ -40,12 +42,13 @@ public class WolverineTest {
 
     @BeforeClass
     public static void initVariables() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
         weapon = mock(Clutches.class);
         weapon1 = mock(Gun.class);
         when(weapon.attack()).thenReturn("Ok");
         when(weapon1.attack()).thenReturn("ey");
-        wolverine = new Wolverine("Hugh");
-        gungster = new Gungster("Mica");
+        wolverine = context.getBean(Wolverine.class);
+//        gungster = new Gungster("Mica");
         weapons = mock(LinkedList.class);
         when(weapons.get(0)).thenReturn(weapon);
         when(weapons.get(1)).thenReturn(weapon1);
@@ -55,9 +58,11 @@ public class WolverineTest {
 
     @Test
     public void wolverineShouldBeGoodInitialized() {
-        wolverine = new Wolverine("Hugh");
-        Assert.assertTrue(wolverine.getName().equals("Hugh") &&
-                outContent.toString().equals("i am wolverine the " + wolverine.getName() + " and I'll kill you\n"));
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
+        wolverine = context.getBean(Wolverine.class);
+        Assert.assertTrue(wolverine.getName().equals("Hugh Jackman") &&
+                outContent.toString().contains("i am wolverine the " + wolverine.getName() + " and I'll kill you\n")
+        );
     }
 
     @Test
@@ -98,22 +103,23 @@ public class WolverineTest {
 
     @Test
     public void wolverineShouldUpdateWeaponOnlyOnce() {
-        Wolverine dragon = new Wolverine("Alex");
+        wolverine = context.getBean(Wolverine.class);
         when(weapon.isBroken()).thenReturn(true);
-        dragon.setWeapon(weapon);
-        dragon.updateWeapon(weapon);
-        dragon.updateWeapon(weapon);
+        wolverine.setWeapon(weapon);
+        wolverine.updateWeapon(weapon);
+        wolverine.updateWeapon(weapon);
         Assert.assertTrue(outContent.toString().contains("You won! But I'll be back"));
 
     }
 
     @Test
     public void impossibleToDoShouldWorkWhenNoLives() {
-        Wolverine dragon = new Wolverine("Hugh");
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
+        wolverine = context.getBean(Wolverine.class);
         when(weapon.isBroken()).thenReturn(true);
-        dragon.updateWeapon(weapon);
-        dragon.impossibleToDo();
-        Assert.assertTrue(outContent.toString().contains("the Hugh lives level is over"));
+        wolverine.updateWeapon(weapon);
+        wolverine.impossibleToDo();
+        Assert.assertTrue(outContent.toString().contains("the Hugh Jackman lives level is over"));
 
     }
 

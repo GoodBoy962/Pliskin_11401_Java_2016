@@ -2,10 +2,9 @@ package test;
 
 import impl.FireBallsStroker;
 import interfaces.Weapon;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,6 +13,12 @@ public class FireBallsStrokerTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private static ApplicationContext context;
+
+    @BeforeClass
+    public static void beforeClass() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
+    }
 
 
     @Before
@@ -29,28 +34,30 @@ public class FireBallsStrokerTest {
     }
 
     @Test
-    public void clutchesShouldBeGoodInit() {
-        FireBallsStroker fireBallsStroker = new FireBallsStroker();
-        Assert.assertTrue(fireBallsStroker.getLifetime() == 9 && fireBallsStroker.getRestAttacksBeforeReload() == 3);
+    public void fireBallsStrokerShouldBeGoodInit() {
+        FireBallsStroker fireBallsStroker = context.getBean(FireBallsStroker.class);
+        Assert.assertEquals(fireBallsStroker.getLifetime(), 9);
+//                && fireBallsStroker.getRestAttacksBeforeReload() == 3);
+        Assert.assertEquals(fireBallsStroker.getRestAttacksBeforeReload(), 3);
     }
 
     @Test
     public void tuneIsOk() {
-        Weapon weapon = new FireBallsStroker();
+        Weapon weapon = context.getBean(FireBallsStroker.class);
         weapon.tune();
         Assert.assertEquals("Fire balls stroker is ready\n", outContent.toString());
     }
 
     @Test
     public void tuneIsOk2() {
-        FireBallsStroker fireBallsStroker = new FireBallsStroker();
+        FireBallsStroker fireBallsStroker = context.getBean(FireBallsStroker.class);
         fireBallsStroker.tune();
         Assert.assertEquals(true, fireBallsStroker.isLoaded());
     }
 
     @Test
     public void attackWithClutchesShouldBeOk() {
-        FireBallsStroker fireBallsStroker = new FireBallsStroker();
+        FireBallsStroker fireBallsStroker = context.getBean(FireBallsStroker.class);
         for (int i = 0; i < 30; i++) {
             fireBallsStroker.attack();
         }

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="vector" class="com.pliskin.Vector2D" scope="prototype">
+        <property name="x" value="3"/>
+        <property name="y" value="4"/>
+    </bean>
+
+    <bean id="defaultVector" class="com.pliskin.Vector2D" scope="prototype">
+        <constructor-arg index="0" value="0.0"/>
+        <constructor-arg index="1" value="0.0"/>
+    </bean>
+
+    <bean id="vector1" class="com.pliskin.Vector2D">
+        <constructor-arg index="0" value="1.0"/>
+        <constructor-arg index="1" value="1.0"/>
+    </bean>
+
+    <bean id="matrix1" class="com.pliskin.Matrix2x2" scope="prototype">
+        <property name="arr" ref="arr1"/>
+    </bean>
+
+    <bean id="matrix2" class="com.pliskin.Matrix2x2">
+        <property name="arr" ref="arr2"/>
+    </bean>
+
+    <bean id="matrix3" class="com.pliskin.Matrix2x2">
+        <property name="arr" ref="arr3"/>
+    </bean>
+
+    <util:list id="arr1">
+        <list>
+            <value>1.0</value>
+            <value>2.0</value>
+        </list>
+        <list>
+            <value>4.0</value>
+            <value>5.0</value>
+        </list>
+    </util:list>
+
+    <util:list id="arr2">
+        <list>
+            <value>9.0</value>
+            <value>8.0</value>
+        </list>
+        <list>
+            <value>6.0</value>
+            <value>5.0</value>
+        </list>
+    </util:list>
+
+    <util:list id="arr3">
+        <list>
+            <value>10.0</value>
+            <value>10.0</value>
+        </list>
+        <list>
+            <value>10.0</value>
+            <value>10.0</value>
+        </list>
+    </util:list>
+
+    <util:list id="arr4">
+        <list>
+            <value>8.0</value>
+            <value>6.0</value>
+        </list>
+        <list>
+            <value>2.0</value>
+            <value>0.0</value>
+        </list>
+    </util:list>
+
+    <util:list id="arr5">
+        <list>
+            <value>#{3.5*1.0}</value>
+            <value>#{3.5*2.0}</value>
+        </list>
+        <list>
+            <value>#{3.5*4.0}</value>
+            <value>#{3.4*5.0}</value>
+        </list>
+    </util:list>
+
+    <util:list id="arr6">
+        <list>
+            <value>21.0</value>
+            <value>18.0</value>
+        </list>
+        <list>
+            <value>66.0</value>
+            <value>57.0</value>
+        </list>
+    </util:list>
+
+    <bean id="defaultMatrix" class="com.pliskin.Matrix2x2"/>
+
+    <bean id="matrix10" class="com.pliskin.Matrix2x2">
+        <constructor-arg index="0" value="10.0"/>
+    </bean>
+
+    <bean id="afterSubMatrix" class="com.pliskin.Matrix2x2">
+        <constructor-arg index="0" ref="arrAfter"/>
+    </bean>
+
+    <util:list id="arrAfter">
+        <list>
+            <value>9.0</value>
+            <value>8.0</value>
+        </list>
+        <list>
+            <value>6.0</value>
+            <value>5.0</value>
+        </list>
+    </util:list>
+
+    <bean id="inverseMatrix" class="com.pliskin.Matrix2x2">
+        <constructor-arg index="0" ref="inverseArr"/>
+    </bean>
+
+    <util:list id="inverseArr">
+        <list>
+            <value>1.0</value>
+            <value>2.0</value>
+        </list>
+        <list>
+            <value>3.0</value>
+            <value>4.0</value>
+        </list>
+    </util:list>
+
+    <bean id="stupidMatrix" class="com.pliskin.Matrix2x2">
+        <constructor-arg index="0" value="1.0"/>
+        <constructor-arg index="1" value="2.0"/>
+        <constructor-arg index="2" value="3.0"/>
+        <constructor-arg index="3" value="4.0"/>
+    </bean>
+</beans>

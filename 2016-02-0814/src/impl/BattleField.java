@@ -4,8 +4,9 @@ import interfaces.Audience;
 import interfaces.Field;
 import interfaces.Hero;
 import interfaces.Monster;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class BattleField implements Field {
 
     private Audience audience;

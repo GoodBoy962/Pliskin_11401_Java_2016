@@ -7,6 +7,7 @@ import interfaces.Hero;
 import interfaces.Monster;
 
 public class BoxingRing implements Field {
+
     private Audience audience;
 
     private Hero hero;

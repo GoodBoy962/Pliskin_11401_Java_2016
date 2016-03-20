@@ -4,6 +4,9 @@ import interfaces.Hero;
 import interfaces.Monster;
 import interfaces.Regeneratable;
 import interfaces.Weapon;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 public class Dragon implements Monster, Regeneratable {
 

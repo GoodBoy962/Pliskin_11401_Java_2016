@@ -6,6 +6,8 @@ import impl.Knight;
 import interfaces.Hero;
 import interfaces.Weapon;
 import org.junit.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -21,6 +23,7 @@ public class DragonTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private static ApplicationContext context;
 
     @Before
     public void setUpStreams() {
@@ -36,18 +39,20 @@ public class DragonTest {
 
     @BeforeClass
     public static void initVariables() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
         weapon = mock(FireBallsStroker.class);
         when(weapon.attack()).thenReturn("Ok");
         hero = mock(Knight.class);
-        dragon = new Dragon("Ralph");
+        dragon = (Dragon) context.getBean("dragonRalph");
     }
 
 
     @Test
     public void dragonShouldBeGoodInitialized() {
-        dragon = new Dragon("Ralph");
+//        dragon = new Dragon("Ralph");
+        dragon = (Dragon) new ClassPathXmlApplicationContext("spring-config.xml").getBean("dragonRalph");
         Assert.assertTrue(dragon.getName().equals("Ralph") &&
-                outContent.toString().equals("i am dragon the " + dragon.getName() + " and I'll kill you\n"));
+                (outContent.toString().contains("i am dragon the " + dragon.getName() + " and I'll kill you\n")));
     }
 
     @Test
@@ -64,7 +69,7 @@ public class DragonTest {
 
     @Test
     public void dragonCanSurrender() {
-        Assert.assertEquals(new Dragon("Mao").surrender(),
+        Assert.assertEquals(dragon.surrender(),
                 "You won! The Princess is yours now");
     }
 
@@ -82,7 +87,7 @@ public class DragonTest {
 
     @Test
     public void dragonShouldUpdateWeaponOnlyOnce() {
-        Dragon dragon = new Dragon("Moa");
+//        Dragon dragon = new Dragon("Moa");
         when(weapon.isBroken()).thenReturn(true);
         dragon.setWeapon(weapon);
         dragon.updateWeapon(weapon);
@@ -92,16 +97,17 @@ public class DragonTest {
 
     @Test
     public void impossibleToDoShouldWorkWhenNoLives() {
-        Dragon dragon = new Dragon("Moa");
+//        Dragon dragon = new Dragon("Moa");
         when(weapon.isBroken()).thenReturn(true);
         dragon.updateWeapon(weapon);
         dragon.impossibleToDo();
-        Assert.assertTrue(outContent.toString().contains("the Moa lives level is over"));
+        Assert.assertTrue(outContent.toString().contains("the Ralph lives level is over"));
     }
 
     @Test
     public void getLivesShouldWorkOk() {
-        Assert.assertEquals(dragon.getLives(), 1);
+        dragon = (Dragon) context.getBean("dragonRalph");
+        Assert.assertEquals(dragon.getLives(), 0);
     }
 
 }

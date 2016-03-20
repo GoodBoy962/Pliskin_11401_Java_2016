@@ -1,3 +1,5 @@
+package com.pliskin;
+
 public class ComplexNumber {
 
     private double re;

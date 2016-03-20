@@ -1,6 +1,10 @@
+package com.pliskin;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Arrays;
 
@@ -8,23 +12,27 @@ public class Matrix2x2Test {
 
     private static Matrix2x2 matrix1, matrix2, matrix3;
     private static double[][] arr1, arr2, arr3, arr4, arr5, arr6;
+    private static ApplicationContext context;
 
     @BeforeClass
     public static void beforeClass() {
-        arr1 = new double[][]{{1.0, 2.0}, {4.0, 5.0}};
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
         arr2 = new double[][]{{9.0, 8.0}, {6.0, 5.0}};
         arr3 = new double[][]{{10.0, 10.0}, {10.0, 10.0}};
         arr4 = new double[][]{{8.0, 6.0}, {2.0, 0.0}};
         arr5 = new double[][]{{3.5 * 1.0, 3.5 * 2.0}, {3.5 * 4.0, 3.5 * 5.0}};
         arr6 = new double[][]{{21.0, 18.0}, {66.0, 57.0}};
-        matrix1 = new Matrix2x2(arr1);
-        matrix2 = new Matrix2x2(arr2);
-        matrix3 = new Matrix2x2(arr3);
+//        matrix1 = new Matrix2x2(arr1);
+        matrix1 = (Matrix2x2) context.getBean("matrix1");
+        matrix2 = (Matrix2x2) context.getBean("matrix2");
+        matrix3 = (Matrix2x2) context.getBean("matrix3");
+//        matrix2 = new Matrix2x2(arr2);
+//        matrix3 = new Matrix2x2(arr3);
     }
 
     @Test
     public void defaultMatrixShouldInitializeNewMassive() {
-        Matrix2x2 matrix2x2 = new Matrix2x2();
+        Matrix2x2 matrix2x2 = (Matrix2x2) context.getBean("defaultMatrix");
         Assert.assertTrue(Arrays.deepEquals(
                 matrix2x2.getArr(),
                 new double[][]{{0.0, 0.0}, {0.0, 0.0}}
@@ -34,7 +42,7 @@ public class Matrix2x2Test {
     @Test
     public void stupidConstructorShouldWorkOk() {
         Assert.assertTrue(Arrays.deepEquals(
-                new Matrix2x2(1.0, 2.0, 3.0, 4.0).getArr(),
+                ((Matrix2x2) context.getBean("stupidMatrix")).getArr(),
                 new double[][]{{1.0, 2.0}, {3.0, 4.0}}
         ));
     }
@@ -42,7 +50,7 @@ public class Matrix2x2Test {
     @Test
     public void matrixConsistingOfOneElementShouldWorkOk() {
         Assert.assertTrue(Arrays.deepEquals(
-                new Matrix2x2(10.0).getArr(),
+                ((Matrix2x2) context.getBean("matrix10")).getArr(),
                 arr3
         ));
     }
@@ -65,7 +73,7 @@ public class Matrix2x2Test {
 
     @Test
     public void afterAddingMatrixToSelfFinalMatrixShouldBeOk() {
-        Matrix2x2 matrix = new Matrix2x2(new double[][]{{1.0, 2.0}, {4.0, 5.0}});
+        Matrix2x2 matrix = (Matrix2x2) context.getBean("matrix1");
         matrix.add2(matrix2);
         Assert.assertTrue(Arrays.deepEquals(
                 matrix.getArr(),
@@ -83,7 +91,7 @@ public class Matrix2x2Test {
 
     @Test
     public void afterSubbingMatrixToSelfFinalMatrixShouldBeOk() {
-        Matrix2x2 matrix = new Matrix2x2(new double[][]{{9.0, 8.0}, {6.0, 5.0}});
+        Matrix2x2 matrix = (Matrix2x2) context.getBean("afterSubMatrix");
         matrix.sub2(matrix1);
         Assert.assertTrue(Arrays.deepEquals(
                 matrix.getArr(),
@@ -101,7 +109,7 @@ public class Matrix2x2Test {
 
     @Test
     public void afterMultiplySelfOnNumberOk() {
-        Matrix2x2 matrix = new Matrix2x2(new double[][]{{1.0, 2.0}, {4.0, 5.0}});
+        Matrix2x2 matrix = (Matrix2x2) context.getBean("matrix1");
         matrix.multNumber2(3.5);
         Assert.assertTrue(Arrays.deepEquals(
                 matrix.getArr(),
@@ -119,7 +127,7 @@ public class Matrix2x2Test {
 
     @Test
     public void multiplySelfOnMatrixShouldWork() {
-        Matrix2x2 matrix = new Matrix2x2(new double[][]{{1.0, 2.0}, {4.0, 5.0}});
+        Matrix2x2 matrix = (Matrix2x2) context.getBean("matrix1");
         matrix.mult2(matrix2);
         Assert.assertTrue(Arrays.deepEquals(
                 matrix.getArr(),
@@ -134,7 +142,7 @@ public class Matrix2x2Test {
 
     @Test
     public void transponShouldWork() {
-        Matrix2x2 matrix = new Matrix2x2(new double[][]{{1.0, 2.0}, {4.0, 5.0}});
+        Matrix2x2 matrix = (Matrix2x2) context.getBean("matrix1");
         matrix.transpon();
         Assert.assertTrue(Arrays.deepEquals(
                 matrix.getArr(),
@@ -144,7 +152,7 @@ public class Matrix2x2Test {
 
     @Test
     public void inverseMatrixShouldWork() {
-        Matrix2x2 matrix = new Matrix2x2(new double[][]{{1.0, 2.0}, {3.0, 4.0}});
+        Matrix2x2 matrix = (Matrix2x2) context.getBean("inverseMatrix");
         try {
             Assert.assertTrue(Arrays.deepEquals(
                     matrix.inverseMatrix().getArr(),
@@ -169,7 +177,7 @@ public class Matrix2x2Test {
 
     @Test
     public void matrixShouldBeGoodMultiplyOnVector() {
-        Vector2D vector = matrix1.multVector(new Vector2D(3.0, 4.0));
+        Vector2D vector = matrix1.multVector((Vector2D) context.getBean("vector"));
         Assert.assertTrue(vector.getX() == 11.0 && vector.getY() == 32.0);
     }
 

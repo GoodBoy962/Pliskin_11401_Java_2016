@@ -4,6 +4,8 @@ import impl.Dragon;
 import impl.Orgs;
 import interfaces.Monster;
 import org.junit.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -17,7 +19,7 @@ public class OrgsTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-
+    private static ApplicationContext context;
 
     @Before
     public void setUpStreams() {
@@ -33,14 +35,15 @@ public class OrgsTest {
 
     @BeforeClass
     public static void initObjects() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
         monster = mock(Dragon.class);
-        orgs = new Orgs("Orgs!!!!", monster, 100);
+        orgs = (Orgs) context.getBean(Orgs.class);
     }
 
     @Test
     public void orgsShouldBeGoodCreated() {
         Assert.assertTrue(orgs.isReady() &&
-                orgs.getMonster() == monster &&
+                orgs.getMonster() == context.getBean("dragon") &&
                 orgs.getNumber() == 100 &&
                 orgs.getWords().equals("Orgs!!!!")
         );

@@ -4,7 +4,6 @@ import interfaces.Hero;
 import interfaces.Monster;
 import interfaces.Weapon;
 
-
 public class Knight implements Hero {
 
     private Weapon weapon;

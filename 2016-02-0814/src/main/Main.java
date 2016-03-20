@@ -1,6 +1,7 @@
 package main;
 
 
+import fights.Fights;
 import impl.*;
 import interfaces.*;
 
@@ -23,12 +24,7 @@ public class Main {
         field.startBattle("The battle is starting!!!");
         String monsterAttack = monster.makeAttack();
         String heroAttack = hero.makeAttack();
-        while (!heroAttack.equals("LOST") && !monsterAttack.equals("LOST")) {
-            monsterAttack = monster.makeAttack();
-            heroAttack = hero.makeAttack();
-            System.out.println(monsterAttack);
-            System.out.println(heroAttack);
-        }
+        Fights.fights(heroAttack, monsterAttack, hero, monster);
         if (heroAttack.equals("LOST")) {
             System.out.println(hero.runaway());
         } else {
@@ -41,7 +37,7 @@ public class Main {
         System.out.println("Fight 2");
         Field field1 = new BoxingRing();
         Monster monster1 = new Gungster("Mica");
-        SuperHero superHero = new Wolverine("Hugh Jackman");
+        final SuperHero superHero = new Wolverine("Hugh Jackman");
         Weapon monsterWeapon1 = new Gun();
         Weapon superHeroWeapon = new Clutches();
         monster1.setWeapon(monsterWeapon1);
@@ -55,17 +51,11 @@ public class Main {
         ((BoxingRing) field1).turnTheLights();
         String monsterAttack1 = monster1.makeAttack();
         String superHeroAttack = superHero.makeAttack();
-        while (!superHeroAttack.equals("LOST") && !monsterAttack1.equals("LOST")) {
-            System.out.println(monsterAttack1);
-            System.out.println(superHeroAttack);
-            monsterAttack1 = monster1.makeAttack();
-            superHeroAttack = superHero.makeAttack();
-        }
+        Fights.fights(superHeroAttack, monsterAttack1, superHero, monster1);
         if (superHeroAttack.equals("LOST")) {
             System.out.println(superHero.flyAway("uppps"));
         } else {
             System.out.println(monster1.surrender());
         }
-        ((BoxingRing) field1).turnTheLights();
     }
 }

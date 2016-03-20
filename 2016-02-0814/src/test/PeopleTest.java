@@ -4,6 +4,8 @@ import impl.People;
 import impl.Wolverine;
 import interfaces.Hero;
 import org.junit.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -17,7 +19,7 @@ public class PeopleTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-
+    private static ApplicationContext context;
 
     @Before
     public void setUpStreams() {
@@ -33,27 +35,28 @@ public class PeopleTest {
 
     @BeforeClass
     public static void initObjects() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
         hero = mock(Wolverine.class);
-        people = new People("UHUHU", hero, 10000);
+        people = context.getBean(People.class);
     }
 
     @Test
-    public void orgsShouldBeGoodCreated() {
+    public void peopleShouldBeGoodCreated() {
         Assert.assertTrue(people.isReady() &&
-                people.getHero() == hero &&
-                people.getNumber() == 10000 &&
+                people.getHero() == context.getBean(Wolverine.class) &&
+                people.getNumber() == 1000 &&
                 people.getWords().equals("UHUHU")
         );
     }
 
     @Test
-    public void orgsShouldSay() {
+    public void peopleShouldSay() {
         people.say("qwerty");
         Assert.assertEquals("qwerty\n", outContent.toString());
     }
 
     @Test
-    public void orgsShouldSaySomethingNotUnderstandableWhileGoingAway() {
+    public void peopleShouldSaySomethingNotUnderstandableWhileGoingAway() {
         people.goAway();
         Assert.assertTrue(outContent.toString().contains("Good"));
     }

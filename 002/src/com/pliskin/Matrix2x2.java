@@ -1,3 +1,8 @@
+package com.pliskin;
+
+import org.springframework.stereotype.Component;
+
+@Component
 public class Matrix2x2 {
 
     private double[][] arr;
@@ -154,5 +159,9 @@ public class Matrix2x2 {
 
     public double[][] getArr() {
         return arr;
+    }
+
+    public void setArr(double[][] arr) {
+        this.arr = arr;
     }
 }

@@ -1,11 +1,12 @@
 package test;
 
-import impl.Dragon;
 import impl.Knight;
 import impl.Sword;
 import interfaces.Monster;
 import interfaces.Weapon;
 import org.junit.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -21,6 +22,7 @@ public class KnightTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private static ApplicationContext context;
 
     @Before
     public void setUpStreams() {
@@ -36,16 +38,17 @@ public class KnightTest {
 
     @BeforeClass
     public static void initVariables() {
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
         weapon = mock(Sword.class);
         when(weapon.attack()).thenReturn("Ok");
-        knight = new Knight();
-        monster = new Dragon("Drago");
+        knight = context.getBean(Knight.class);
+        monster = (Monster) context.getBean("dragonDrago");
     }
 
 
     @Test
     public void knightShouldBeGoodInitialized() {
-        knight = new Knight();
+        knight = context.getBean(Knight.class);
         knight.setName("Arthur");
         Assert.assertTrue(knight.getName().equals("Arthur"));
     }

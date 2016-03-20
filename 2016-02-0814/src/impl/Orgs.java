@@ -3,7 +3,6 @@ package impl;
 import interfaces.Audience;
 import interfaces.Monster;
 
-
 public class Orgs implements Audience {
 
     private boolean isReady;
