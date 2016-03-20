@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="battleField" class="impl.BattleField">
+        <property name="audience" ref="orgs"/>
+    </bean>
+
+    <bean id="dragon" class="impl.Dragon">
+        <constructor-arg value="WITH GIRLS TATTOO"/>
+        <property name="weapon" ref="fireBallsStroker"/>
+        <property name="opponent" ref="knight"/>
+    </bean>
+
+    <bean id="dragonRalph" class="impl.Dragon">
+        <constructor-arg value="Ralph"/>
+        <property name="weapon" ref="fireBallsStroker"/>
+        <property name="opponent" ref="knight"/>
+    </bean>
+
+    <bean id="dragonDrago" class="impl.Dragon">
+        <constructor-arg value="Drago"/>
+        <property name="weapon" ref="fireBallsStroker"/>
+        <property name="opponent" ref="knight"/>
+    </bean>
+
+    <bean id="fireBallsStroker" class="impl.FireBallsStroker" scope="prototype"/>
+
+    <bean id="sword" class="impl.Sword" scope="prototype"/>
+
+    <bean id="orgs" class="impl.Orgs">
+        <constructor-arg index="0" value="Orgs!!!!"/>
+        <constructor-arg index="1" ref="dragon"/>
+        <constructor-arg index="2" value="100"/>
+    </bean>
+
+    <bean id="knight" class="impl.Knight">
+        <property name="weapon" ref="sword"/>
+        <property name="opponent" ref="dragon"/>
+    </bean>
+
+    <bean id="boxRing" class="impl.BoxingRing">
+        <property name="audience" ref="people"/>
+    </bean>
+
+    <bean id="gungster" class="impl.Gungster">
+        <constructor-arg value="Mica"/>
+        <property name="opponent" ref="wolwerine"/>
+        <property name="weapon" ref="gun"/>
+    </bean>
+
+    <bean id="wolwerine" class="impl.Wolverine">
+        <constructor-arg value="Hugh Jackman"/>
+        <property name="weapon" ref="clutches"/>
+        <property name="opponent" ref="gungster"/>
+        <property name="weapons">
+            <list value-type="interfaces.Weapon">
+                <ref bean="clutches1"/>
+                <ref bean="clutches2"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="clutches" class="impl.Clutches"/>
+
+    <bean id="gun" class="impl.Gun"/>
+
+    <bean id="people" class="impl.People">
+        <constructor-arg index="0" value="UHUHU"/>
+        <constructor-arg index="1" ref="wolwerine"/>
+        <constructor-arg index="2" value="1000"/>
+    </bean>
+    <bean id="clutches2" class="impl.Clutches"/>
+    <bean id="clutches1" class="impl.Clutches"/>
+
+
+</beans>
