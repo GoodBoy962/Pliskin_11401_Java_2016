@@ -1,0 +1,1 @@
+<p><a href="/getdate">get date</a></p>

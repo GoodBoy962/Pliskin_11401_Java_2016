@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 @Aspect
 public class noSQLInjections {
 
-    private Pattern pattern = Pattern.compile("/((\\%3D)|(=))[^\\n]*((\\%27)|(\\')|(\\-\\-)|(\\%3B)|(;))/i");
+    private Pattern pattern = Pattern.compile("/(\\%27)|(\\')|(\\-\\-)|(\\%23)|(#)/ix");
 
     @Around("execution(* *..*.execute(String))")
     public Object noSqlInjection(ProceedingJoinPoint jp) throws Throwable {
