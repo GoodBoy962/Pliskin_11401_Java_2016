@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by aleksandrpliskin on 22.03.16.
+ * 014
  */
 @Service
 public class SearchServiceImpl implements SearchService {

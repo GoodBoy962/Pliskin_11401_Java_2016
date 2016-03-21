@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * Created by aleksandrpliskin on 22.03.16.
+ * 014
  */
 @ControllerAdvice
 public class ControllerExceptionHandler {

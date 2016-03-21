@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by aleksandrpliskin on 21.03.16.
+ * 015
  */
 @Service
 public class TextAnalyzeServiceImpl implements TextAnalyzeService {

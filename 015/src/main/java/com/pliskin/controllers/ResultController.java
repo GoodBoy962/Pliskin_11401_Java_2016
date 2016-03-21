@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by aleksandrpliskin on 21.03.16.
+ * 015
  */
 @Controller
 public class ResultController {
