@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="socket" class="java.net.Socket">
+        <constructor-arg index="0" type="java.lang.String" value="localhost"/>
+        <constructor-arg index="1" type="int" value="3456"/>
+    </bean>
+
+    <!--<bean id="os" init-method="#{socket.getOutputStream()}"/>-->
+
+    <!--<bean id="pw" class="java.io.PrintWriter">-->
+    <!--<constructor-arg index="0" ref="#{socket.getOutputStream()}"/>-->
+    <!--<constructor-arg index="1" type="boolean" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="isr" class="java.io.InputStreamReader">-->
+    <!--<constructor-arg ref="#{socket.getInputStream()}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="br" class="java.io.BufferedReader">-->
+    <!--<constructor-arg type="java.io.InputStreamReader" ref="isr"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="tern" class="java.lang.Integer">-->
+    <!--<constructor-arg type="int" value="1"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="board" class="board.Board">-->
+    <!--<constructor-arg index="0" ref="pw"/>-->
+    <!--<constructor-arg index="1" ref="br"/>-->
+    <!--<constructor-arg index="2" ref="tern"/>-->
+    <!--</bean>-->
+
+</beans>
