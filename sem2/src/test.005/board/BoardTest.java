@@ -11,11 +11,10 @@ import static org.mockito.Mockito.mock;
 
 public class BoardTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-
     private static BufferedReader br;
     private static PrintWriter pw;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
     @BeforeClass
     public static void initVariables() {

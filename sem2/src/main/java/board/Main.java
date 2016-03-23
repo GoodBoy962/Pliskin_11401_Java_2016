@@ -1,8 +1,5 @@
 package board;
 
-import aspects.GameIsGoing;
-import org.springframework.aop.framework.ProxyFactory;
-
 import java.io.*;
 import java.net.Socket;
 
@@ -10,9 +7,6 @@ import java.net.Socket;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
-//        ApplicationContext context = new ClassPathXmlApplicationContext("root-config.xml");
-
         int port = 3456;
         String host = "localhost";
         Socket s = new Socket(host, port);
@@ -36,14 +30,9 @@ public class Main {
         } else {
             tern = 1;
         }
-
         System.out.println(tern);
         System.out.println("game starts");
-//        Board board = context.getBean(Board.class);
         Board board = new Board();
-//        ProxyFactory pf = new ProxyFactory(board);
-//        pf.addAdvice(new GameIsGoing());
-//        board = (Board) pf.getProxy();
         board.goGame(pw, br, tern);
     }
 

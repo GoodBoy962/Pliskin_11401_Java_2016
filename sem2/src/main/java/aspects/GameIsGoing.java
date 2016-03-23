@@ -3,8 +3,6 @@ package aspects;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-import java.net.InetAddress;
-
 /**
  * Created by aleksandrpliskin on 22.03.16.
  * 011

@@ -3,6 +3,12 @@ package enums;
 public class FigureColor {
 
     public Figure figure;
+    public Color color;
+
+    public FigureColor(Figure figure, Color color) {
+        this.figure = figure;
+        this.color = color;
+    }
 
     public Color getColor() {
         return color;
@@ -18,13 +24,6 @@ public class FigureColor {
 
     public void setFigure(Figure figure) {
         this.figure = figure;
-    }
-
-    public Color color;
-
-    public FigureColor(Figure figure, Color color) {
-        this.figure = figure;
-        this.color = color;
     }
 
     public String toString() {
