@@ -19,7 +19,7 @@ import java.util.Date;
 public class OperationsController {
 
     @Autowired
-    OperationService operationService;
+    private OperationService operationService;
 
     @RequestMapping("/getdate")
     public String getDatePage(Model model) {
