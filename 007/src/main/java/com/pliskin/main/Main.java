@@ -13,6 +13,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 /**
  * Created by aleksandrpliskin on 19.03.16.
+ * 007
  */
 public class Main {
     public static void main(String[] args) {
