@@ -14,13 +14,13 @@ import java.util.regex.Pattern;
 @Aspect
 public class noSQLInjections {
 
-    private Pattern pattern = Pattern.compile("/(\\%27)|(\\')|(\\-\\-)|(\\%23)|(#)/ix");
+    private Pattern pattern = Pattern.compile(".*(;? ?(drop|update|select|insert) ?)*.*");
 
     @Around("execution(* *..*.execute(String))")
     public Object noSqlInjection(ProceedingJoinPoint jp) throws Throwable {
         String lang = (String) jp.getArgs()[0];
         Matcher matcher = pattern.matcher(lang);
-        if (!matcher.matches()) {
+        if (!matcher.find()) {
             System.out.println("injection found");
             return null;
         }

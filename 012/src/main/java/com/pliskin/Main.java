@@ -11,6 +11,6 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
         SimpleClass obj = context.getBean(SimpleClass.class);
-        obj.execute("Alexander");
+        obj.execute("select * from table_name");
     }
 }
