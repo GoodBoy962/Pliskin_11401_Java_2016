@@ -1,0 +1,1 @@
+${hello} Medical Clinic CRM
