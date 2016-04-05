@@ -14,12 +14,25 @@ public class Office {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "offices_gen")
     private Long id;
 
+    private String address;
+
     @ManyToOne
-    @JoinColumn(name = "medical_clinic_id")
+    @JoinTable(name = "offices_medical_clinics",
+            joinColumns = @JoinColumn(name = "office_id"),
+            inverseJoinColumns = @JoinColumn(name = "medical_clinic_id")
+    )
     private MedicalClinic medicalClinic;
 
     public Long getId() {
         return id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setId(Long id) {

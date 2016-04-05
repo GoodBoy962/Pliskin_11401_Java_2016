@@ -16,6 +16,8 @@ public class MedicalClinic {
 
     private String name;
 
+    private String info;
+
     public Long getId() {
         return id;
     }
@@ -30,5 +32,13 @@ public class MedicalClinic {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

@@ -20,6 +20,10 @@ public class Admin {
 
     private String fio;
 
+    @OneToOne
+    @JoinColumn(name = "credentials_id")
+    private Credentials credentials;
+
     public String getFio() {
         return fio;
     }

@@ -14,36 +14,34 @@ public class PatientHistory {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patient_histories_gen")
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
-
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
 
     @OneToOne
     @JoinColumn(name = "doctor_schedule_id")
     private DoctorSchedule doctorSchedule;
 
-    private Double cost;
+    private Integer cost;
 
     private Boolean status;
 
-    public Double getCost() {
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getCost() {
         return cost;
     }
 
-    public void setCost(Double cost) {
+    public void setCost(Integer cost) {
         this.cost = cost;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
     }
 
     public Long getId() {

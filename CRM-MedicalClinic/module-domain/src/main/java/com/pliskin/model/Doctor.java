@@ -31,7 +31,9 @@ public class Doctor {
     private Date inceptionDate;
 
     @ManyToOne
-    @JoinColumn(name = "office_id")
+    @JoinTable(name = "doctors_offices",
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "office_id"))
     private Office office;
 
     public Date getBirthDay() {
