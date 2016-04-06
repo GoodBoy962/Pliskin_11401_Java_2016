@@ -4,14 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Created by aleksandrpliskin on 01.04.16.
+ * Created by aleksandrpliskin on 06.04.16.
  */
 @Controller
-public class IndexController {
+@RequestMapping(value = "/doctor")
+public class DoctorController {
 
     @RequestMapping(value = "")
-    public String getIndexPage() {
-        return "index";
+    public String getDoctorIndex() {
+        return "doctor";
     }
 
 }
