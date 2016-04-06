@@ -7,5 +7,6 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <include file="db/changelogs/1606040119_postgresql.xml"/>
+    <include file="db/changelogs/1606041809_postgresql.xml"/>
 
 </databaseChangeLog>
