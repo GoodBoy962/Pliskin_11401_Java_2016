@@ -1,5 +1,6 @@
 package com.pliskin.service;
 
+import com.pliskin.forms.OfficeAdminCreationForm;
 import com.pliskin.model.MedicalClinic;
 import com.pliskin.model.Office;
 
@@ -12,4 +13,5 @@ public interface OfficeService {
 
     List<Office> getMedClinicOffices(MedicalClinic medicalClinic);
 
+    void createOfficeAndAdmin(OfficeAdminCreationForm form, Long medicalClinicId);
 }

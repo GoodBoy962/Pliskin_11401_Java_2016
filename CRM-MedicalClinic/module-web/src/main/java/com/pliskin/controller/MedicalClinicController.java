@@ -22,7 +22,8 @@ public class MedicalClinicController {
     OfficeService officeService;
 
     @RequestMapping(value = "medical_clinics")
-    public String getMedClinics() {
+    public String getMedClinics(Model model) {
+        model.addAttribute("medical_clinics", medicalClinicService.getMedClinics());
         return "medical_clinics_list";
     }
 

@@ -47,4 +47,12 @@ public class Admin {
     public void setOffice(Office office) {
         this.office = office;
     }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
+    }
 }

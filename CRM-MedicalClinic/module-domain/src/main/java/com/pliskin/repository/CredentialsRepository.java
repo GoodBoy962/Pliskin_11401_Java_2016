@@ -12,4 +12,5 @@ public interface CredentialsRepository extends JpaRepository<Credentials, Long> 
 
     Credentials findOneByLogin(String login);
 
+    Credentials findOneByEmail(String email);
 }

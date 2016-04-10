@@ -1,6 +1,7 @@
 package com.pliskin.repository;
 
 import com.pliskin.model.Admin;
+import com.pliskin.model.Credentials;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long> {
+
+    Admin findByFio(String fio);
+
+    Admin findOneByCredentials(Credentials credentials);
 }
