@@ -56,122 +56,6 @@
     </div>
 </section>
 
-<section id="portfolio">
-    <div class="container">
-        <div class="box">
-            <div class="center gap">
-                <h2>Portfolio</h2>
-                <p class="lead">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac<br>turpis
-                    egestas. Vestibulum tortor quam, feugiat vitae.</p>
-            </div><!--/.center-->
-            <ul class="portfolio-filter">
-                <li><a class="btn btn-primary active" href="#" data-filter="*">All</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".bootstrap">Bootstrap</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".html">HTML</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".wordpress">Wordpress</a></li>
-            </ul><!--/#portfolio-filter-->
-            <ul class="portfolio-items col-4">
-                <li class="portfolio-item apps">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item1.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                   href="images/portfolio/full/item1.jpg"><i class="icon-eye-open"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item joomla bootstrap">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item2.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                   href="images/portfolio/full/item2.jpg"><i class="icon-eye-open"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item bootstrap wordpress">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item3.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                   href="images/portfolio/full/item3.jpg"><i class="icon-eye-open"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item joomla wordpress apps">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item4.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                   href="images/portfolio/full/item4.jpg"><i class="icon-eye-open"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item joomla html">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item5.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                   href="images/portfolio/full/item5.jpg"><i class="icon-eye-open"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item wordpress html">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item6.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                   href="images/portfolio/full/item6.jpg"><i class="icon-eye-open"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item joomla html">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item5.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                   href="images/portfolio/full/item5.jpg"><i class="icon-eye-open"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item wordpress html">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item6.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                   href="images/portfolio/full/item6.jpg"><i class="icon-eye-open"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-            </ul>
-        </div><!--/.box-->
-    </div><!--/.container-->
-</section><!--/#portfolio-->
-
 <section id="about-us">
     <div class="container">
         <div class="box">
@@ -262,21 +146,21 @@
         <div class="box last">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>Contact Form</h1>
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                    <h1>Контактная форма</h1>
+                    <p>Напишите нам, если хотите зарегестрировать вашу Медицинскую клинику в нашем сервисе</p>
                     <div class="status alert alert-success" style="display: none"></div>
                     <form id="main-contact-form" class="contact-form" name="contact-form" method="post"
                           action="sendemail.php" role="form">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" required="required" placeholder="Name">
+                                    <input type="text" class="form-control" required="required" placeholder="ФИО">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input type="text" class="form-control" required="required"
-                                           placeholder="Email address">
+                                           placeholder="email">
                                 </div>
                             </div>
                         </div>
@@ -284,49 +168,38 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <textarea name="message" id="message" required="required" class="form-control"
-                                              rows="8" placeholder="Message"></textarea>
+                                              rows="8" placeholder="сообщение"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-danger btn-lg">Send Message</button>
+                                    <button type="submit" class="btn btn-danger btn-lg">отправить</button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div><!--/.col-sm-6-->
                 <div class="col-sm-6">
-                    <h1>Our Address</h1>
+                    <h1>Наш адрес</h1>
                     <div class="row">
                         <div class="col-md-6">
                             <address>
-                                <strong>Twitter, Inc.</strong><br>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                            </address>
-                        </div>
-                        <div class="col-md-6">
-                            <address>
-                                <strong>Twitter, Inc.</strong><br>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
+                                <strong>Pliskin corporation</strong><br>
+                                San Francisco 770<br>
+                                <abbr title="Phone">tel:+7(967)362-03-39</abbr>
                             </address>
                         </div>
                     </div>
-                    <h1>Connect with us</h1>
+                    <h1>Наши контакты в соц сетях</h1>
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="social">
                                 <li><a href="#"><i class="icon-facebook icon-social"></i> Facebook</a></li>
                                 <li><a href="#"><i class="icon-google-plus icon-social"></i> Google Plus</a></li>
-                                <li><a href="#"><i class="icon-pinterest icon-social"></i> Pinterest</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="social">
                                 <li><a href="#"><i class="icon-linkedin icon-social"></i> Linkedin</a></li>
                                 <li><a href="#"><i class="icon-twitter icon-social"></i> Twitter</a></li>
-                                <li><a href="#"><i class="icon-youtube icon-social"></i> Youtube</a></li>
                             </ul>
                         </div>
                     </div>
