@@ -37,4 +37,9 @@ public class AuthController {
         }
     }
 
+    @RequestMapping("/registration")
+    public String getRegistrationPage(Model model) {
+        return "registration";
+    }
+
 }

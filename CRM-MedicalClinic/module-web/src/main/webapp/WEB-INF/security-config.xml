@@ -9,6 +9,7 @@
 
     <security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/login" access="isAnonymous()"/>
+        <security:intercept-url pattern="/registration" access="isAnonymous()"/>
         <security:intercept-url pattern="/resources/**" access="permitAll()"/>
         <security:intercept-url pattern="/system/**" access="hasRole('ROLE_SYSTEM_ADMIN')"/>
         <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEM_ADMIN')"/>
@@ -24,7 +25,7 @@
                 default-target-url="/default"
                 always-use-default-target="true"
                 authentication-failure-url="/login?error=true"/>
-        <security:logout logout-url="/logout" logout-success-url="/login"/>
+        <security:logout logout-url="/logout" logout-success-url="/"/>
         <security:csrf disabled="true"/>
     </security:http>
 
