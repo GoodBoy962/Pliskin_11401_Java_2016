@@ -7,6 +7,7 @@ import com.pliskin.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -25,5 +26,10 @@ public class DoctorServiceImpl implements DoctorService {
     public void createDoctor(DoctorCreationForm form) {
         Doctor doctor = doctorFunction.apply(form);
         doctorRepository.save(doctor);
+    }
+
+    @Override
+    public List<Doctor> getAll() {
+        return doctorRepository.findAll();
     }
 }

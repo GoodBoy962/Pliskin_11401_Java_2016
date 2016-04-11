@@ -17,4 +17,5 @@ public interface MedicalClinicService {
     void createNewMedClinic(MedicalClinicRegistrationForm form);
 
     MedicalClinic getMedClinic(String name);
+
 }

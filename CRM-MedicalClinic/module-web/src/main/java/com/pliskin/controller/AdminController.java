@@ -1,8 +1,13 @@
 package com.pliskin.controller;
 
 import com.pliskin.forms.DoctorCreationForm;
+import com.pliskin.model.Office;
+import com.pliskin.repository.AdminRepository;
 import com.pliskin.service.DoctorService;
+import com.pliskin.service.MedicalClinicService;
+import com.pliskin.service.OfficeService;
 import com.pliskin.service.SpecializationService;
+import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -28,12 +33,25 @@ public class AdminController {
     @Autowired
     SpecializationService specializationService;
 
+    @Autowired
+    AdminRepository adminRepository;//TODO very bad
+
+    @Autowired
+    OfficeService officeService;
+
+    @Autowired
+    MedicalClinicService medicalClinicService;
+
     @Qualifier("doctorCreationFormValidator")
     @Autowired
     Validator validator;
 
     @RequestMapping(value = "")
-    public String getAdminIndex() {
+    public String getAdminIndex(Model model) {
+        model.addAttribute("admin", adminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()));
+        Office office = officeService.getOfficeByAdminCredentials();
+        model.addAttribute("id", office.getMedicalClinic().getId());
+        model.addAttribute("officeId", office.getId());
         return "admin";
     }
 

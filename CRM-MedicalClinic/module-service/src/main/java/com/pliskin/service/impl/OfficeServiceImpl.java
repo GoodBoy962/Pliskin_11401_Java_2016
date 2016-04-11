@@ -10,6 +10,7 @@ import com.pliskin.repository.CredentialsRepository;
 import com.pliskin.repository.MedicalClinicRepository;
 import com.pliskin.repository.OfficeRepository;
 import com.pliskin.service.OfficeService;
+import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,11 @@ public class OfficeServiceImpl implements OfficeService {
         Admin admin = adminFunction.apply(form);
         admin.setOffice(office);
         adminRepository.save(admin);
+    }
+
+    @Secured("hasRole('ROLE_ADMIN')")
+    @Override
+    public Office getOfficeByAdminCredentials() {
+        return adminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getOffice();
     }
 }

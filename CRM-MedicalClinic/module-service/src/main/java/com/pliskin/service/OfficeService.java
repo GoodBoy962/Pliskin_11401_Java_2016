@@ -14,4 +14,6 @@ public interface OfficeService {
     List<Office> getMedClinicOffices(MedicalClinic medicalClinic);
 
     void createOfficeAndAdmin(OfficeAdminCreationForm form, Long medicalClinicId);
+
+    Office getOfficeByAdminCredentials();
 }
