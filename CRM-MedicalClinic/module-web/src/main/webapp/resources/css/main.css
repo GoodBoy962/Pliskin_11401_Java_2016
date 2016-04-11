@@ -57,7 +57,8 @@ a:focus {
 }
 
 #main-slider {
-    background-image: url(../images/scrubs-2.jpg);
+    /*background-image: url(../images/slider-bg.jpg);*/
+    background-color: #2a6496;
     background-attachment: fixed;
     background-size: cover;
     background-position: 50% 50%;
