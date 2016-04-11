@@ -40,6 +40,9 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public List<Office> getMedClinicOffices(MedicalClinic medicalClinic) {
+        if (medicalClinic == null) {
+            throw new NoSuchMedicalClinicException();
+        }
         return officeRepository.findByMedicalClinic(medicalClinic);
     }
 

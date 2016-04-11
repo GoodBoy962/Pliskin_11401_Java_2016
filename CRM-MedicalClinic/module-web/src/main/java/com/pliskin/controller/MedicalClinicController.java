@@ -30,8 +30,8 @@ public class MedicalClinicController {
     @RequestMapping(value = "medical_clinics/{id}")
     public String getMedClinicPage(@PathVariable("id") Long id, Model model) {
         MedicalClinic medicalClinic = medicalClinicService.getMedClinic(id);
+        model.addAttribute("offs", officeService.getMedClinicOffices(medicalClinic));
         model.addAttribute("mc", medicalClinic);
-        model.addAttribute("offices", officeService.getMedClinicOffices(medicalClinic));
         return "med_clinic";
     }
 

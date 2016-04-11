@@ -25,6 +25,12 @@
     <a class="next" href="#main-slider" data-slide="next"><i class="icon-angle-right"></i></a>
 </section>
 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 <section id="services">
     <div class="container">
         <div class="box first">
@@ -56,90 +62,11 @@
     </div>
 </section>
 
-<section id="about-us">
-    <div class="container">
-        <div class="box">
-            <div class="center">
-                <h2>Meet the Team</h2>
-                <p class="lead">Pellentesque habitant morbi tristique senectus et netus et<br>malesuada fames ac turpis
-                    egestas.</p>
-            </div>
-            <div class="gap"></div>
-            <div id="team-scroller" class="carousel scale">
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="member">
-                                    <p><img class="img-responsive img-thumbnail img-circle" src="images/team1.jpg"
-                                            alt=""></p>
-                                    <h3>Agnes Smith
-                                        <small class="designation">CEO &amp; Founder</small>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="member">
-                                    <p><img class="img-responsive img-thumbnail img-circle" src="images/team2.jpg"
-                                            alt=""></p>
-                                    <h3>Donald Ford
-                                        <small class="designation">Senior Vice President</small>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="member">
-                                    <p><img class="img-responsive img-thumbnail img-circle" src="images/team3.jpg"
-                                            alt=""></p>
-                                    <h3>Karen Richardson
-                                        <small class="designation">Assitant Vice President</small>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="member">
-                                    <p><img class="img-responsive img-thumbnail img-circle" src="images/team3.jpg"
-                                            alt=""></p>
-                                    <h3>David Robbins
-                                        <small class="designation">Co-Founder</small>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="member">
-                                    <p><img class="img-responsive img-thumbnail img-circle" src="images/team1.jpg"
-                                            alt=""></p>
-                                    <h3>Philip Mejia
-                                        <small class="designation">Marketing Manager</small>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="member">
-                                    <p><img class="img-responsive img-thumbnail img-circle" src="images/team2.jpg"
-                                            alt=""></p>
-                                    <h3>Charles Erickson
-                                        <small class="designation">Support Manager</small>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a class="left-arrow" href="#team-scroller" data-slide="prev">
-                    <i class="icon-angle-left icon-4x"></i>
-                </a>
-                <a class="right-arrow" href="#team-scroller" data-slide="next">
-                    <i class="icon-angle-right icon-4x"></i>
-                </a>
-            </div><!--/.carousel-->
-        </div><!--/.box-->
-    </div><!--/.container-->
-</section><!--/#about-us-->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 <section id="contact">
     <div class="container">
@@ -176,7 +103,7 @@
                             </div>
                         </div>
                     </form>
-                </div><!--/.col-sm-6-->
+                </div>
                 <div class="col-sm-6">
                     <h1>Наш адрес</h1>
                     <div class="row">
@@ -192,22 +119,27 @@
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="social">
-                                <li><a href="#"><i class="icon-facebook icon-social"></i> Facebook</a></li>
-                                <li><a href="#"><i class="icon-google-plus icon-social"></i> Google Plus</a></li>
+                                <li><a href="https://www.facebook.com/alexnetmore"><i
+                                        class="icon-facebook icon-social"></i> Facebook</a></li>
+                                <li><a href="https://plus.google.com/117236137415946671771"><i
+                                        class="icon-google-plus icon-social"></i> Google Plus</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="social">
-                                <li><a href="#"><i class="icon-linkedin icon-social"></i> Linkedin</a></li>
-                                <li><a href="#"><i class="icon-twitter icon-social"></i> Twitter</a></li>
+                                <li>
+                                    <a href="https://www.linkedin.com/profile/preview?locale=ru_RU&trk=prof-0-sb-preview-primary-button"><i
+                                            class="icon-linkedin icon-social"></i> LinkedIn</a></li>
+                                <li><a href="https://twitter.com/good_boy_961"><i class="icon-twitter icon-social"></i>
+                                    Twitter</a></li>
                             </ul>
                         </div>
                     </div>
-                </div><!--/.col-sm-6-->
-            </div><!--/.row-->
-        </div><!--/.box-->
-    </div><!--/.container-->
-</section><!--/#contact-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 </#macro>

@@ -40,14 +40,14 @@ public class SystemAdminController {
     }
 
     @RequestMapping(value = "medical_clinics/new")
-    public String getFormToCreateMedicalClinic() {
+    public String getFormToCreateMedicalClinic(Model model) {
+        model.addAttribute("mc_new_form", new MedicalClinicRegistrationForm());
         return "new-mc";
     }
 
     @RequestMapping(value = "medical_clinics", method = RequestMethod.POST)
-    public String createMedicalClinic(@ModelAttribute("medical_clinic_form") @Valid MedicalClinicRegistrationForm form,
-                                      BindingResult result,
-                                      Model model) {
+    public String createMedicalClinic(@ModelAttribute("mc_new_form") @Valid MedicalClinicRegistrationForm form,
+                                      BindingResult result) {
         if (result.hasErrors()) {
             return "new-mc";
         } else {

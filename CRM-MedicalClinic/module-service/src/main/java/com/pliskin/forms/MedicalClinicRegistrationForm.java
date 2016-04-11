@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
  */
 public class MedicalClinicRegistrationForm {
 
-    @Size(min = 3, max = 30, message = "название должно состоять не менее, чем из 3б не более, чем из 30 символов")
+    @Size(min = 3, max = 30, message = "название должно состоять не менее, чем из 3 символов, но не более, чем из 30 символов")
     private String name;
 
     @NotEmpty(message = "должна присутствовать информация")

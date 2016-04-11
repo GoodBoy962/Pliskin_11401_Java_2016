@@ -58,12 +58,12 @@ a:focus {
 
 #main-slider {
     /*background-image: url(../images/slider-bg.jpg);*/
-    background-color: #2a6496;
+    background-color: #26b6d8;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: contain;
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    padding: 200px 0;
+    padding: 200px;
     color: #fff;
 }
 
