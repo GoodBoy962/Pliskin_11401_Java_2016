@@ -1,4 +1,4 @@
-package com.pliskin.util;
+package com.pliskin.util.validators;
 
 import com.pliskin.forms.DoctorCreationForm;
 import com.pliskin.repository.CredentialsRepository;

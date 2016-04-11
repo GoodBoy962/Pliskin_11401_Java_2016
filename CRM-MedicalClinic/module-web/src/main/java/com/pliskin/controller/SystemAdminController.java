@@ -34,6 +34,10 @@ public class SystemAdminController {
     @Qualifier(value = "officeAdminForm")
     Validator validator;
 
+    @Qualifier("medicalClinicRegistrationFormValidator")
+    @Autowired
+    Validator mcValidator;
+
     @RequestMapping(value = "")
     public String getSystemAdminIndex() {
         return "system";
@@ -48,6 +52,7 @@ public class SystemAdminController {
     @RequestMapping(value = "medical_clinics", method = RequestMethod.POST)
     public String createMedicalClinic(@ModelAttribute("mc_new_form") @Valid MedicalClinicRegistrationForm form,
                                       BindingResult result) {
+        mcValidator.validate(form, result);
         if (result.hasErrors()) {
             return "new-mc";
         } else {

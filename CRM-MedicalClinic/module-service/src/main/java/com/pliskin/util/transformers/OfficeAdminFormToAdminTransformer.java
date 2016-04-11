@@ -1,4 +1,4 @@
-package com.pliskin.util;
+package com.pliskin.util.transformers;
 
 import com.pliskin.forms.OfficeAdminCreationForm;
 import com.pliskin.model.Admin;

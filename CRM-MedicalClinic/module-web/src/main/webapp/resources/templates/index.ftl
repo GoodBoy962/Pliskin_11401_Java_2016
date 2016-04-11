@@ -68,79 +68,83 @@
 <br/>
 <br/>
 
-<section id="contact">
-    <div class="container">
-        <div class="box last">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h1>Контактная форма</h1>
-                    <p>Напишите нам, если хотите зарегестрировать вашу Медицинскую клинику в нашем сервисе</p>
-                    <div class="status alert alert-success" style="display: none"></div>
-                    <form id="main-contact-form" class="contact-form" name="contact-form" method="post"
-                          action="sendemail.php" role="form">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" required="required" placeholder="ФИО">
+
+<@security.authorize access="isAnonymous()">
+
+    <section id="contact">
+        <div class="container">
+            <div class="box last">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1>Контактная форма</h1>
+                        <p>Напишите нам, если хотите зарегестрировать вашу Медицинскую клинику в нашем сервисе</p>
+                        <div class="status alert alert-success" style="display: none"></div>
+                        <form id="main-contact-form" class="contact-form" name="contact-form" method="post"
+                              action="sendemail.php" role="form">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" required="required" placeholder="ФИО">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" required="required"
+                                               placeholder="email">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" required="required"
-                                           placeholder="email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
                                     <textarea name="message" id="message" required="required" class="form-control"
                                               rows="8" placeholder="сообщение"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-danger btn-lg">отправить</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger btn-lg">отправить</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-sm-6">
-                    <h1>Наш адрес</h1>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <address>
-                                <strong>Pliskin corporation</strong><br>
-                                San Francisco 770<br>
-                                <abbr title="Phone">tel:+7(967)362-03-39</abbr>
-                            </address>
-                        </div>
+                        </form>
                     </div>
-                    <h1>Наши контакты в соц сетях</h1>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <ul class="social">
-                                <li><a href="https://www.facebook.com/alexnetmore"><i
-                                        class="icon-facebook icon-social"></i> Facebook</a></li>
-                                <li><a href="https://plus.google.com/117236137415946671771"><i
-                                        class="icon-google-plus icon-social"></i> Google Plus</a></li>
-                            </ul>
+                    <div class="col-sm-6">
+                        <h1>Наш адрес</h1>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <address>
+                                    <strong>Pliskin corporation</strong><br>
+                                    San Francisco 770<br>
+                                    <abbr title="Phone">tel:+7(967)362-03-39</abbr>
+                                </address>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <ul class="social">
-                                <li>
-                                    <a href="https://www.linkedin.com/profile/preview?locale=ru_RU&trk=prof-0-sb-preview-primary-button"><i
-                                            class="icon-linkedin icon-social"></i> LinkedIn</a></li>
-                                <li><a href="https://twitter.com/good_boy_961"><i class="icon-twitter icon-social"></i>
-                                    Twitter</a></li>
-                            </ul>
+                        <h1>Наши контакты в соц сетях</h1>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="social">
+                                    <li><a href="https://www.facebook.com/alexnetmore"><i
+                                            class="icon-facebook icon-social"></i> Facebook</a></li>
+                                    <li><a href="https://plus.google.com/117236137415946671771"><i
+                                            class="icon-google-plus icon-social"></i> Google Plus</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="social">
+                                    <li>
+                                        <a href="https://www.linkedin.com/profile/preview?locale=ru_RU&trk=prof-0-sb-preview-primary-button"><i
+                                                class="icon-linkedin icon-social"></i> LinkedIn</a></li>
+                                    <li><a href="https://twitter.com/good_boy_961"><i
+                                            class="icon-twitter icon-social"></i>
+                                        Twitter</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
+    </@security.authorize>
 
 </#macro>
 

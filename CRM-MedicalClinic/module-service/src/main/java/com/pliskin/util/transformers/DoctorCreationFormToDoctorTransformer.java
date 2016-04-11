@@ -1,4 +1,4 @@
-package com.pliskin.util;
+package com.pliskin.util.transformers;
 
 import com.pliskin.forms.DoctorCreationForm;
 import com.pliskin.model.Doctor;
@@ -6,6 +6,8 @@ import com.pliskin.model.enums.Role;
 import com.pliskin.repository.AdminRepository;
 import com.pliskin.repository.OfficeRepository;
 import com.pliskin.repository.SpecializationRepository;
+import com.pliskin.util.CredentialsCreator;
+import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

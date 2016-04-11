@@ -1,4 +1,4 @@
-package com.pliskin.util;
+package com.pliskin.util.validators;
 
 import com.pliskin.forms.OfficeAdminCreationForm;
 import com.pliskin.repository.AdminRepository;
@@ -40,7 +40,7 @@ public class OfficeAdminCreationFormValidator implements Validator {
         if (credentialsRepository.findOneByLogin(form.getLogin()) != null) {
             errors.rejectValue("login", "", "пользователь с таким логином уже существует");
         }
-        if (credentialsRepository.findOneByLogin(form.getEmail()) != null) {
+        if (credentialsRepository.findOneByEmail(form.getEmail()) != null) {
             errors.rejectValue("email", "", "пользователь с таким email уже существует");
         }
     }
