@@ -17,6 +17,7 @@
         <security:intercept-url pattern="/patient/**" access="hasAnyRole('ROLE_PATIENT')"/>
         <security:intercept-url pattern="/medical_clinics/**" access="permitAll()"/>
         <security:intercept-url pattern="/medical_clinics/*/offices/new" access="hasRole('ROLE_SYSTEM_ADMIN')"/>
+        <security:intercept-url pattern="/doctors/*/timetable/new" access="hasRole('ROLE_ADMIN')"/>
         <security:form-login
                 login-page="/login"
                 login-processing-url="/login/process"

@@ -10,19 +10,9 @@
                 <h3>${office.address}</h3>
             </div>
             <br/>
-            <#--<#list offs as of>-->
-                <#--<div class="carousel-inner">-->
-                    <#--<div class="item active">-->
-                        <#--<div class="row col-md-9 col-lg-6 text text-left">-->
-                            <#--<p><a href="/medical_clinics/${mc.id}/offices/${of.id}">${of.address}</a></p>-->
-                        <#--&lt;#&ndash;<p>${of.address}</p>&ndash;&gt;-->
-                        <#--</div>-->
-                    <#--</div>-->
-                <#--</div>-->
-            <#--</#list>-->
-            <#--<@security.authorize access="hasRole('ROLE_SYSTEM_ADMIN')">-->
-                <#--<a href="/system/medical_clinics/${mc.id}/offices/new">добавить офис и администратора офиса</a> <br/>-->
-            <#--</@security.authorize>-->
+            <#list doctors as d>
+                <a href="/doctors/${d.id}">${d.fio}</a>
+            </#list>
         </div>
     </div>
 </section>

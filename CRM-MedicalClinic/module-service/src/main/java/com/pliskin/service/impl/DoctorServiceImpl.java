@@ -2,6 +2,7 @@ package com.pliskin.service.impl;
 
 import com.pliskin.forms.DoctorCreationForm;
 import com.pliskin.model.Doctor;
+import com.pliskin.model.Office;
 import com.pliskin.repository.DoctorRepository;
 import com.pliskin.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Doctor getDoctor(Long id) {
         return doctorRepository.findOne(id);
+    }
+
+    @Override
+    public List<Doctor> getDoctorsByOffice(Office office) {
+        return doctorRepository.findByOffice(office);
     }
 }

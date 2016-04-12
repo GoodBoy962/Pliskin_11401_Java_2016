@@ -2,6 +2,7 @@ package com.pliskin.service;
 
 import com.pliskin.forms.DoctorCreationForm;
 import com.pliskin.model.Doctor;
+import com.pliskin.model.Office;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface DoctorService {
     List<Doctor> getAll();
 
     Doctor getDoctor(Long id);
+
+    List<Doctor> getDoctorsByOffice(Office office);
 }

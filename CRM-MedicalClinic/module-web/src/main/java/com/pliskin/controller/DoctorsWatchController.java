@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by aleksandrpliskin on 12.04.16.
  */
@@ -32,7 +34,9 @@ public class DoctorsWatchController {
 
     @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
     public String getDoctorPage(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("doctor", doctorService.getDoctor(id));
+        Doctor doctor = doctorService.getDoctor(id);
+        model.addAttribute("doctor", doctor);
+        model.addAttribute("isTimetable", doctorScheduleService.getDoctorSchedule(doctor));
         return "doctor";
     }
 
@@ -42,6 +46,19 @@ public class DoctorsWatchController {
         model.addAttribute("doctor", doctor);
         model.addAttribute("timetable", doctorScheduleService.getDoctorSchedule(doctor));
         return "doctor_timetable";
+    }
+
+    @RequestMapping(value = "/doctors/{id}/timetable/new", method = RequestMethod.GET)
+    public String getFormToCreateDoctorTimeTable(@PathVariable("id") Long id, Model model) {
+        Doctor doctor = doctorService.getDoctor(id);
+        model.addAttribute("doctor", doctor);
+        return "new-dt";
+    }
+
+    @RequestMapping(value = "/doctors/{id}/timetable", method = RequestMethod.POST)
+    public String createDoctorTimeTable(@PathVariable("id") Long id, HttpServletRequest request) {
+        doctorScheduleService.createDoctorSchedule(id, request.getParameterMap().keySet());
+        return "redirect:/doctors/{id}";
     }
 
 

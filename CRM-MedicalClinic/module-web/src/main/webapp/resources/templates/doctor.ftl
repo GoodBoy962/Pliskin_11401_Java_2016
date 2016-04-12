@@ -42,14 +42,19 @@
                             </tr>
                             <tr>
                                 <td>расписание</td>
-                                <td><a href="/doctors/${doctor.id}/timetable">посмотреть</a></td>
+                                <#if isTimetable?has_content>
+                                    <td><a href="/doctors/${doctor.id}/timetable">посмотреть</a></td>
+                                <#else>
+                                    <td>
+                                        <@security.authorize access="hasRole('ROLE_ADMIN')">
+                                            <p><a href="/doctors/${doctor.id}/timetable/new">создать</a></p>
+                                        </@security.authorize>
+                                    </td>
+                                </#if>
                             </tr>
 
                             </tbody>
                         </table>
-
-                    <#--<a href="#" class="btn btn-primary">My Sales Performance</a>-->
-                    <#--<a href="#" class="btn btn-primary">Team Sales Performance</a>-->
                     </div>
                 </div>
             </div>
