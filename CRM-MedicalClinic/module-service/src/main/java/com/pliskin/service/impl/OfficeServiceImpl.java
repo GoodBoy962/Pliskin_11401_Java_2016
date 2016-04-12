@@ -1,6 +1,7 @@
 package com.pliskin.service.impl;
 
 import com.pliskin.exceptions.NoSuchMedicalClinicException;
+import com.pliskin.exceptions.NoSuchOfficeException;
 import com.pliskin.forms.OfficeAdminCreationForm;
 import com.pliskin.model.Admin;
 import com.pliskin.model.MedicalClinic;
@@ -71,6 +72,10 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public Office getOffice(Long id) {
-        return officeRepository.findOne(id);
+        Office office = officeRepository.findOne(id);
+        if (office == null) {
+            throw new NoSuchOfficeException();
+        }
+        return office;
     }
 }

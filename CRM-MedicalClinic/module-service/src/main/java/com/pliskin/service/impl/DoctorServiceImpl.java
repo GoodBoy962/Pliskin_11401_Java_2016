@@ -1,5 +1,6 @@
 package com.pliskin.service.impl;
 
+import com.pliskin.exceptions.NoSuchDoctorException;
 import com.pliskin.forms.DoctorCreationForm;
 import com.pliskin.model.Doctor;
 import com.pliskin.model.Office;
@@ -36,7 +37,11 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor getDoctor(Long id) {
-        return doctorRepository.findOne(id);
+        Doctor doctor = doctorRepository.findOne(id);
+        if (doctor == null) {
+            throw  new NoSuchDoctorException();
+        }
+        return doctor;
     }
 
     @Override

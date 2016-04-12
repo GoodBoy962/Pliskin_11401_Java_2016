@@ -6,7 +6,7 @@ package com.pliskin.exceptions;
 public class NoSuchMedicalClinicException extends ResourceNotFoundException {
 
     public NoSuchMedicalClinicException() {
-        super("не существуею такой мед клиники");
+        super("не существует такой мед клиники");
     }
 
 }

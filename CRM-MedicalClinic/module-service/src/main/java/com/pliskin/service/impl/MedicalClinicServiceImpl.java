@@ -1,13 +1,11 @@
 package com.pliskin.service.impl;
 
+import com.pliskin.exceptions.NoSuchMedicalClinicException;
 import com.pliskin.forms.MedicalClinicRegistrationForm;
-import com.pliskin.model.Admin;
-import com.pliskin.model.Credentials;
 import com.pliskin.model.MedicalClinic;
 import com.pliskin.repository.AdminRepository;
 import com.pliskin.repository.MedicalClinicRepository;
 import com.pliskin.service.MedicalClinicService;
-import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
@@ -32,7 +30,11 @@ public class MedicalClinicServiceImpl implements MedicalClinicService {
 
     @Override
     public MedicalClinic getMedClinic(Long id) {
-        return medicalClinicRepository.findOne(id);
+        MedicalClinic medicalClinic = medicalClinicRepository.findOne(id);
+        if (medicalClinic == null) {
+            throw new NoSuchMedicalClinicException();
+        }
+        return medicalClinic;
     }
 
     @Secured("hasRole('ROLE_SYSTEM_ADMIN')")
@@ -46,7 +48,11 @@ public class MedicalClinicServiceImpl implements MedicalClinicService {
 
     @Override
     public MedicalClinic getMedClinic(String name) {
-        return medicalClinicRepository.findByName(name);
+        MedicalClinic medicalClinic = medicalClinicRepository.findByName(name);
+        if (medicalClinic == null) {
+            throw new NoSuchMedicalClinicException();
+        }
+        return medicalClinic;
     }
 
 }
