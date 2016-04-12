@@ -16,4 +16,6 @@ public interface OfficeService {
     void createOfficeAndAdmin(OfficeAdminCreationForm form, Long medicalClinicId);
 
     Office getOfficeByAdminCredentials();
+
+    Office getOffice(Long id);
 }

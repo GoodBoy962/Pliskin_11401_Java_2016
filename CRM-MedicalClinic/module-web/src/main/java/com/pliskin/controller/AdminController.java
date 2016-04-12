@@ -3,10 +3,7 @@ package com.pliskin.controller;
 import com.pliskin.forms.DoctorCreationForm;
 import com.pliskin.model.Office;
 import com.pliskin.repository.AdminRepository;
-import com.pliskin.service.DoctorService;
-import com.pliskin.service.MedicalClinicService;
-import com.pliskin.service.OfficeService;
-import com.pliskin.service.SpecializationService;
+import com.pliskin.service.*;
 import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,7 +31,7 @@ public class AdminController {
     SpecializationService specializationService;
 
     @Autowired
-    AdminRepository adminRepository;//TODO very bad
+    AdminService adminService;
 
     @Autowired
     OfficeService officeService;
@@ -48,7 +45,7 @@ public class AdminController {
 
     @RequestMapping(value = "")
     public String getAdminIndex(Model model) {
-        model.addAttribute("admin", adminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()));
+        model.addAttribute("admin", adminService.findOneByCredentials(SecurityUtils.getCurrentUser()));
         Office office = officeService.getOfficeByAdminCredentials();
         model.addAttribute("id", office.getMedicalClinic().getId());
         model.addAttribute("officeId", office.getId());

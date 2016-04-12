@@ -32,4 +32,9 @@ public class DoctorServiceImpl implements DoctorService {
     public List<Doctor> getAll() {
         return doctorRepository.findAll();
     }
+
+    @Override
+    public Doctor getDoctor(Long id) {
+        return doctorRepository.findOne(id);
+    }
 }

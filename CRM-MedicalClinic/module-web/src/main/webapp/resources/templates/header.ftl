@@ -24,7 +24,9 @@
                 </@security.authorize>
                 <@security.authorize access="hasRole('ROLE_ADMIN')">
                     <li><a href="/admin/doctors/new">Добавить врача</a></li>
-                    <li><a href="/medical_clinics/${id}/offices/${officeId}/doctors">Посмотреть своих врачей</a></li>
+                    <#if springMacroRequestContext.getRequestUri() == "/admin">
+                    <li><a href="/medical_clinics/${id}/offices/${officeId}/doctors">Посмотреть своих врачей</a></li><!--TODO-->
+                    </#if>
                 </@security.authorize>
                 </ul>
             </div>

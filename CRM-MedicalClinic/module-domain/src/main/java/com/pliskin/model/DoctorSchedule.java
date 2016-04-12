@@ -1,8 +1,9 @@
 package com.pliskin.model;
 
+import com.pliskin.model.enums.WeekDay;
+
 import javax.persistence.*;
 import java.sql.Time;
-import java.time.DayOfWeek;
 
 /**
  * Created by aleksandrpliskin on 02.04.16.
@@ -24,7 +25,8 @@ public class DoctorSchedule {
     private Doctor doctor;
 
     @Column(name = "week_day")
-    private DayOfWeek weekDay;
+    @Enumerated(EnumType.STRING)
+    private WeekDay weekDay;
 
     @Column(name = "start_time")
     private Time startTime;
@@ -64,11 +66,11 @@ public class DoctorSchedule {
         this.startTime = startTime;
     }
 
-    public DayOfWeek getWeekDay() {
+    public WeekDay getWeekDay() {
         return weekDay;
     }
 
-    public void setWeekDay(DayOfWeek weekDay) {
+    public void setWeekDay(WeekDay weekDay) {
         this.weekDay = weekDay;
     }
 }

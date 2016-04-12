@@ -93,6 +93,7 @@
     <changeSet id="seeds_13" author="GoodBoy">
         <loadUpdateData tableName="doctor_schedule" primaryKey="id" file="db/seeds/doctor_schedule.csv">
             <column name="id" type="numeric"/>
+            <column name="week_day" type="string"/>
             <column name="start_time" type="time"/>
             <column name="end_time" type="time"/>
         </loadUpdateData>

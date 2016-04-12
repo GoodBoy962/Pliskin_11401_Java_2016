@@ -11,7 +11,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #777;
+    color: #000000;
     font-weight: 300;
 }
 
@@ -64,7 +64,7 @@ a:focus {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     padding: 200px;
-    color: #fff;
+    color: #000000;
 }
 
 #main-slider .item {

@@ -68,4 +68,9 @@ public class OfficeServiceImpl implements OfficeService {
     public Office getOfficeByAdminCredentials() {
         return adminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getOffice();
     }
+
+    @Override
+    public Office getOffice(Long id) {
+        return officeRepository.findOne(id);
+    }
 }
