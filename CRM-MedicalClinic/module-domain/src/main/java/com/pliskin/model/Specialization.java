@@ -16,13 +16,6 @@ public class Specialization {
 
     private String name;
 
-    @ManyToOne
-    @JoinTable(name = "specializations_medical_clinics",
-            joinColumns = @JoinColumn(name = "specialization_id"),
-            inverseJoinColumns = @JoinColumn(name = "medical_clinic_id")
-    )
-    private MedicalClinic medicalClinic;
-
     public Long getId() {
         return id;
     }
@@ -39,11 +32,4 @@ public class Specialization {
         this.name = name;
     }
 
-    public MedicalClinic getMedicalClinic() {
-        return medicalClinic;
-    }
-
-    public void setMedicalClinic(MedicalClinic medicalClinic) {
-        this.medicalClinic = medicalClinic;
-    }
 }

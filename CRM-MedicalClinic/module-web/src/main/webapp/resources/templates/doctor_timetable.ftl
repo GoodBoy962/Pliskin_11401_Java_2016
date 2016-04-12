@@ -37,10 +37,10 @@
                                                     <#assign flag = 0>
                                                     <#if t.weekDay == w_day && (t.startTime?string("hh:mm a") == time || t.startTime?string("hh:mm a") == "12:00 PM" && time =="12:00 AM")>
                                                         <@security.authorize access="hasRole('ROLE_PATIENT')">
-                                                            <td data-title="${w_day}">записаться</td>
+                                                            <td data-title="${w_day}"><a>записаться</a></td>
                                                         </@security.authorize>
                                                         <@security.authorize access="isAnonymous()">
-                                                            <td data-title="${w_day}">записаться</td>
+                                                            <td data-title="${w_day}"><a href="/login">записаться</a></td>
                                                         </@security.authorize>
                                                         <@security.authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEM_ADMIN', 'ROLE_DOCTOR')">
                                                             <td data-title="${w_day}">+</td>

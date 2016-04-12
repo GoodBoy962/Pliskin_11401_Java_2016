@@ -15,6 +15,7 @@
         <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEM_ADMIN')"/>
         <security:intercept-url pattern="/doctor/**" access="hasRole('ROLE_DOCTOR')"/>
         <security:intercept-url pattern="/patient/**" access="hasAnyRole('ROLE_PATIENT')"/>
+        <security:intercept-url pattern="/appointment/**" access="hasAnyRole('ROLE_PATIENT')"/>
         <security:intercept-url pattern="/medical_clinics/**" access="permitAll()"/>
         <security:intercept-url pattern="/medical_clinics/*/offices/new" access="hasRole('ROLE_SYSTEM_ADMIN')"/>
         <security:intercept-url pattern="/doctors/*/timetable/new" access="hasRole('ROLE_ADMIN')"/>
