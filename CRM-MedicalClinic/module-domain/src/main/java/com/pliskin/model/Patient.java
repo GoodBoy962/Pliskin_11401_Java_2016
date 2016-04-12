@@ -21,7 +21,7 @@ public class Patient {
     private Date birthDay;
 
     @OneToOne
-    @JoinColumn(name = "credential_id")
+    @JoinColumn(name = "credentials_id")
     private Credentials credentials;
 
     public Date getBirthDay() {

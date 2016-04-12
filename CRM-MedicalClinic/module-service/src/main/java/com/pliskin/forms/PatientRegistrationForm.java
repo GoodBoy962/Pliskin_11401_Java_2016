@@ -6,9 +6,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 /**
- * Created by aleksandrpliskin on 10.04.16.
+ * Created by aleksandrpliskin on 13.04.16.
  */
-public class DoctorCreationForm {
+public class PatientRegistrationForm {
 
     @Size(min = 1, max = 30, message = "имя неправильно введено")
     private String name;
@@ -25,19 +25,29 @@ public class DoctorCreationForm {
     @Size(min = 6, max = 32, message = "пароль должен состоять не менее, чем из 6, не более, чем из 32 символов")
     private String password;
 
+    private String repassword;
+
     @Email(regexp = ".+@.+", message = "невалидный email")
     private String email;
 
     @NotEmpty(message = "поле не дожно быть пустым")
     private String birthDay;
 
-    @NotEmpty(message = "поле не дожно быть пустым")
-    private String employmentDate;
+    public String getRepassword() {
+        return repassword;
+    }
 
-    @NotEmpty(message = "поле не дожно быть пустым")
-    private String inceptionDate;
+    public void setRepassword(String repassword) {
+        this.repassword = repassword;
+    }
 
-    private String specialization;
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
+    }
 
     public String getEmail() {
         return email;
@@ -85,37 +95,5 @@ public class DoctorCreationForm {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
-    }
-
-    public String getEmploymentDate() {
-        return employmentDate;
-    }
-
-    public void setEmploymentDate(String employmentDate) {
-        this.employmentDate = employmentDate;
-    }
-
-    public String getInceptionDate() {
-        return inceptionDate;
-    }
-
-    public void setInceptionDate(String inceptionDate) {
-        this.inceptionDate = inceptionDate;
-    }
-
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
     }
 }
