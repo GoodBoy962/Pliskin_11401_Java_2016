@@ -1,9 +1,5 @@
 <#list dates as d>
-<div class="carousel-inner">
-    <div class="item active">
-        <div class="row col-md-9 col-lg-6 text text-left">
-            ${d?date}
-        </div>
-    </div>
+<div class="checkbox col-lg-3">
+    <input name="date" id="date" type="checkbox" value="${d?date}"/>${d?date}
 </div>
 </#list>

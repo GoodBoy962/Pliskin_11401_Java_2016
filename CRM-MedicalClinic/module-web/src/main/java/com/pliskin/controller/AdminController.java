@@ -54,6 +54,7 @@ public class AdminController {
 
     @RequestMapping(value = "/doctors/new", method = RequestMethod.GET)
     public String getFormToCreateNewDoctor(Model model) {
+        model.addAttribute("admin", adminService.findOneByCredentials(SecurityUtils.getCurrentUser()));
         model.addAttribute("specializations", specializationService.getAllSpecializations());
         model.addAttribute("doctor_form", new DoctorCreationForm());
         return "new-doctor";
@@ -63,6 +64,7 @@ public class AdminController {
     public String createNewDoctor(@ModelAttribute("doctor_form") @Valid DoctorCreationForm form,
                                   BindingResult result,
                                   Model model) {
+        model.addAttribute("admin", adminService.findOneByCredentials(SecurityUtils.getCurrentUser()));
         validator.validate(form, result);
         if (result.hasErrors()) {
             model.addAttribute("specializations", specializationService.getAllSpecializations());

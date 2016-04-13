@@ -1,6 +1,7 @@
 $(function () {
+    var arr = ['w', 'm', '2m'];
     var period = $("#period");
-    if (period.find("option:selected").attr("id") in ['w', 'm', 'wm']) {
+    if ($.inArray(period.find("option:selected").attr("id"), arr) > -1) {
         period.change(function () {
             getDates();
         }).change();
@@ -27,3 +28,15 @@ function getDates() {
         }
     })
 }
+
+function doSendAble() {
+    if ($("#dates").find("input[type=checkbox]:checked").length == 1) {
+        $("#appointment-create").removeAttr('disabled');
+    } else {
+        $("#appointment-create").prop('disabled', true);
+    }
+}
+
+$("#dates").change(function() {
+    doSendAble()
+});

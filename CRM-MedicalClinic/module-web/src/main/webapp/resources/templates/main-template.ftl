@@ -18,10 +18,6 @@
         <link rel="stylesheet" type="text/css" href="${style}"/>
     </#list>
 
-    <#list customScripts as script>
-        <script src="${script}"></script>
-    </#list>
-
 </head>
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
     <#include "header.ftl"/>
@@ -38,6 +34,9 @@
 <script src="/js/jquery.isotope.min.js"></script>
 <script src="/js/jquery.prettyPhoto.js"></script>
 <script src="/js/main.js"></script>
+    <#list customScripts as script>
+    <script src="${script}"></script>
+    </#list>
 </body>
 </html>
 </#macro>

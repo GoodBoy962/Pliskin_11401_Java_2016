@@ -2,10 +2,12 @@ package com.pliskin.service.impl;
 
 import com.pliskin.exceptions.NoSuchDoctorException;
 import com.pliskin.forms.DoctorCreationForm;
+import com.pliskin.model.Credentials;
 import com.pliskin.model.Doctor;
 import com.pliskin.model.Office;
 import com.pliskin.repository.DoctorRepository;
 import com.pliskin.service.DoctorService;
+import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,5 +60,11 @@ public class DoctorServiceImpl implements DoctorService {
             throw  new NoSuchDoctorException();
         }
         return doctor;
+    }
+
+    @Override
+    public Object getDoctor() {
+        return doctorRepository.findByCredentials(SecurityUtils.getCurrentUser());
+
     }
 }

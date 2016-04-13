@@ -1,5 +1,6 @@
 package com.pliskin.repository;
 
+import com.pliskin.model.Credentials;
 import com.pliskin.model.Doctor;
 import com.pliskin.model.Office;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +16,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     List<Doctor> findByOffice(Office office);
 
     Doctor findOneByFio(String fio);
+
+    Object findByCredentials(Credentials credentials);
 }

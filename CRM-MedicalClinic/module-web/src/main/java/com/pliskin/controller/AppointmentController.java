@@ -3,8 +3,8 @@ package com.pliskin.controller;
 import com.pliskin.forms.AppointmentCreationForm;
 import com.pliskin.service.DoctorScheduleService;
 import com.pliskin.service.DoctorService;
+import com.pliskin.service.PatientHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +29,9 @@ public class AppointmentController {
     @Autowired
     DoctorScheduleService doctorScheduleService;
 
+    @Autowired
+    PatientHistoryService patientHistoryService;
+
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String getFormToCreateAppointment(HttpServletRequest request, Model model) {
         model.addAttribute("doctor", doctorService.getDoctor(Long.valueOf(request.getParameter("doctor_id"))));
@@ -50,8 +53,13 @@ public class AppointmentController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String createAppointment(@ModelAttribute("appointment_form") @Valid AppointmentCreationForm form,
+                                    @RequestParam("date") String date,
                                     BindingResult result) {
-        return null;
+        if (result.hasErrors()) {
+            return "new-appointment";
+        }
+        patientHistoryService.createHistory(form, date);
+        return "patient";
     }
 
 }

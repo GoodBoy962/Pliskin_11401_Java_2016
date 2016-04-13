@@ -17,4 +17,5 @@ public interface DoctorScheduleRepository extends JpaRepository<DoctorSchedule, 
     List<DoctorSchedule> findByDoctor(Doctor doctor);
 
     DoctorSchedule findByDoctorAndWeekDayAndStartTimeAndEndTime(Doctor doctor, WeekDay weekDay, Time startTime, Time endTime);
+
 }

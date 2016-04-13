@@ -20,4 +20,6 @@ public interface DoctorService {
     List<Doctor> getDoctorsByOffice(Office office);
 
     Doctor getDoctor(String doctorFio);
+
+    Object getDoctor();
 }
