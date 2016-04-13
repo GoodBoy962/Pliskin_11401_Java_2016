@@ -13,4 +13,6 @@ import java.util.List;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     List<Doctor> findByOffice(Office office);
+
+    Doctor findOneByFio(String fio);
 }

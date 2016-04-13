@@ -1,6 +1,7 @@
 package com.pliskin.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by aleksandrpliskin on 01.04.16.
@@ -27,6 +28,16 @@ public class PatientHistory {
     private Boolean status;
 
     private String description;
+
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public String getDescription() {
         return description;

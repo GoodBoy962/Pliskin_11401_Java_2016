@@ -18,4 +18,6 @@ public interface DoctorService {
     Doctor getDoctor(Long id);
 
     List<Doctor> getDoctorsByOffice(Office office);
+
+    Doctor getDoctor(String doctorFio);
 }

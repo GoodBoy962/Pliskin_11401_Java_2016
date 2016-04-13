@@ -6,8 +6,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="db/changelogs/1606040119_postgresql.xml"/>
-    <include file="db/changelogs/1606041809_postgresql.xml"/>
-    <include file="db/changelogs/1613042111_postgresql.xml"/>
+
+    <changeSet id="1613042111_1" author="GoodBoy">
+        <addColumn tableName="patient_histories">
+            <column name="date" type="date"></column>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

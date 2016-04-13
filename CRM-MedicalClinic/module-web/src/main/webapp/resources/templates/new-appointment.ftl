@@ -2,6 +2,8 @@
 
 <#macro m_body>
 
+<script src="/js/appointment.js"></script>
+
 <section id="main-slider" class="carousel">
     <div class="container">
         <div class="col-md-10 col-lg-offset-2 text-center">
@@ -30,10 +32,10 @@
                     <div class="col-md-8" id="period">
                         <h3>выберите период времени, чтобы узнать, когда можно записаться</h3>
                         <select id="period">
-                            <option></option>
-                            <option id="w" onselect="getDates()"> на две недели</option>
-                            <option id="m" onselect="getDates()"> на месяц</option>
-                            <option id="2m" onselect="getDates()"> на два месяца</option>
+                            <#--<option></option>-->
+                            <option id="w" name="w"> на две недели</option>
+                            <option id="m" name="m"> на месяц</option>
+                            <option id="2m" name="2m"> на два месяца</option>
                         </select>
                     </div>
                 </div>
@@ -57,4 +59,4 @@
 
 </#macro>
 
-<@main title="Запись на приём" customScripts=["/js/appointment.js"]/>
+<@main title="Запись на приём"/>

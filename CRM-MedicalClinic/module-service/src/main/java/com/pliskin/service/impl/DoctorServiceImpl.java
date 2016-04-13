@@ -50,4 +50,13 @@ public class DoctorServiceImpl implements DoctorService {
     public List<Doctor> getDoctorsByOffice(Office office) {
         return doctorRepository.findByOffice(office);
     }
+
+    @Override
+    public Doctor getDoctor(String doctorFio) {
+        Doctor doctor = doctorRepository.findOneByFio(doctorFio);
+        if (doctor == null) {
+            throw  new NoSuchDoctorException();
+        }
+        return doctor;
+    }
 }
