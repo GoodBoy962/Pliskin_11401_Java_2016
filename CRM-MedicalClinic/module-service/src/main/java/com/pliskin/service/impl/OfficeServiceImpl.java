@@ -15,6 +15,7 @@ import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.function.Function;
@@ -49,6 +50,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Secured(value = "hasRole('ROLE_STUDENT_ADMIN')")
+    @Transactional
     @Override
     public void createOfficeAndAdmin(OfficeAdminCreationForm form, Long medicalClinicId) {
         MedicalClinic medicalClinic = medicalClinicRepository.findOne(medicalClinicId);

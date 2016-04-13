@@ -9,6 +9,7 @@ import com.pliskin.service.MedicalClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class MedicalClinicServiceImpl implements MedicalClinicService {
     }
 
     @Secured("hasRole('ROLE_SYSTEM_ADMIN')")
+    @Transactional
     @Override
     public void createNewMedClinic(MedicalClinicRegistrationForm form) {
         MedicalClinic medicalClinic = new MedicalClinic();

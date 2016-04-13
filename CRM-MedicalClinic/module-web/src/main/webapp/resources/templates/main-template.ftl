@@ -14,8 +14,6 @@
     <link rel="shortcut icon" href="/images/ico/medicine box 2.ico">
     <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
 
-    <script src="/resources/js/jquery-2.1.3.min.js"></script>
-
     <#list customStyles as style>
         <link rel="stylesheet" type="text/css" href="${style}"/>
     </#list>

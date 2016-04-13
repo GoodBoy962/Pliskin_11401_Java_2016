@@ -8,6 +8,7 @@ import com.pliskin.repository.DoctorRepository;
 import com.pliskin.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.function.Function;
@@ -24,6 +25,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     DoctorRepository doctorRepository;
 
+    @Transactional
     @Override
     public void createDoctor(DoctorCreationForm form) {
         Doctor doctor = doctorFunction.apply(form);

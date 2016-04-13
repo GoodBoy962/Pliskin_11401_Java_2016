@@ -3,11 +3,15 @@ package com.pliskin.service.impl;
 import com.pliskin.model.Doctor;
 import com.pliskin.model.DoctorSchedule;
 import com.pliskin.repository.DoctorScheduleRepository;
+import com.pliskin.repository.PatientHistoryRepository;
 import com.pliskin.service.DoctorScheduleService;
 import com.pliskin.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -26,6 +30,9 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
     Function<Object, DoctorSchedule> transformer;
 
     @Autowired
+    PatientHistoryRepository patientHistoryRepository;
+
+    @Autowired
     DoctorService doctorService;
 
     @Override
@@ -33,12 +40,20 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
         return doctorScheduleRepository.findByDoctor(doctor);
     }
 
+    @Transactional
     @Override
     public void createDoctorSchedule(Long id, Set attachments) {
         Doctor doctor = doctorService.getDoctor(id);
         List<DoctorSchedule> doctorSchedules = (List<DoctorSchedule>) attachments.stream().map(transformer).collect(Collectors.toList());
         doctorSchedules.forEach(doctorSchedule -> doctorSchedule.setDoctor(doctor));
         doctorScheduleRepository.save(doctorSchedules);
+    }
+
+    @Override
+    public List<Date> getPossibleDates(String period, String weekDay, String time, String doctorFio) {
+        List<Date> dates = new ArrayList<>();
+        dates.contains("a");
+        return dates;
     }
 
 }

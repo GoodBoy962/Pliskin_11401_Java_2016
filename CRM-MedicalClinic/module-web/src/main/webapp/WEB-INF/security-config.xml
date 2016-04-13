@@ -29,11 +29,16 @@
                 authentication-failure-url="/login?error=true"/>
         <security:logout logout-url="/logout" logout-success-url="/"/>
         <security:csrf disabled="true"/>
+        <security:access-denied-handler ref="accessDeniedHandler"/>
     </security:http>
 
     <security:authentication-manager>
         <security:authentication-provider ref="authProvider"/>
     </security:authentication-manager>
+
+    <bean id="accessDeniedHandler" class="com.pliskin.security.MyAccessDeniedHandler">
+        <property name="errorPage" value="/403"/>
+    </bean>
 
     <bean id="authProvider" class="com.pliskin.security.AuthProviderImpl"/>
 </beans>
