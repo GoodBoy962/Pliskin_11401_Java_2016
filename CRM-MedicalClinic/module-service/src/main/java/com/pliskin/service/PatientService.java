@@ -1,6 +1,7 @@
 package com.pliskin.service;
 
 import com.pliskin.forms.PatientRegistrationForm;
+import com.pliskin.model.Credentials;
 import com.pliskin.model.Patient;
 
 /**
@@ -10,4 +11,6 @@ public interface PatientService {
     void saveNewPatient(PatientRegistrationForm form);
 
     Patient getPatient();
+
+    Patient getPatient(Credentials credentials);
 }

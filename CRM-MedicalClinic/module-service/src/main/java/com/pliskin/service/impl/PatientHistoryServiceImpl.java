@@ -1,6 +1,7 @@
 package com.pliskin.service.impl;
 
-import com.pliskin.forms.AppointmentCreationForm;
+import com.pliskin.model.Credentials;
+import com.pliskin.model.Patient;
 import com.pliskin.model.PatientHistory;
 import com.pliskin.model.enums.WeekDay;
 import com.pliskin.repository.DoctorScheduleRepository;
@@ -17,6 +18,7 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -43,27 +45,27 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
     @Secured("hasRole('ROLE_PATIENT')")
     @Transactional
     @Override
-    public void createHistory(AppointmentCreationForm form, String date) {
+    public void createHistory(String fio, String wDay, String time1, String date) {
         PatientHistory patientHistory = new PatientHistory();
         DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat formatter1 = new SimpleDateFormat("HH:mm:ss");
         try {
             patientHistory.setDate(formatter.parse(date));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String time = transformer.apply(form.getTime());
+        String time = transformer.apply(time1);
         long timeStart = 0;
         try {
-            timeStart = formatter.parse(time.substring(0, 8)).getTime();
-            long timeEnd = formatter.parse(time.substring(9, time.length())).getTime();
+            timeStart = formatter1.parse(time.substring(0, 8)).getTime();
+            long timeEnd = formatter1.parse(time.substring(9, time.length())).getTime();
             Time startTime = new Time(timeStart);
             Time endTime = new Time(timeEnd);
             patientHistory.setStatus(Boolean.FALSE);
             patientHistory.setPatient(patientService.getPatient());
             patientHistory.setDoctorSchedule(doctorScheduleRepository.findByDoctorAndWeekDayAndStartTimeAndEndTime(
-                    doctorService.getDoctor(form.getDoctorFio()),
-                    WeekDay.valueOf(form.getWeekDay()),
+                    doctorService.getDoctor(fio),
+                    WeekDay.valueOf(wDay),
                     startTime,
                     endTime
             ));
@@ -71,5 +73,10 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<PatientHistory> getHistories(Credentials credentials) {
+        return patientHistoryRepository.findByPatient(patientService.getPatient(credentials));
     }
 }

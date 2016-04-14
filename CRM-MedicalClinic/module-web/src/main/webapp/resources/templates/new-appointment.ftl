@@ -5,25 +5,26 @@
 <section id="main-slider" class="carousel">
     <div class="container">
         <div class="col-md-10 col-lg-offset-2 text-center">
-            <@sf.form action="/appointment" method="post" modelAttribute="appointment_form" class="form-horizontal text-center">
+            <form action="/appointment" method="post" class="form-horizontal text-center">
                 <div class="form-group text-center">
                     <div class="col-md-8">
-                        <@sf.input path="weekDay" id="weekDay" placeholder="День недели" value="${w_day}" disabled=true/>
-                        <br/>
-                        <@sf.errors path="weekDay"/><br/>
+                        <input name="weekDay" id="weekDay" placeholder="День недели" value="${w_day?string}"
+                               <#--disabled-->
+                        />
                     </div>
                 </div>
                 <div class="form-group text-center">
                     <div class="col-md-8">
-                        <@sf.input path="time" id="time" placeholder="Время" value="${time}" disabled=true/><br/>
-                        <@sf.errors path="time"/><br/>
+                        <input name="time" id="time" placeholder="Время" value="${time?string}"
+                               <#--disabled-->
+                        /><br/>
                     </div>
                 </div>
                 <div class="form-group text-center">
                     <div class="col-md-8">
-                        <@sf.input path="doctorFio" id="doctorFio" placeholder="ФИО доктора" value="${doctor.fio}" disabled=true/>
-                        <br/>
-                        <@sf.errors path="doctorFio"/><br/>
+                        <input name="doctorFio" id="doctorFio" placeholder="ФИО доктора" value="${doctor.fio?string}"
+                               <#--disabled-->
+                        />
                     </div>
                 </div>
                 <div class="form-group text-left">
@@ -43,10 +44,11 @@
 
                 <div class="form-group text-center">
                     <div class="col-md-8">
-                        <button type="submit" id="appointment-create" class="btn btn-success" disabled>Записаться</button>
+                        <button type="submit" id="appointment-create" class="btn btn-success" disabled>Записаться
+                        </button>
                     </div>
                 </div>
-            </@sf.form>
+            </form>
         </div>
     </div>
 </section>

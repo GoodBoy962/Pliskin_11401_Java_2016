@@ -1,6 +1,7 @@
 package com.pliskin.service.impl;
 
 import com.pliskin.forms.PatientRegistrationForm;
+import com.pliskin.model.Credentials;
 import com.pliskin.model.Patient;
 import com.pliskin.repository.PatientRepository;
 import com.pliskin.service.PatientService;
@@ -33,5 +34,10 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient getPatient() {
         return patientRepository.findByCredentials(SecurityUtils.getCurrentUser());
+    }
+
+    @Override
+    public Patient getPatient(Credentials credentials) {
+        return patientRepository.findByCredentials(credentials);
     }
 }
