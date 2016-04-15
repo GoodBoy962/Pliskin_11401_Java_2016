@@ -16,6 +16,8 @@ public class Office {
 
     private String address;
 
+    private String city;
+
     @ManyToOne
     @JoinTable(name = "offices_medical_clinics",
             joinColumns = @JoinColumn(name = "office_id"),
@@ -45,5 +47,13 @@ public class Office {
 
     public void setMedicalClinic(MedicalClinic medicalClinic) {
         this.medicalClinic = medicalClinic;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

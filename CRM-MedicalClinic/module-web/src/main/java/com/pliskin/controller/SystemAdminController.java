@@ -46,7 +46,7 @@ public class SystemAdminController {
     @RequestMapping(value = "medical_clinics/new")
     public String getFormToCreateMedicalClinic(Model model) {
         model.addAttribute("mc_new_form", new MedicalClinicRegistrationForm());
-        return "new-mc";
+        return "/new-mc";
     }
 
     @RequestMapping(value = "medical_clinics", method = RequestMethod.POST)
@@ -54,7 +54,7 @@ public class SystemAdminController {
                                       BindingResult result) {
         mcValidator.validate(form, result);
         if (result.hasErrors()) {
-            return "new-mc";
+            return "/new-mc";
         } else {
             medicalClinicService.createNewMedClinic(form);
             return "redirect:/medical_clinics/" + medicalClinicService.getMedClinic(form.getName()).getId();
@@ -66,7 +66,7 @@ public class SystemAdminController {
                                                          Model model) {
         model.addAttribute("office_admin_form", new OfficeAdminCreationForm());
         model.addAttribute("id", medicalClinicId);
-        return "new-office_admin";
+        return "/new-office_admin";
     }
 
     @RequestMapping(value = "/medical_clinics/{id}/offices", method = RequestMethod.POST)
@@ -75,7 +75,7 @@ public class SystemAdminController {
                                                 BindingResult result) {
         validator.validate(form, result);
         if (result.hasErrors()) {
-            return "new-office_admin";
+            return "/new-office_admin";
         }
         officeService.createOfficeAndAdmin(form, medicalClinicId);
         return "redirect:/medical_clinics/" + medicalClinicId + "/";

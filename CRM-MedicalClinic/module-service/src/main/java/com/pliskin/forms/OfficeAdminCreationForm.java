@@ -2,13 +2,15 @@ package com.pliskin.forms;
 
 import org.hibernate.validator.constraints.Email;
 
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
  * Created by aleksandrpliskin on 07.04.16.
  */
 public class OfficeAdminCreationForm {
+
+    @Size(min = 3, max = 40, message = "название города неверно")
+    private String city;
 
     @Size(min = 5, max = 50, message = "неверный адрес")
     private String address;
@@ -85,5 +87,13 @@ public class OfficeAdminCreationForm {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

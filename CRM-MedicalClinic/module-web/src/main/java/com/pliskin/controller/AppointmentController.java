@@ -1,8 +1,8 @@
 package com.pliskin.controller;
 
-import com.pliskin.service.DoctorScheduleService;
-import com.pliskin.service.DoctorService;
-import com.pliskin.service.PatientHistoryService;
+import com.pliskin.model.Office;
+import com.pliskin.model.Specialization;
+import com.pliskin.service.*;
 import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by aleksandrpliskin on 13.04.16.
@@ -29,12 +32,22 @@ public class AppointmentController {
     @Autowired
     PatientHistoryService patientHistoryService;
 
+    @Autowired
+    OfficeService officeService;
+
+    @Autowired
+    SpecializationService specializationService;
+
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String getFormToCreateAppointment(HttpServletRequest request, Model model) {
-        model.addAttribute("doctor", doctorService.getDoctor(Long.valueOf(request.getParameter("doctor_id"))));//TODO if no such
-        model.addAttribute("time", request.getParameter("time"));//TODO here too
-        model.addAttribute("w_day", request.getParameter("w_day"));//TODO here too
-        return "new-appointment";
+        if (request.getParameter("doctor_id") != null) {
+            model.addAttribute("doctor", doctorService.getDoctor(Long.valueOf(request.getParameter("doctor_id"))));
+            model.addAttribute("time", request.getParameter("time"));
+            model.addAttribute("w_day", request.getParameter("w_day"));
+            return "/new-appointment";
+        } else {
+            return "/new-appointment-cool";
+        }
     }
 
     @RequestMapping(value = "/dates", method = RequestMethod.GET)
@@ -44,7 +57,7 @@ public class AppointmentController {
                            @RequestParam("time") String time,
                            @RequestParam("doctorFio") String doctorFio) {
         model.addAttribute("dates", doctorScheduleService.getPossibleDates(period, weekDay, time, doctorFio));
-        return "appointment_dates";
+        return "/appointment_dates";
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -58,8 +71,24 @@ public class AppointmentController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getAppointmentsHistory(Model model) {
-        model.addAttribute("appointments",patientHistoryService.getHistories(SecurityUtils.getCurrentUser()));
-        return "appointments";
+        model.addAttribute("appointments", patientHistoryService.getHistories(SecurityUtils.getCurrentUser()));
+        return "/appointments";
+    }
+
+    @RequestMapping(value = "/offices", method = RequestMethod.GET)
+    public String getOffices(@RequestParam("city") String city, Model model) {
+        List<Office> offices = officeService.getOfficesByCity(city);
+        model.addAttribute("offices", offices);
+        return "/offices-list";
+    }
+
+    @RequestMapping(value = "specializations", method = RequestMethod.GET)
+    public String getSpecializationsOfDoctorsInOffice(@RequestParam("city") String city,
+                                                   @RequestParam("address") String address,
+                                                   Model model) {
+        Set<Specialization> specializations = specializationService.getSpecializationsOfDoctorsInOfficeByCityAndAddress(city, address);
+        model.addAttribute("specializations", new ArrayList<>(specializations));
+        return "specializations-list";
     }
 
 }

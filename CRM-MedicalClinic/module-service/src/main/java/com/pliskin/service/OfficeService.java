@@ -18,4 +18,8 @@ public interface OfficeService {
     Office getOfficeByAdminCredentials();
 
     Office getOffice(Long id);
+
+    List<Office> getOfficesByCity(String city);
+
+    Office getOfficeByCityAndAddress(String city, String address);
 }

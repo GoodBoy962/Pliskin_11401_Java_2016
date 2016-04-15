@@ -35,7 +35,7 @@ public class AuthController {
         if (Boolean.TRUE.equals(error)) {
             model.addAttribute("error", error);
         }
-        return "login";
+        return "/login";
     }
 
     @RequestMapping("/default")
@@ -49,14 +49,14 @@ public class AuthController {
         } else if (request.isUserInRole("ROLE_DOCTOR")) {
             return "redirect:/doctor";
         } else {
-            return "login";
+            return "/login";
         }
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String getRegistrationPage(Model model) {
         model.addAttribute("userform", new PatientRegistrationForm());
-        return "registration";
+        return "/registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -66,7 +66,7 @@ public class AuthController {
             return "registration";
         }
         patientService.saveNewPatient(form);
-        return "redirect:/";
+        return "/redirect:/";
     }
 
 }

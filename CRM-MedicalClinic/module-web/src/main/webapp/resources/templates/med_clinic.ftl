@@ -14,7 +14,7 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="row col-md-9 col-lg-6 text text-left">
-                            <p><a href="/offices/${of.id}">${of.address}</a></p>
+                            <p><a href="/offices/${of.id}">${of.city}    ${of.address}</a></p>
                         </div>
                     </div>
                 </div>

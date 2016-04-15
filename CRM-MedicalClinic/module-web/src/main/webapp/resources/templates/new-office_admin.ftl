@@ -8,6 +8,12 @@
             <@sf.form action="/system/medical_clinics/${id}/offices" method="post" class="form-horizontal text-center" modelAttribute="office_admin_form">
                 <div class="form-group text-center">
                     <div class="col-md-12">
+                        <@sf.input path="city" id="city" class="form-control" placeholder="Город"/><br/>
+                        <@sf.errors path="city" class="alert alert-danger form-control"/>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="col-md-12">
                         <@sf.input path="address" id="address" class="form-control" placeholder="Адрес офиса"/><br/>
                         <@sf.errors path="address" class="alert alert-danger form-control"/>
                     </div>

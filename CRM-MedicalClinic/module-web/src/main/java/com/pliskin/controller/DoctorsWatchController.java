@@ -29,7 +29,7 @@ public class DoctorsWatchController {
                                 @PathVariable("id") String id,
                                 @PathVariable("officeId") String officeId) {
         model.addAttribute("doctors", doctorService.getAll());
-        return "doctors";
+        return "/doctors";
     }
 
     @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
@@ -37,7 +37,7 @@ public class DoctorsWatchController {
         Doctor doctor = doctorService.getDoctor(id);
         model.addAttribute("doctor", doctor);
         model.addAttribute("isTimetable", doctorScheduleService.getDoctorSchedule(doctor));
-        return "doctor";
+        return "/doctor";
     }
 
     @RequestMapping(value = "/doctors/{id}/timetable", method = RequestMethod.GET)
@@ -45,14 +45,14 @@ public class DoctorsWatchController {
         Doctor doctor = doctorService.getDoctor(id);
         model.addAttribute("doctor", doctor);
         model.addAttribute("timetable", doctorScheduleService.getDoctorSchedule(doctor));
-        return "doctor_timetable";
+        return "/doctor_timetable";
     }
 
     @RequestMapping(value = "/doctors/{id}/timetable/new", method = RequestMethod.GET)
     public String getFormToCreateDoctorTimeTable(@PathVariable("id") Long id, Model model) {
         Doctor doctor = doctorService.getDoctor(id);
         model.addAttribute("doctor", doctor);
-        return "new-dt";
+        return "/new-dt";
     }
 
     @RequestMapping(value = "/doctors/{id}/timetable", method = RequestMethod.POST)

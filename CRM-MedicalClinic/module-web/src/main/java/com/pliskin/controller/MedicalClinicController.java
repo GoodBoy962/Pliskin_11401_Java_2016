@@ -24,7 +24,7 @@ public class MedicalClinicController {
     @RequestMapping(value = "medical_clinics")
     public String getMedClinics(Model model) {
         model.addAttribute("medical_clinics", medicalClinicService.getMedClinics());
-        return "medical_clinics_list";
+        return "/medical_clinics_list";
     }
 
     @RequestMapping(value = "medical_clinics/{id}")
@@ -32,7 +32,7 @@ public class MedicalClinicController {
         MedicalClinic medicalClinic = medicalClinicService.getMedClinic(id);
         model.addAttribute("offs", officeService.getMedClinicOffices(medicalClinic));
         model.addAttribute("mc", medicalClinic);
-        return "med_clinic";
+        return "/med_clinic";
     }
 
 }

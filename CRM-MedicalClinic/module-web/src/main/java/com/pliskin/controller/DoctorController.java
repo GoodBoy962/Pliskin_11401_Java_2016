@@ -19,7 +19,7 @@ public class DoctorController {
     @RequestMapping(value = "")
     public String getDoctorIndex(Model model) {
         model.addAttribute("doctor", doctorService.getDoctor());
-        return "doctor";
+        return "/doctor";
     }
 
 }

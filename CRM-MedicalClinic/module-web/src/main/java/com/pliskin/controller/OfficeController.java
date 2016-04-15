@@ -27,7 +27,7 @@ public class OfficeController {
         Office office = officeService.getOffice(id);
         model.addAttribute("office", office);
         model.addAttribute("doctors", doctorService.getDoctorsByOffice(office));
-        return "office";
+        return "/office";
     }
 
 }

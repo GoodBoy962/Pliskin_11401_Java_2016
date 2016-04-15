@@ -80,4 +80,14 @@ public class OfficeServiceImpl implements OfficeService {
         }
         return office;
     }
+
+    @Override
+    public List<Office> getOfficesByCity(String city) {
+        return officeRepository.findByCity(city);
+    }
+
+    @Override
+    public Office getOfficeByCityAndAddress(String city, String address) {
+        return officeRepository.findOneByCityAndAddress(city, address);
+    }
 }

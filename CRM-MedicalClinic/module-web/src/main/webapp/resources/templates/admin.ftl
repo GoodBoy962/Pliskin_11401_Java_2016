@@ -25,6 +25,10 @@
                                 <td>офис</td>
                                 <td><a href="/offices/${admin.office.id}">${admin.office.address}</a></td>
                             </tr>
+                            <tr>
+                                <td>город</td>
+                                <td>${admin.office.city}</td>
+                            </tr>
                             <tbody>
                         </table>
                     </div>

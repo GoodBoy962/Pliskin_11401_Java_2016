@@ -19,7 +19,7 @@ public class PatientController {
     @RequestMapping(value = "")
     public String getPatientIndex(Model model) {
         model.addAttribute("patient", patientService.getPatient());
-        return "patient";
+        return "/patient";
     }
 
 }

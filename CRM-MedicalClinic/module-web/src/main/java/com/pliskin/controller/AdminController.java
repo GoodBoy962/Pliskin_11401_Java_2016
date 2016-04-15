@@ -49,7 +49,7 @@ public class AdminController {
         Office office = officeService.getOfficeByAdminCredentials();
         model.addAttribute("id", office.getMedicalClinic().getId());
         model.addAttribute("officeId", office.getId());
-        return "admin";
+        return "/admin";
     }
 
     @RequestMapping(value = "/doctors/new", method = RequestMethod.GET)
@@ -57,7 +57,7 @@ public class AdminController {
         model.addAttribute("admin", adminService.findOneByCredentials(SecurityUtils.getCurrentUser()));
         model.addAttribute("specializations", specializationService.getAllSpecializations());
         model.addAttribute("doctor_form", new DoctorCreationForm());
-        return "new-doctor";
+        return "/new-doctor";
     }
 
     @RequestMapping(value = "/doctors", method = RequestMethod.POST)
@@ -68,7 +68,7 @@ public class AdminController {
         validator.validate(form, result);
         if (result.hasErrors()) {
             model.addAttribute("specializations", specializationService.getAllSpecializations());
-            return "new-doctor";
+            return "/new-doctor";
         }
         doctorService.createDoctor(form);
         return "redirect:/admin";
