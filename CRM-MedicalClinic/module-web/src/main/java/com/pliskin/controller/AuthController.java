@@ -66,7 +66,7 @@ public class AuthController {
             return "registration";
         }
         patientService.saveNewPatient(form);
-        return "/redirect:/";
+        return "redirect:/";
     }
 
 }

@@ -2,11 +2,12 @@ package com.pliskin.service.impl;
 
 import com.pliskin.exceptions.NoSuchDoctorException;
 import com.pliskin.forms.DoctorCreationForm;
-import com.pliskin.model.Credentials;
 import com.pliskin.model.Doctor;
 import com.pliskin.model.Office;
 import com.pliskin.repository.DoctorRepository;
+import com.pliskin.repository.SpecializationRepository;
 import com.pliskin.service.DoctorService;
+import com.pliskin.service.SpecializationService;
 import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,12 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     DoctorRepository doctorRepository;
 
+    @Autowired
+    SpecializationRepository specializationRepository;
+
     @Transactional
     @Override
+
     public void createDoctor(DoctorCreationForm form) {
         Doctor doctor = doctorFunction.apply(form);
         doctorRepository.save(doctor);
@@ -43,7 +48,7 @@ public class DoctorServiceImpl implements DoctorService {
     public Doctor getDoctor(Long id) {
         Doctor doctor = doctorRepository.findOne(id);
         if (doctor == null) {
-            throw  new NoSuchDoctorException();
+            throw new NoSuchDoctorException();
         }
         return doctor;
     }
@@ -57,7 +62,7 @@ public class DoctorServiceImpl implements DoctorService {
     public Doctor getDoctor(String doctorFio) {
         Doctor doctor = doctorRepository.findOneByFio(doctorFio);
         if (doctor == null) {
-            throw  new NoSuchDoctorException();
+            throw new NoSuchDoctorException();
         }
         return doctor;
     }
@@ -66,5 +71,10 @@ public class DoctorServiceImpl implements DoctorService {
     public Object getDoctor() {
         return doctorRepository.findByCredentials(SecurityUtils.getCurrentUser());
 
+    }
+
+    @Override
+    public List<Doctor> getDoctorsByOfficeAndSpecialization(Office office, String specialization) {
+        return doctorRepository.findByOfficeAndSpecialization(office, specializationRepository.findByName(specialization));
     }
 }

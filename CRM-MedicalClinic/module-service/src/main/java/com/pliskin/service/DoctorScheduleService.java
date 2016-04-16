@@ -2,11 +2,10 @@ package com.pliskin.service;
 
 import com.pliskin.model.Doctor;
 import com.pliskin.model.DoctorSchedule;
-import com.pliskin.model.enums.WeekDay;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -20,4 +19,5 @@ public interface DoctorScheduleService {
 
     List<Date> getPossibleDates(String period, String weekDay, String time, String doctorFio);
 
+    Map<Doctor, Map<Date, List<DoctorSchedule>>> getAllPossibleDates(String city, String address, String specialization, String period);
 }

@@ -29,21 +29,21 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group text-left" hidden>
-                    <div class="col-md-8" id="doctors">
-                        <h3>Врач</h3>
-                        <select id="docs">
-
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group text-left" hidden>
+                <div class="form-group text-left" id="js-period" hidden>
                     <div class="col-md-8" id="period">
                         <h3>выберите период времени, чтобы узнать, когда можно записаться</h3>
                         <select id="period">
                             <option id="w" name="w"> на две недели</option>
                             <option id="m" name="m"> на месяц</option>
                             <option id="2m" name="2m"> на два месяца</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group text-left" id="js-doctorDates" hidden>
+                    <div class="col-md-8" id="doctors">
+                        <h3>Врач</h3>
+                        <select id="js-dates">
+
                         </select>
                     </div>
                 </div>

@@ -82,13 +82,23 @@ public class AppointmentController {
         return "/offices-list";
     }
 
-    @RequestMapping(value = "specializations", method = RequestMethod.GET)
+    @RequestMapping(value = "/specializations", method = RequestMethod.GET)
     public String getSpecializationsOfDoctorsInOffice(@RequestParam("city") String city,
-                                                   @RequestParam("address") String address,
-                                                   Model model) {
+                                                      @RequestParam("address") String address,
+                                                      Model model) {
         Set<Specialization> specializations = specializationService.getSpecializationsOfDoctorsInOfficeByCityAndAddress(city, address);
         model.addAttribute("specializations", new ArrayList<>(specializations));
-        return "specializations-list";
+        return "/specializations-list";
+    }
+
+    @RequestMapping(value = "/dates_doctors", method = RequestMethod.GET)
+    public String getPossibleDatesAndDoctors(@RequestParam("city") String city,
+                                             @RequestParam("address") String address,
+                                             @RequestParam("specialization") String specialization,
+                                             @RequestParam("period") String period,
+                                             Model model) {
+        model.addAttribute("dates_doctors", doctorScheduleService.getAllPossibleDates(city, address, specialization, period));
+        return "/doctors_dates";
     }
 
 }

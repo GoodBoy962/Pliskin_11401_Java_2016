@@ -7,6 +7,7 @@ import com.pliskin.repository.DoctorScheduleRepository;
 import com.pliskin.repository.PatientHistoryRepository;
 import com.pliskin.service.DoctorScheduleService;
 import com.pliskin.service.DoctorService;
+import com.pliskin.service.OfficeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,9 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
     DoctorService doctorService;
 
     @Autowired
+    OfficeService officeService;
+
+    @Autowired
     Function<String, String> timeTransformer;
 
     @Override
@@ -60,6 +64,17 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
         String timeValue = timeTransformer.apply(time);
         List<Date> dates = getRightDays(period, weekDay, doctor, timeValue);
         return dates;
+    }
+
+    @Override
+    public Map<Doctor, Map<Date, List<DoctorSchedule>>> getAllPossibleDates(String city, String address, String specialization, String period) {
+        List<Doctor> doctors = doctorService.getDoctorsByOfficeAndSpecialization(officeService.getOfficeByCityAndAddress(city, address), specialization);
+        Map<Doctor, Map<Date, List<DoctorSchedule>>> doctorsDates = new HashMap<>();
+        for (Doctor doctor : doctors) {
+            Map<Date, List<DoctorSchedule>> dates = getRightDays(period, doctor);
+            doctorsDates.put(doctor, dates);
+        }
+        return doctorsDates;
     }
 
     private Date getEndDate(Date sDate, String period) {
@@ -115,6 +130,28 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
             e.printStackTrace();
         }
         return resultDates;
+    }
+
+    private Map<Date, List<DoctorSchedule>> getRightDays(String period, Doctor doctor) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEEE", Locale.US);
+        List<Date> dates = new ArrayList<>();
+        Map<Date, List<DoctorSchedule>> map = new HashMap<>();
+        Date startDate = new Date();
+        Date endDate = getEndDate(startDate, period);
+        final long interval = 24 * 1000 * 60 * 60;
+        long endTime = endDate.getTime();
+        long curTime = startDate.getTime();
+        while (curTime <= endTime) {
+            dates.add(new Date(curTime));
+            curTime += interval;
+        }
+        for (Date date : dates) {
+            List<DoctorSchedule> resultDates = doctorScheduleRepository.findByDoctorAndWeekDay(doctor, WeekDay.valueOf(dateFormat.format(date).toUpperCase())).stream().filter(doctorSchedule -> patientHistoryRepository.findByDateAndDoctorSchedule(
+                    date, doctorSchedule) == null).collect(Collectors.toList());
+            map.put(date, resultDates);
+        }
+
+        return map;
     }
 
 }

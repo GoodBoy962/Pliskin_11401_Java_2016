@@ -27,7 +27,8 @@ function getDoctorSpecialities() {
         dataType: "html",
         success: function (data) {
             $("#specializations").show();
-            $("#specs").html(data)
+            $("#specs").html(data);
+            $("#js-period").show();
         }
     })
 }
@@ -38,3 +39,31 @@ $(function () {
         getDoctorSpecialities();
     }).change();
 });
+
+$(function () {
+    var specializations = $("#specializations");
+    specializations.change(function () {
+        getDoctorsAndPossibleDates(specializations.find("option:selected").val());
+    })
+});
+
+function getDoctorsAndPossibleDates(specialization) {
+    var city = $("#city").val();
+    var address = $("#offices").find("option:selected").val();
+    var period = $("#js-period").find("option:selected").attr("id");
+    $.ajax({
+        url: "dates_doctors",
+        type: "GET",
+        data: {
+            city: city,
+            address: address,
+            specialization: specialization,
+            period: period
+        },
+        dataType: "html",
+        success: function (data) {
+            $("#doctors").html(data);
+            $("#js-doctorDates").show();
+        }
+    })
+}

@@ -3,6 +3,7 @@ package com.pliskin.repository;
 import com.pliskin.model.Credentials;
 import com.pliskin.model.Doctor;
 import com.pliskin.model.Office;
+import com.pliskin.model.Specialization;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Doctor findOneByFio(String fio);
 
     Object findByCredentials(Credentials credentials);
+
+    List<Doctor> findByOfficeAndSpecialization(Office office, Specialization specialization);
 }
