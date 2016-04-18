@@ -1,6 +1,8 @@
 package com.pliskin.service.impl;
 
 import com.pliskin.model.Credentials;
+import com.pliskin.model.Doctor;
+import com.pliskin.model.DoctorSchedule;
 import com.pliskin.model.PatientHistory;
 import com.pliskin.model.enums.WeekDay;
 import com.pliskin.repository.DoctorScheduleRepository;
@@ -17,8 +19,10 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by aleksandrpliskin on 14.04.16.
@@ -86,9 +90,19 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         String doctorFio = info.substring(0, info.indexOf('/') - 1);
         String fullDate = info.substring(info.indexOf('/') + 3);
         String date = fullDate.substring(0, fullDate.indexOf(' '));
-        String wDay = fullDate.substring(fullDate.indexOf(' ') + + 1, fullDate.lastIndexOf(' '));
+        String wDay = fullDate.substring(fullDate.indexOf(' ') + +1, fullDate.lastIndexOf(' '));
         String time = fullDate.substring(fullDate.lastIndexOf(' ') + 1, fullDate.length());
         createHistory(doctorFio, wDay, time, date);
 
+    }
+
+    @Override
+    public List<PatientHistory> getHistoriesByDoctor(Doctor doctor) {
+        List<DoctorSchedule> doctorSchedules = doctorScheduleRepository.findByDoctor(doctor);
+        List<PatientHistory> patientHistories = new ArrayList<>();
+        for (DoctorSchedule doctorSchedule : doctorSchedules) {
+            patientHistories.addAll(patientHistoryRepository.findByDoctorSchedule(doctorSchedule));
+        }
+        return patientHistories;
     }
 }

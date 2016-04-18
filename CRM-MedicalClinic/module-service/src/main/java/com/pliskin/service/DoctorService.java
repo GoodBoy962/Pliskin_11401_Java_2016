@@ -21,7 +21,7 @@ public interface DoctorService {
 
     Doctor getDoctor(String doctorFio);
 
-    Object getDoctor();
+    Doctor getDoctor();
 
     List<Doctor> getDoctorsByOfficeAndSpecialization(Office office, String specialization);
 }

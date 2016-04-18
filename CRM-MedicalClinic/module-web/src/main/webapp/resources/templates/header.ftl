@@ -16,6 +16,9 @@
                 <@security.authorize access="!isAnonymous()">
                     <li><a href="/default">Профиль</a></li>
                 </@security.authorize>
+                <@security.authorize access="hasRole('ROLE_DOCTOR')">
+                    <li><a href="/doctor/appointments">Приём пациентов</a></li>
+                </@security.authorize>
                 <@security.authorize access="isAnonymous()">
                     <li><a href="/registration">Зарегистрироваться</a></li>
                     <li><a href="/login" id="login">Войти</a></li>

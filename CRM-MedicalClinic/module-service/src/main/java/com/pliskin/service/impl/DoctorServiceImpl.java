@@ -68,7 +68,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Object getDoctor() {
+    public Doctor getDoctor() {
         return doctorRepository.findByCredentials(SecurityUtils.getCurrentUser());
 
     }
