@@ -62,7 +62,7 @@ function getDoctorsAndPossibleDates(specialization) {
         },
         dataType: "html",
         success: function (data) {
-            $("#doctors").html(data);
+            $("#js-dates").html(data);
             $("#js-doctorDates").show();
         }
     })
