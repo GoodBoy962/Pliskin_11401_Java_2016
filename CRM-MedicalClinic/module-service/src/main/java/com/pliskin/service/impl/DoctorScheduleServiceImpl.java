@@ -62,8 +62,7 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
     public List<Date> getPossibleDates(String period, String weekDay, String time, String doctorFio) {
         Doctor doctor = doctorService.getDoctor(doctorFio);
         String timeValue = timeTransformer.apply(time);
-        List<Date> dates = getRightDays(period, weekDay, doctor, timeValue);
-        return dates;
+        return getRightDays(period, weekDay, doctor, timeValue);
     }
 
     @Override

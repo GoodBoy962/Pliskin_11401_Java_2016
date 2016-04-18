@@ -101,4 +101,15 @@ public class AppointmentController {
         return "/doctors_dates";
     }
 
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String createCoolAppointment(Model model,
+                                        @RequestParam("appointmentDate") String appointmentDate,
+                                        @RequestParam("city") String city,
+                                        @RequestParam("address") String address,
+                                        @RequestParam("specialization") String specialization
+                                        ) {
+        patientHistoryService.createHistoryFromCoolForm(appointmentDate);
+        return "redirect:/patient";
+    }
+
 }

@@ -12,4 +12,6 @@ public interface PatientHistoryService {
     void createHistory(String fio, String wDay, String time, String date);
 
     List<PatientHistory> getHistories(Credentials credentials);
+
+    void createHistoryFromCoolForm(String info);
 }

@@ -1,7 +1,6 @@
 package com.pliskin.service.impl;
 
 import com.pliskin.model.Credentials;
-import com.pliskin.model.Patient;
 import com.pliskin.model.PatientHistory;
 import com.pliskin.model.enums.WeekDay;
 import com.pliskin.repository.DoctorScheduleRepository;
@@ -78,5 +77,18 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
     @Override
     public List<PatientHistory> getHistories(Credentials credentials) {
         return patientHistoryRepository.findByPatient(patientService.getPatient(credentials));
+    }
+
+    @Secured("hasRole('ROLE_PATIENT')")
+    @Override
+    @Transactional
+    public void createHistoryFromCoolForm(String info) {
+        String doctorFio = info.substring(0, info.indexOf('/') - 1);
+        String fullDate = info.substring(info.indexOf('/') + 3);
+        String date = fullDate.substring(0, fullDate.indexOf(' '));
+        String wDay = fullDate.substring(fullDate.indexOf(' ') + + 1, fullDate.lastIndexOf(' '));
+        String time = fullDate.substring(fullDate.lastIndexOf(' ') + 1, fullDate.length());
+        createHistory(doctorFio, wDay, time, date);
+
     }
 }
