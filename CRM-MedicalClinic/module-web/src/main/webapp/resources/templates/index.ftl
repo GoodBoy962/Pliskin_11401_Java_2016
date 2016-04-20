@@ -69,7 +69,7 @@
 <br/>
 
 
-<@security.authorize access="isAnonymous()">
+    <@security.authorize access="isAnonymous()">
 
     <section id="contact">
         <div class="container">
@@ -79,17 +79,18 @@
                         <h1>Контактная форма</h1>
                         <p>Напишите нам, если хотите зарегестрировать вашу Медицинскую клинику в нашем сервисе</p>
                         <div class="status alert alert-success" style="display: none"></div>
-                        <form id="main-contact-form" class="contact-form" name="contact-form" method="post"
-                              action="sendemail.php" role="form">
+                        <form class="contact-form" method="post"
+                              action="/proposal">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" required="required" placeholder="ФИО">
+                                        <input type="text" class="form-control" name="fio" required="required"
+                                               placeholder="ФИО">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" required="required"
+                                        <input type="text" class="form-control" name="email" required="required"
                                                placeholder="email">
                                     </div>
                                 </div>

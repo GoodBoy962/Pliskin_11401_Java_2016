@@ -13,4 +13,7 @@ public interface PatientService {
     Patient getPatient();
 
     Patient getPatient(Credentials credentials);
+
+    Patient getPatientById(Long id);
+
 }

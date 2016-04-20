@@ -1,5 +1,6 @@
 package com.pliskin.service;
 
+import com.pliskin.forms.SpecializationCreationForm;
 import com.pliskin.model.Specialization;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface SpecializationService {
     public List<Specialization> getAllSpecializations();
 
     Set<Specialization> getSpecializationsOfDoctorsInOfficeByCityAndAddress(String city, String address);
+
+    void createNew(SpecializationCreationForm form);
 }

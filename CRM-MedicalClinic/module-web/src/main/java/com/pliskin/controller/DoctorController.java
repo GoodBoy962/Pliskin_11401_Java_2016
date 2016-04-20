@@ -1,16 +1,20 @@
 package com.pliskin.controller;
 
+import com.pliskin.forms.AppointmentChangeForm;
 import com.pliskin.model.Doctor;
 import com.pliskin.service.DoctorScheduleService;
 import com.pliskin.service.DoctorService;
 import com.pliskin.service.PatientHistoryService;
-import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 /**
  * Created by aleksandrpliskin on 06.04.16.
@@ -45,8 +49,21 @@ public class DoctorController {
     }
 
     @RequestMapping(value = "/appointments/{id}/change", method = RequestMethod.GET)
-    public String getFormToChangeAppointment(Model model, @PathVariable("id") String id) {
-        //TODO
-        return "change-appointment";
+    public String getFormToChangeAppointment(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("changeForm", new AppointmentChangeForm(patientHistoryService.getHistoryById(id)));
+        model.addAttribute("appointmentId", id);
+        return "/change-appointment";
     }
+
+    @RequestMapping(value = "/appointments/{id}/change", method = RequestMethod.POST)
+    public String changePatientHistory(@PathVariable("id") Long id,
+                                       @ModelAttribute("changeForm") @Valid AppointmentChangeForm form,
+                                       BindingResult result) {
+        if (result.hasErrors()) {
+            return "/change-appointment";
+        }
+        patientHistoryService.changeAppointment(id, form);
+        return "redirect:/doctor/appointments";
+    }
+
 }

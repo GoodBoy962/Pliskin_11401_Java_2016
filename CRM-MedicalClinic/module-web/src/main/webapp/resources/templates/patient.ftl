@@ -26,7 +26,13 @@
                                 <td>Email</td>
                                 <td><a href="mailto:${patient.credentials.email}">${patient.credentials.email}</a></td>
                             </tr>
+                            <tr>
 
+                                <@security.authorize access="hasRole('ROLE_DOCTOR')">
+                                    <td>история посещений</td>
+                                    <td><a href="/patients/${patient.id}/appointments">Посмотреть</a></td>
+                                </@security.authorize>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

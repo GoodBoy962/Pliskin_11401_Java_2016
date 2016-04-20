@@ -1,5 +1,6 @@
 package com.pliskin.service;
 
+import com.pliskin.forms.AppointmentChangeForm;
 import com.pliskin.model.Credentials;
 import com.pliskin.model.Doctor;
 import com.pliskin.model.PatientHistory;
@@ -20,4 +21,10 @@ public interface PatientHistoryService {
 
     @Query("select PatientHistory pth where pth.doctorSchedule ")
     List<PatientHistory> getHistoriesByDoctor(@Param("doctor") Doctor doctor);
+
+    PatientHistory getHistoryById(Long id);
+
+    void changeAppointment(Long id, AppointmentChangeForm form);
+
+    List<PatientHistory> getHistories(Long id);
 }

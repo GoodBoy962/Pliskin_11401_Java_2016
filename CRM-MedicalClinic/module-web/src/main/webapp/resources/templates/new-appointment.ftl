@@ -9,21 +9,24 @@
                 <div class="form-group text-center">
                     <div class="col-md-8">
                         <input name="weekDay" id="weekDay" placeholder="День недели" value="${w_day?string}"
-                               disabled
+                               <#--disabled-->
+                                type="hidden"
                         />
                     </div>
                 </div>
                 <div class="form-group text-center">
                     <div class="col-md-8">
                         <input name="time" id="time" placeholder="Время" value="${time?string}"
-                               disabled
+                               <#--disabled-->
+                                type="hidden"
                         /><br/>
                     </div>
                 </div>
                 <div class="form-group text-center">
                     <div class="col-md-8">
                         <input name="doctorFio" id="doctorFio" placeholder="ФИО доктора" value="${doctor.fio?string}"
-                               disabled
+                               <#--disabled-->
+                                type="hidden"
                         />
                     </div>
                 </div>

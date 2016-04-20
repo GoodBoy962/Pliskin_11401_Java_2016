@@ -11,7 +11,7 @@
             </div>
             <br/>
             <#list doctors as d>
-                <a href="/doctors/${d.id}">${d.fio}</a>
+                <a href="/doctors/${d.id}">${d.fio}</a><br/>
             </#list>
         </div>
     </div>

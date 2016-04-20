@@ -9,8 +9,8 @@
     <#list dates as date>
         <#assign times = dd?values[count1]?values[count2]>
         <#list times as t>
-        <option>${doctor.fio} // ${date?date}
-        ${t.weekDay} ${t.startTime?time}
+        <option>${doctor.fio} // ${date?date?string}
+        ${t.weekDay} ${t.startTime?time?string("hh:mm:ss")}
         </option>
         </#list>
         <#assign count2++/>

@@ -40,4 +40,9 @@ public class PatientServiceImpl implements PatientService {
     public Patient getPatient(Credentials credentials) {
         return patientRepository.findByCredentials(credentials);
     }
+
+    @Override
+    public Patient getPatientById(Long id) {
+        return patientRepository.findOne(id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.pliskin.service.impl;
 
+import com.pliskin.forms.SpecializationCreationForm;
 import com.pliskin.model.Doctor;
 import com.pliskin.model.Specialization;
 import com.pliskin.repository.SpecializationRepository;
@@ -39,5 +40,12 @@ public class SpecializationServiceImpl implements SpecializationService {
                 officeService.getOfficeByCityAndAddress(city, address)).
                 stream().map(Doctor::getSpecialization).
                 collect(Collectors.toSet());
+    }
+
+    @Override
+    public void createNew(SpecializationCreationForm form) {
+        Specialization specialization = new Specialization();
+        specialization.setName(form.getName());
+        specializationRepository.save(specialization);
     }
 }

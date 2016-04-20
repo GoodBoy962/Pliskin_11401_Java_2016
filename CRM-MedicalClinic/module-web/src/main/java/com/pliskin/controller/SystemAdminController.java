@@ -2,8 +2,11 @@ package com.pliskin.controller;
 
 import com.pliskin.forms.MedicalClinicRegistrationForm;
 import com.pliskin.forms.OfficeAdminCreationForm;
+import com.pliskin.forms.SpecializationCreationForm;
 import com.pliskin.service.MedicalClinicService;
 import com.pliskin.service.OfficeService;
+import com.pliskin.service.ProposalService;
+import com.pliskin.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -31,12 +34,22 @@ public class SystemAdminController {
     OfficeService officeService;
 
     @Autowired
+    ProposalService proposalService;
+
+    @Autowired
+    SpecializationService specializationService;
+
+    @Autowired
     @Qualifier(value = "officeAdminForm")
     Validator validator;
 
     @Qualifier("medicalClinicRegistrationFormValidator")
     @Autowired
     Validator mcValidator;
+
+    @Qualifier("specializationCreationFormValidator")
+    @Autowired
+    Validator specializationValidator;
 
     @RequestMapping(value = "")
     public String getSystemAdminIndex() {
@@ -79,5 +92,34 @@ public class SystemAdminController {
         }
         officeService.createOfficeAndAdmin(form, medicalClinicId);
         return "redirect:/medical_clinics/" + medicalClinicId + "/";
+    }
+
+    @RequestMapping(value = "/proposals", method = RequestMethod.GET)
+    public String watchProposals(Model model) {
+        model.addAttribute("proposals", proposalService.getAll());
+        return "/proposals";
+    }
+
+    @RequestMapping(value = "/specializations", method = RequestMethod.GET)
+    public String getAllSpecializations(Model model) {
+        model.addAttribute("specializations", specializationService.getAllSpecializations());
+        return "specializations";
+    }
+
+    @RequestMapping(value = "/specialization/new", method = RequestMethod.GET)
+    public String getFormToCreateSpecialization(Model model) {
+        model.addAttribute("specializationForm", new SpecializationCreationForm());
+        return "new-specialization";
+    }
+
+    @RequestMapping(value = "/specializations", method = RequestMethod.POST)
+    public String createSpecialization(@ModelAttribute("specializationForm") @Valid SpecializationCreationForm form,
+                                       BindingResult result) {
+        specializationValidator.validate(form, result);
+        if (result.hasErrors()) {
+            return "new-specialization";
+        }
+        specializationService.createNew(form);
+        return "redirect:/system/specializations";
     }
 }

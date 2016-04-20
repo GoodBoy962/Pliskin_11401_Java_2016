@@ -19,6 +19,9 @@
                             <td>Цена</td>
                             <td>Разъяснение</td>
                             <td>Статус</td>
+                            <@security.authorize access="hasRole('ROLE_DOCTOR')">
+                                <td></td>
+                            </@security.authorize>
                         </tr>
                         </thead>
                         <tbody>
@@ -27,7 +30,7 @@
                                 <td class="middle"><a
                                         href="/doctors/${a.doctorSchedule.doctor.id}">${a.doctorSchedule.doctor.fio}</a>
                                 </td>
-                                <td class="large">${a.patient.fio}</a></td>
+                                <td class="large"><a href="/patients/${a.patient.id}">${a.patient.fio}</a></td>
                                 <td class="light">${a.date?string("dd-MM-yyyy")}</td>
                                 <td class="light">${a.doctorSchedule.startTime}</td>
                                 <td class="light">
@@ -43,7 +46,11 @@
                                 <td>
                                 ${a.status?string('было', 'не было')}
                                 </td>
-
+                                <@security.authorize access="hasRole('ROLE_DOCTOR')">
+                                <#if a.status == false>
+                                    <td><a href="/doctor/appointments/${a.id}/change">Изменить</a></td>
+                                </#if>
+                                </@security.authorize>
                             </tr>
                             </#list>
 

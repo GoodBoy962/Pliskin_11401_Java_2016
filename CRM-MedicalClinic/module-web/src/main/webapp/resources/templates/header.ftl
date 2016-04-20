@@ -25,12 +25,14 @@
                 </@security.authorize>
                 <@security.authorize access="hasRole('ROLE_SYSTEM_ADMIN')">
                     <li><a href="/system/medical_clinics/new">Добавить Мед клинику</a></li>
+                    <li><a href="/system/proposals">Заявки</a></li>
+                    <li><a href="/system/specializations">Специализации</a></li>
                 </@security.authorize>
                 <@security.authorize access="hasRole('ROLE_ADMIN')">
                     <li><a href="/admin/doctors/new">Добавить врача</a></li>
                     <#if springMacroRequestContext.getRequestUri() == "/admin">
                         <li><a href="/medical_clinics/${id}/offices/${officeId}/doctors">Посмотреть своих врачей</a>
-                        </li><!--TODO-->
+                        </li>
                     </#if>
                 </@security.authorize>
                 <@security.authorize access="hasRole('ROLE_PATIENT')">

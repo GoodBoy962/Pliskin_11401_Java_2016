@@ -1,5 +1,6 @@
 package com.pliskin.service.impl;
 
+import com.pliskin.forms.AppointmentChangeForm;
 import com.pliskin.model.Credentials;
 import com.pliskin.model.Doctor;
 import com.pliskin.model.DoctorSchedule;
@@ -22,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Created by aleksandrpliskin on 14.04.16.
@@ -104,5 +104,24 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
             patientHistories.addAll(patientHistoryRepository.findByDoctorSchedule(doctorSchedule));
         }
         return patientHistories;
+    }
+
+    @Override
+    public PatientHistory getHistoryById(Long id) {
+        return patientHistoryRepository.findOne(id);
+    }
+
+    @Override
+    public void changeAppointment(Long id, AppointmentChangeForm form) {
+        PatientHistory patientHistory = patientHistoryRepository.findOne(id);
+        patientHistory.setCost(form.getCost());
+        patientHistory.setDescription(form.getDescription());
+        patientHistory.setStatus(true);
+        patientHistoryRepository.save(patientHistory);
+    }
+
+    @Override
+    public List<PatientHistory> getHistories(Long id) {
+        return patientHistoryRepository.findByPatient(patientService.getPatientById(id));
     }
 }
