@@ -73,4 +73,15 @@ public class DoctorSchedule {
     public void setWeekDay(WeekDay weekDay) {
         this.weekDay = weekDay;
     }
+
+    @Override
+    public String toString() {
+        return "DoctorSchedule{" +
+                "doctor=" + doctor +
+                ", id=" + id +
+                ", weekDay=" + weekDay +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                '}';
+    }
 }

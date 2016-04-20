@@ -56,4 +56,14 @@ public class Office {
     public void setCity(String city) {
         this.city = city;
     }
+
+    @Override
+    public String toString() {
+        return "Office{" +
+                "address='" + address + '\'' +
+                ", id=" + id +
+                ", city='" + city + '\'' +
+                ", medicalClinic=" + medicalClinic +
+                '}';
+    }
 }

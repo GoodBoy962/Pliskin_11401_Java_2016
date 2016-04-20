@@ -33,4 +33,12 @@ public class SystemAdmin {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "SystemAdmin{" +
+                "credentials=" + credentials +
+                ", id=" + id +
+                '}';
+    }
 }

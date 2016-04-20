@@ -51,4 +51,14 @@ public class Proposal {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "Proposal{" +
+                "email='" + email + '\'' +
+                ", id=" + id +
+                ", fio='" + fio + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

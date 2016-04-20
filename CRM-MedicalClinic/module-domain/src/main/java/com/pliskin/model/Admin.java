@@ -55,4 +55,14 @@ public class Admin {
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
     }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "credentials=" + credentials +
+                ", id=" + id +
+                ", office=" + office +
+                ", fio='" + fio + '\'' +
+                '}';
+    }
 }

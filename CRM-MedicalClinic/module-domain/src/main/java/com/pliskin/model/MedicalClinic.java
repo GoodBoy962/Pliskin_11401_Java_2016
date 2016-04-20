@@ -41,4 +41,13 @@ public class MedicalClinic {
     public void setInfo(String info) {
         this.info = info;
     }
+
+    @Override
+    public String toString() {
+        return "MedicalClinic{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", info='" + info + '\'' +
+                '}';
+    }
 }

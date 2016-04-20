@@ -55,4 +55,14 @@ public class Patient {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "birthDay=" + birthDay +
+                ", id=" + id +
+                ", fio='" + fio + '\'' +
+                ", credentials=" + credentials +
+                '}';
+    }
 }

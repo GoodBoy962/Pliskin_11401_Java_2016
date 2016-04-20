@@ -64,4 +64,15 @@ public class Credentials {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "Credentials{" +
+                "email='" + email + '\'' +
+                ", id=" + id +
+                ", role=" + role +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

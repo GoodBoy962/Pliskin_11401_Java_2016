@@ -86,4 +86,17 @@ public class PatientHistory {
     public void setDoctorSchedule(DoctorSchedule doctorSchedule) {
         this.doctorSchedule = doctorSchedule;
     }
+
+    @Override
+    public String toString() {
+        return "PatientHistory{" +
+                "cost=" + cost +
+                ", id=" + id +
+                ", patient=" + patient +
+                ", doctorSchedule=" + doctorSchedule +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

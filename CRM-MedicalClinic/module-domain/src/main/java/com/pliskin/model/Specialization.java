@@ -32,4 +32,11 @@ public class Specialization {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Specialization{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

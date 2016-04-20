@@ -108,4 +108,18 @@ public class Doctor {
     public void setSpecialization(Specialization specialization) {
         this.specialization = specialization;
     }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "birthDay=" + birthDay +
+                ", id=" + id +
+                ", fio='" + fio + '\'' +
+                ", credentials=" + credentials +
+                ", employmentDate=" + employmentDate +
+                ", inceptionDate=" + inceptionDate +
+                ", office=" + office +
+                ", specialization=" + specialization +
+                '}';
+    }
 }
