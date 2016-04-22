@@ -13,7 +13,7 @@ public interface DoctorService {
 
     void createDoctor(DoctorCreationForm form);
 
-    List<Doctor> getAll();
+    List<Doctor> getAllByOfficeId(Long officeId);
 
     Doctor getDoctor(Long id);
 

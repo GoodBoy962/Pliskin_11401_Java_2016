@@ -7,6 +7,7 @@ import com.pliskin.model.Office;
 import com.pliskin.repository.DoctorRepository;
 import com.pliskin.repository.SpecializationRepository;
 import com.pliskin.service.DoctorService;
+import com.pliskin.service.OfficeService;
 import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     SpecializationRepository specializationRepository;
 
+    @Autowired
+    OfficeService officeService;
+
     @Transactional
     @Override
     public void createDoctor(DoctorCreationForm form) {
@@ -38,8 +42,9 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<Doctor> getAll() {
-        return doctorRepository.findAll();
+    public List<Doctor> getAllByOfficeId(Long officeId) {
+        Office office = officeService.getOffice(officeId);
+        return doctorRepository.findAllByOffice(office);
     }
 
     @Override

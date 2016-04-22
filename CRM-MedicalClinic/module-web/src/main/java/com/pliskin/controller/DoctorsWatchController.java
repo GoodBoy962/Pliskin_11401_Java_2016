@@ -26,9 +26,9 @@ public class DoctorsWatchController {
 
     @RequestMapping(value = "/medical_clinics/{id}/offices/{officeId}/doctors", method = RequestMethod.GET)
     public String getAllDoctors(Model model,
-                                @PathVariable("id") String id,
-                                @PathVariable("officeId") String officeId) {
-        model.addAttribute("doctors", doctorService.getAll());
+                                @PathVariable("id") Long id,
+                                @PathVariable("officeId") Long officeId) {
+        model.addAttribute("doctors", doctorService.getAllByOfficeId(officeId));
         return "/doctors";
     }
 

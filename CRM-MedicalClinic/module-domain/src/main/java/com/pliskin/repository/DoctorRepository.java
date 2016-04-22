@@ -21,4 +21,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Doctor findByCredentials(Credentials credentials);
 
     List<Doctor> findByOfficeAndSpecialization(Office office, Specialization specialization);
+
+    List<Doctor> findAllByOffice(Office office);
 }
