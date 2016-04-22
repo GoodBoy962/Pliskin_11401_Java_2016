@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by aleksandrpliskin on 21.04.16.
@@ -13,7 +14,7 @@ public class ServiceAspect {
     private static Logger log = Logger.getLogger(ServiceAspect.class);
 
     public void before() {
-        log.info("==> before");
+        log.info("\n==========>" + new Date() + "\n" + "===============================================" + "\n");
     }
 
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {

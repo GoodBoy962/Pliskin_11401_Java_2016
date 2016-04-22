@@ -7,7 +7,6 @@ import com.pliskin.model.Office;
 import com.pliskin.repository.DoctorRepository;
 import com.pliskin.repository.SpecializationRepository;
 import com.pliskin.service.DoctorService;
-import com.pliskin.service.SpecializationService;
 import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Transactional
     @Override
-
     public void createDoctor(DoctorCreationForm form) {
         Doctor doctor = doctorFunction.apply(form);
         doctorRepository.save(doctor);

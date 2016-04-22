@@ -8,7 +8,7 @@
 
     <changeSet id="1615041020_1" author="GoodBoy">
         <addColumn tableName="offices">
-            <column name="city" type="varchar(255)"></column>
+            <column name="city" type="varchar(255)"/>
         </addColumn>
     </changeSet>
 

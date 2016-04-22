@@ -19,10 +19,7 @@ public class Office {
     private String city;
 
     @ManyToOne
-    @JoinTable(name = "offices_medical_clinics",
-            joinColumns = @JoinColumn(name = "office_id"),
-            inverseJoinColumns = @JoinColumn(name = "medical_clinic_id")
-    )
+    @JoinColumn(name = "medical_clinic_id")
     private MedicalClinic medicalClinic;
 
     public Long getId() {

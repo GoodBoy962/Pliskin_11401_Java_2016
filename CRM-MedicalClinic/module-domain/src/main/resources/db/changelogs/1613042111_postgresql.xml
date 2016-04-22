@@ -9,7 +9,7 @@
 
     <changeSet id="1613042111_1" author="GoodBoy">
         <addColumn tableName="patient_histories">
-            <column name="date" type="date"></column>
+            <column name="date" type="date"/>
         </addColumn>
     </changeSet>
 

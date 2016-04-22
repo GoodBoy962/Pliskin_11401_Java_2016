@@ -25,21 +25,20 @@
     </changeSet>
 
     <changeSet id="seeds_4" author="GoodBoy">
-        <loadUpdateData tableName="offices_medical_clinics" primaryKey="office_id, medical_clinic_id"
-                        file="db/seeds/offices_medical_clinics.csv">
-            <column name="office_id" type="numeric"/>
-            <column name="medical_clinic_id" type="numeric"/>
-        </loadUpdateData>
-    </changeSet>
-
-    <changeSet id="seeds_5" author="GoodBoy">
         <loadUpdateData tableName="admins" primaryKey="id" file="db/seeds/admins.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
 
-    <changeSet id="seeds_6" author="GoodBoy">
+    <changeSet id="seeds_5" author="GoodBoy">
         <loadUpdateData tableName="system_admins" primaryKey="id" file="db/seeds/system_admins.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+
+    <changeSet id="seeds_6" author="GoodBoy">
+        <loadUpdateData tableName="specializations" primaryKey="id" file="db/seeds/specializations.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
@@ -54,48 +53,18 @@
     </changeSet>
 
     <changeSet id="seeds_8" author="GoodBoy">
-        <loadUpdateData tableName="doctors_offices" primaryKey="doctor_id, office_id"
-                        file="db/seeds/doctors_offices.csv">
-            <column name="doctor_id" type="numeric"/>
-            <column name="office_id" type="numeric"/>
-        </loadUpdateData>
-    </changeSet>
-
-    <changeSet id="seeds_9" author="GoodBoy">
-        <loadUpdateData tableName="specializations" primaryKey="id" file="db/seeds/specializations.csv">
-            <column name="id" type="numeric"/>
-        </loadUpdateData>
-    </changeSet>
-
-    <changeSet id="seeds_10" author="GoodBoy">
-        <loadUpdateData tableName="doctors_specializations" primaryKey="doctor_id, specialization_id"
-                        file="db/seeds/doctors_specializations.csv">
-            <column name="specialization_id" type="numeric"/>
-            <column name="doctor_id" type="numeric"/>
-        </loadUpdateData>
-    </changeSet>
-
-    <changeSet id="seeds_11" author="GoodBoy">
         <loadUpdateData tableName="patients" primaryKey="id" file="db/seeds/patients.csv">
             <column name="id" type="numeric"/>
             <column name="birth_day" type="date"/>
         </loadUpdateData>
     </changeSet>
 
-    <changeSet id="seeds_12" author="GoodBoy">
+    <changeSet id="seeds_9" author="GoodBoy">
         <loadUpdateData tableName="doctor_schedule" primaryKey="id" file="db/seeds/doctor_schedule.csv">
             <column name="id" type="numeric"/>
             <column name="week_day" type="string"/>
             <column name="start_time" type="time"/>
             <column name="end_time" type="time"/>
-        </loadUpdateData>
-    </changeSet>
-
-    <changeSet id="seeds_13" author="GoodBoy">
-        <loadUpdateData tableName="doctor_schedule_doctors" primaryKey="doctor_id,doctor_schedule_id"
-                        file="db/seeds/doctor_schedule_doctors.csv">
-            <column name="doctor_schedule_id" type="numeric"/>
-            <column name="doctor_id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
 

@@ -64,6 +64,7 @@
             <column name="address" type="varchar(255)">
                 <constraints nullable="false" unique="true"/>
             </column>
+            <column name="medical_clinic_id" type="bigint"/>
         </createTable>
     </changeSet>
 
@@ -77,31 +78,15 @@
     </changeSet>
 
     <changeSet id="1606040119_7" author="GoodBoy">
-        <createTable tableName="offices_medical_clinics">
-            <column name="office_id" type="bigint"/>
-            <column name="medical_clinic_id" type="bigint"/>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="1606040119_8" author="GoodBoy">
-        <addForeignKeyConstraint baseTableName="offices_medical_clinics"
-                                 baseColumnNames="office_id"
-                                 constraintName="offices_medical_clinics_offices_fk"
-                                 referencedTableName="offices"
-                                 referencedColumnNames="id"
-        />
-    </changeSet>
-
-    <changeSet id="1606040119_9" author="GoodBoy">
-        <addForeignKeyConstraint baseTableName="offices_medical_clinics"
+        <addForeignKeyConstraint baseTableName="offices"
                                  baseColumnNames="medical_clinic_id"
-                                 constraintName="offices_medical_clinics_medical_clinics_fk"
+                                 constraintName="offices_medical_clinics_fk"
                                  referencedTableName="medical_clinics"
                                  referencedColumnNames="id"
         />
     </changeSet>
 
-    <changeSet id="1606040119_10" author="GoodBoy">
+    <changeSet id="1606040119_8" author="GoodBoy">
         <createTable tableName="admins">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -112,7 +97,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="1606040119_11" author="GoodBoy">
+    <changeSet id="1606040119_9" author="GoodBoy">
         <addForeignKeyConstraint baseTableName="admins"
                                  baseColumnNames="office_id"
                                  constraintName="admins_offices_fk"
@@ -121,7 +106,7 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_12" author="GoodBoy">
+    <changeSet id="1606040119_10" author="GoodBoy">
         <addForeignKeyConstraint baseTableName="admins"
                                  baseColumnNames="credentials_id"
                                  constraintName="admins_credentials_fk"
@@ -130,7 +115,7 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_13" author="GoodBoy">
+    <changeSet id="1606040119_11" author="GoodBoy">
         <createSequence
                 sequenceName="admins_id_seq"
                 startValue="50"
@@ -139,7 +124,7 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_14" author="GoodBoy">
+    <changeSet id="1606040119_12" author="GoodBoy">
         <createTable tableName="system_admins">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -148,16 +133,16 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="1606040119_15" author="GoodBoy">
+    <changeSet id="1606040119_13" author="GoodBoy">
         <addForeignKeyConstraint baseTableName="system_admins"
                                  baseColumnNames="credentials_id"
-                                 constraintName="admins_credentials_fk"
+                                 constraintName="system_admins_credentials_fk"
                                  referencedTableName="credentials"
                                  referencedColumnNames="id"
         />
     </changeSet>
 
-    <changeSet id="1606040119_16" author="GoodBoy">
+    <changeSet id="1606040119_14" author="GoodBoy">
         <createSequence
                 sequenceName="system_admins_id_seq"
                 startValue="50"
@@ -166,7 +151,7 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_17" author="GoodBoy">
+    <changeSet id="1606040119_15" author="GoodBoy">
         <createTable tableName="doctors">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -176,10 +161,12 @@
             <column name="birth_day" type="date"/>
             <column name="employment_date" type="date"/>
             <column name="inception_date" type="date"/>
+            <column name="office_id" type="bigint"/>
+            <column name="specialization_id" type="bigint"/>
         </createTable>
     </changeSet>
 
-    <changeSet id="1606040119_18" author="GoodBoy">
+    <changeSet id="1606040119_16" author="GoodBoy">
         <addForeignKeyConstraint baseTableName="doctors"
                                  baseColumnNames="credentials_id"
                                  constraintName="doctors_credentials_fk"
@@ -188,7 +175,7 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_19" author="GoodBoy">
+    <changeSet id="1606040119_17" author="GoodBoy">
         <createSequence
                 sequenceName="doctors_id_seq"
                 startValue="50"
@@ -197,32 +184,16 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_20" author="GoodBoy">
-        <createTable tableName="doctors_offices">
-            <column name="doctor_id" type="bigint"/>
-            <column name="office_id" type="bigint"/>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="1606040119_21" author="GoodBoy">
-        <addForeignKeyConstraint baseTableName="doctors_offices"
-                                 baseColumnNames="doctor_id"
-                                 constraintName="doctors_offices_doctors_fk"
-                                 referencedTableName="doctors"
-                                 referencedColumnNames="id"
-        />
-    </changeSet>
-
-    <changeSet id="1606040119_22" author="GoodBoy">
-        <addForeignKeyConstraint baseTableName="doctors_offices"
+    <changeSet id="1606040119_18" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="doctors"
                                  baseColumnNames="office_id"
-                                 constraintName="doctors_offices_offices_fk"
+                                 constraintName="doctors_offices_fk"
                                  referencedTableName="offices"
                                  referencedColumnNames="id"
         />
     </changeSet>
 
-    <changeSet id="1606040119_23" author="GoodBoy">
+    <changeSet id="1606040119_19" author="GoodBoy">
         <createTable tableName="patients">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -233,7 +204,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="1606040119_24" author="GoodBoy">
+    <changeSet id="1606040119_20" author="GoodBoy">
         <addForeignKeyConstraint baseTableName="patients"
                                  baseColumnNames="credentials_id"
                                  constraintName="patients_credentials_fk"
@@ -242,7 +213,7 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_25" author="GoodBoy">
+    <changeSet id="1606040119_21" author="GoodBoy">
         <createSequence
                 sequenceName="patients_id_seq"
                 startValue="50"
@@ -251,7 +222,7 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_26" author="GoodBoy">
+    <changeSet id="1606040119_22" author="GoodBoy">
         <createTable tableName="specializations">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -260,7 +231,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="1606040119_27" author="GoodBoy">
+    <changeSet id="1606040119_23" author="GoodBoy">
         <createSequence
                 sequenceName="specializations_id_seq"
                 startValue="50"
@@ -269,7 +240,7 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_28" author="GoodBoy">
+    <changeSet id="1606040119_24" author="GoodBoy">
         <createTable tableName="doctor_schedule">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -277,35 +248,20 @@
             <column name="week_day" type="varchar(255)"/>
             <column name="start_time" type="time"/>
             <column name="end_time" type="time"/>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="1606040119_29" author="GoodBoy">
-        <createTable tableName="doctor_schedule_doctors">
-            <column name="doctor_schedule_id" type="bigint"/>
             <column name="doctor_id" type="bigint"/>
         </createTable>
     </changeSet>
 
-    <changeSet id="1606040119_30" author="GoodBoy">
-        <addForeignKeyConstraint baseTableName="doctor_schedule_doctors"
-                                 baseColumnNames="doctor_schedule_id"
-                                 constraintName="doctor_schedule_doctors_doctor_schedule_fk"
-                                 referencedTableName="doctor_schedule"
-                                 referencedColumnNames="id"
-        />
-    </changeSet>
-
-    <changeSet id="1606040119_31" author="GoodBoy">
-        <addForeignKeyConstraint baseTableName="doctor_schedule_doctors"
+    <changeSet id="1606040119_25" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="doctor_schedule"
                                  baseColumnNames="doctor_id"
-                                 constraintName="doctor_schedule_doctors_doctor_fk"
+                                 constraintName="doctor_schedule_doctors_fk"
                                  referencedTableName="doctors"
                                  referencedColumnNames="id"
         />
     </changeSet>
 
-    <changeSet id="1606040119_32" author="GoodBoy">
+    <changeSet id="1606040119_26" author="GoodBoy">
         <createSequence
                 sequenceName="doctor_schedule_id_seq"
                 startValue="50"
@@ -314,7 +270,7 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_33" author="GoodBoy">
+    <changeSet id="1606040119_27" author="GoodBoy">
         <createTable tableName="patient_histories">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -327,7 +283,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="1606040119_34" author="GoodBoy">
+    <changeSet id="1606040119_28" author="GoodBoy">
         <createSequence
                 sequenceName="patient_histories_id_seq"
                 startValue="50"
@@ -336,20 +292,29 @@
         />
     </changeSet>
 
-    <changeSet id="1606040119_35" author="GoodBoy">
+    <changeSet id="1606040119_29" author="GoodBoy">
         <addForeignKeyConstraint baseTableName="patient_histories"
                                  baseColumnNames="patient_id"
-                                 constraintName="patient_histories_patient_fk"
+                                 constraintName="patient_histories_patients_fk"
                                  referencedTableName="patients"
                                  referencedColumnNames="id"
         />
     </changeSet>
 
-    <changeSet id="1606040119_36" author="GoodBoy">
+    <changeSet id="1606040119_30" author="GoodBoy">
         <addForeignKeyConstraint baseTableName="patient_histories"
                                  baseColumnNames="doctor_schedule_id"
                                  constraintName="patient_histories_doctor_schedule_fk"
                                  referencedTableName="doctor_schedule"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_31" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="doctors"
+                                 baseColumnNames="specialization_id"
+                                 constraintName="doctors_specializations_fk"
+                                 referencedTableName="specializations"
                                  referencedColumnNames="id"
         />
     </changeSet>

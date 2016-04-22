@@ -58,6 +58,7 @@ public class OfficeServiceImpl implements OfficeService {
             throw new NoSuchMedicalClinicException();
         }
         Office office = new Office();
+        office.setCity(form.getCity());
         office.setAddress(form.getAddress());
         office.setMedicalClinic(medicalClinic);
         officeRepository.save(office);

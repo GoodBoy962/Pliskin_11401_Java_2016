@@ -18,10 +18,7 @@ public class DoctorSchedule {
     private Long id;
 
     @ManyToOne
-    @JoinTable(name = "doctor_schedule_doctors",
-            joinColumns = @JoinColumn(name = "doctor_schedule_id"),
-            inverseJoinColumns = @JoinColumn(name = "doctor_id")
-    )
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     @Column(name = "week_day")

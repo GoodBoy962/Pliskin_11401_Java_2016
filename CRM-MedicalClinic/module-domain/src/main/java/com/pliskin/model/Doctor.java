@@ -2,7 +2,6 @@ package com.pliskin.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by aleksandrpliskin on 01.04.16.
@@ -32,17 +31,11 @@ public class Doctor {
     private Date inceptionDate;
 
     @ManyToOne
-    @JoinTable(name = "doctors_offices",
-            joinColumns = @JoinColumn(name = "doctor_id"),
-            inverseJoinColumns = @JoinColumn(name = "office_id"))
+    @JoinColumn(name = "office_id")
     private Office office;
 
     @ManyToOne
-    @JoinTable(
-            name = "doctors_specializations",
-            joinColumns = @JoinColumn(name = "doctor_id"),
-            inverseJoinColumns = @JoinColumn(name = "specialization_id")
-    )
+    @JoinColumn(name = "specialization_id")
     private Specialization specialization;
 
     public Date getBirthDay() {
