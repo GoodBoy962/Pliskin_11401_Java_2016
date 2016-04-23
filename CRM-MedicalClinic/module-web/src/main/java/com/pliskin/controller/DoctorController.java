@@ -76,11 +76,12 @@ public class DoctorController {
         return "redirect:/doctor/appointments/" + id + "/download";
     }
 
-    @Value("/Users/aleksandrpliskin/Desktop/static/sem1/pdf/")//TODO
+    @Value(value = "#{contentProps['pdf.folder']}")
     private String path;
 
     @RequestMapping(value = "appointments/{id}/download")
-    public void getLogFile(HttpSession session, HttpServletResponse response, @PathVariable("id") Long id) throws Exception {
+    public void getLogFile(HttpSession session, HttpServletResponse response,
+                           @PathVariable("id") Long id) throws Exception {
         PatientHistory patientHistory = patientHistoryService.getHistoryById(id);
         try {
             String filePathToBeServed = path + patientHistory.getId() + '_' + patientHistory.getPatient().getFio() + ".pdf";//complete file name with path;
