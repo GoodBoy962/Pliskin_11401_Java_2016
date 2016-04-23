@@ -1,5 +1,6 @@
 package com.pliskin.service.impl;
 
+import com.itextpdf.text.Document;
 import com.pliskin.forms.AppointmentChangeForm;
 import com.pliskin.model.Credentials;
 import com.pliskin.model.Doctor;
@@ -11,6 +12,7 @@ import com.pliskin.repository.PatientHistoryRepository;
 import com.pliskin.service.DoctorService;
 import com.pliskin.service.PatientHistoryService;
 import com.pliskin.service.PatientService;
+import com.pliskin.util.pdf.ReceiptGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,9 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
 
     @Autowired
     Function<String, String> transformer;
+
+    @Autowired
+    ReceiptGenerator receiptGenerator;
 
     @Secured("hasRole('ROLE_PATIENT')")
     @Transactional
@@ -112,12 +117,13 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
     }
 
     @Override
-    public void changeAppointment(Long id, AppointmentChangeForm form) {
+    public Document changeAppointment(Long id, AppointmentChangeForm form) {
         PatientHistory patientHistory = patientHistoryRepository.findOne(id);
         patientHistory.setCost(form.getCost());
         patientHistory.setDescription(form.getDescription());
         patientHistory.setStatus(true);
         patientHistoryRepository.save(patientHistory);
+        return receiptGenerator.create(patientHistory);
     }
 
     @Override

@@ -79,8 +79,7 @@
                         <h1>Контактная форма</h1>
                         <p>Напишите нам, если хотите зарегестрировать вашу Медицинскую клинику в нашем сервисе</p>
                         <div class="status alert alert-success" style="display: none"></div>
-                        <form class="contact-form" method="post"
-                              action="/proposal">
+                        <form class="contact-form" method="post" action="/proposal">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -101,10 +100,11 @@
                                     <textarea name="message" id="message" required="required" class="form-control"
                                               rows="8" placeholder="сообщение"></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-danger btn-lg">отправить</button>
-                                    </div>
+
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger btn-lg">отправить</button>
                             </div>
                         </form>
                     </div>

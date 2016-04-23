@@ -1,5 +1,6 @@
 package com.pliskin.controller;
 
+import com.itextpdf.text.Document;
 import com.pliskin.forms.AppointmentChangeForm;
 import com.pliskin.model.Doctor;
 import com.pliskin.service.DoctorScheduleService;
@@ -58,11 +59,12 @@ public class DoctorController {
     @RequestMapping(value = "/appointments/{id}/change", method = RequestMethod.POST)
     public String changePatientHistory(@PathVariable("id") Long id,
                                        @ModelAttribute("changeForm") @Valid AppointmentChangeForm form,
-                                       BindingResult result) {
+                                       BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "/change-appointment";
         }
-        patientHistoryService.changeAppointment(id, form);
+        Document document = patientHistoryService.changeAppointment(id, form);
+        model.addAttribute(document);
         return "redirect:/doctor/appointments";
     }
 

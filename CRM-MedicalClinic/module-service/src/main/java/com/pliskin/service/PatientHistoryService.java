@@ -1,5 +1,6 @@
 package com.pliskin.service;
 
+import com.itextpdf.text.Document;
 import com.pliskin.forms.AppointmentChangeForm;
 import com.pliskin.model.Credentials;
 import com.pliskin.model.Doctor;
@@ -24,7 +25,7 @@ public interface PatientHistoryService {
 
     PatientHistory getHistoryById(Long id);
 
-    void changeAppointment(Long id, AppointmentChangeForm form);
+    Document changeAppointment(Long id, AppointmentChangeForm form);
 
     List<PatientHistory> getHistories(Long id);
 }
