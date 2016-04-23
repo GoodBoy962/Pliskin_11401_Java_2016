@@ -10,6 +10,7 @@ import com.pliskin.service.DoctorService;
 import com.pliskin.service.OfficeService;
 import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,6 +71,7 @@ public class DoctorServiceImpl implements DoctorService {
         return doctor;
     }
 
+    @Secured("hasRole('ROLE_DOCTOR')")
     @Override
     public Doctor getDoctor() {
         return doctorRepository.findByCredentials(SecurityUtils.getCurrentUser());

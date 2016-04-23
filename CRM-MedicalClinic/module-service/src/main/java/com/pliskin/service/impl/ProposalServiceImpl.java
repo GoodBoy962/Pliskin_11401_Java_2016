@@ -25,6 +25,7 @@ public class ProposalServiceImpl implements ProposalService {
         proposal.setEmail(email);
         proposal.setFio(fio);
         proposal.setMessage(message);
+        proposalRepository.save(proposal);
     }
 
     @Secured("isAnonymous()")

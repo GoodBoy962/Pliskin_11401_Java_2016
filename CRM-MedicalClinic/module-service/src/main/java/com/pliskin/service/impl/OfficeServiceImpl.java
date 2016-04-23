@@ -49,7 +49,7 @@ public class OfficeServiceImpl implements OfficeService {
         return officeRepository.findByMedicalClinic(medicalClinic);
     }
 
-    @Secured(value = "hasRole('ROLE_STUDENT_ADMIN')")
+    @Secured(value = "hasRole('ROLE_SYSTEM_ADMIN')")
     @Transactional
     @Override
     public void createOfficeAndAdmin(OfficeAdminCreationForm form, Long medicalClinicId) {

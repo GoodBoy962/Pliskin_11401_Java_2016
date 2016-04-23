@@ -7,6 +7,7 @@ import com.pliskin.repository.PatientRepository;
 import com.pliskin.service.PatientService;
 import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,7 @@ public class PatientServiceImpl implements PatientService {
         patientRepository.save(patient);
     }
 
+    @Secured("hasRole('ROLE_PATIENT')")
     @Override
     public Patient getPatient() {
         return patientRepository.findByCredentials(SecurityUtils.getCurrentUser());

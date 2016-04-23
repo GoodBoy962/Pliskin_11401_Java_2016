@@ -1,16 +1,19 @@
 package com.pliskin.service.impl;
 
 import com.pliskin.exceptions.NoSuchMedicalClinicException;
+import com.pliskin.forms.MedicalClinicRegistrationForm;
 import com.pliskin.model.MedicalClinic;
 import com.pliskin.repository.AdminRepository;
 import com.pliskin.repository.MedicalClinicRepository;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -33,6 +36,12 @@ public class MedicalClinicServiceImplTest {
         when(medicalClinicService.medicalClinicRepository.findAll()).thenReturn(medicalClinics);
         when(medicalClinicService.medicalClinicRepository.findOne(1L)).thenReturn(medicalClinic);
         when(medicalClinicService.medicalClinicRepository.findOne(2L)).thenReturn(null);
+        when(medicalClinicService.medicalClinicRepository.save(any(MedicalClinic.class))).thenAnswer((Answer<MedicalClinic>) invocation -> {
+            Object[] args = invocation.getArguments();
+            return (MedicalClinic) args[0];
+        });
+        when(medicalClinicService.medicalClinicRepository.findByName("name")).thenReturn(medicalClinic);
+        when(medicalClinicService.medicalClinicRepository.findByName("no name")).thenReturn(null);
     }
 
     @Test
@@ -48,6 +57,21 @@ public class MedicalClinicServiceImplTest {
     @Test(expected = NoSuchMedicalClinicException.class)
     public void getMedClinicByIdShouldThrowExceptionIfNoSuchIdForMedClinic() {
         medicalClinicService.getMedClinic(2L);
+    }
+
+    @Test
+    public void createNewMedClinicShouldCreateCorrectClinic() {
+        medicalClinicService.createNewMedClinic(new MedicalClinicRegistrationForm());
+    }
+
+    @Test
+    public void getMedClinicByNameShouldReturnCorrectMedClinic() {
+        Assert.assertEquals(medicalClinicService.getMedClinic("name"), medicalClinic);
+    }
+
+    @Test(expected = NoSuchMedicalClinicException.class)
+    public void getMedClinicByNameShouldThrowExceptionIfNoMedClinicWithSuchName() {
+        medicalClinicService.getMedClinic("no name");
     }
 
 }

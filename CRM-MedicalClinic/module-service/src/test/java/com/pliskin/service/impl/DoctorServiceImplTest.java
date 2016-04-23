@@ -114,5 +114,9 @@ public class DoctorServiceImplTest {
         Assert.assertEquals(doctors, doctorService.getDoctorsByOfficeAndSpecialization(office, "dentist"));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void getDoctorShouldWork() {
+        doctorService.getDoctor();
+    }
 
 }

@@ -17,8 +17,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static com.pliskin.util.DateUtils.getEndDate;
 
 /**
  * Created by aleksandrpliskin on 12.04.16.
@@ -43,6 +46,9 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
 
     @Autowired
     Function<String, String> timeTransformer;
+
+    @Autowired
+    BiFunction<String, Doctor, Map<Date, List<DoctorSchedule>>> stringDoctorMapBiFunction;
 
     @Override
     public List<DoctorSchedule> getDoctorSchedule(Doctor doctor) {
@@ -70,26 +76,10 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
         List<Doctor> doctors = doctorService.getDoctorsByOfficeAndSpecialization(officeService.getOfficeByCityAndAddress(city, address), specialization);
         Map<Doctor, Map<Date, List<DoctorSchedule>>> doctorsDates = new HashMap<>();
         for (Doctor doctor : doctors) {
-            Map<Date, List<DoctorSchedule>> dates = getRightDays(period, doctor);
+            Map<Date, List<DoctorSchedule>> dates = stringDoctorMapBiFunction.apply(period, doctor);
             doctorsDates.put(doctor, dates);
         }
         return doctorsDates;
-    }
-
-    private Date getEndDate(Date sDate, String period) {
-        Calendar resultDate = Calendar.getInstance();
-        resultDate.setTime(sDate);
-        switch (period) {
-            case "w":
-                resultDate.add(Calendar.WEEK_OF_MONTH, 2);
-                break;
-            case "m":
-                resultDate.add(Calendar.MONTH, 1);
-                break;
-            default:
-                resultDate.add(Calendar.MONTH, 2);
-        }
-        return resultDate.getTime();
     }
 
     private List<Date> getRightDays(String period, String weekDay, Doctor doctor, String time) {
@@ -129,28 +119,6 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
             e.printStackTrace();
         }
         return resultDates;
-    }
-
-    private Map<Date, List<DoctorSchedule>> getRightDays(String period, Doctor doctor) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEEE", Locale.US);
-        List<Date> dates = new ArrayList<>();
-        Map<Date, List<DoctorSchedule>> map = new HashMap<>();
-        Date startDate = new Date();
-        Date endDate = getEndDate(startDate, period);
-        final long interval = 24 * 1000 * 60 * 60;
-        long endTime = endDate.getTime();
-        long curTime = startDate.getTime();
-        while (curTime <= endTime) {
-            dates.add(new Date(curTime));
-            curTime += interval;
-        }
-        for (Date date : dates) {
-            List<DoctorSchedule> resultDates = doctorScheduleRepository.findByDoctorAndWeekDay(doctor, WeekDay.valueOf(dateFormat.format(date).toUpperCase())).stream().filter(doctorSchedule -> patientHistoryRepository.findByDateAndDoctorSchedule(
-                    date, doctorSchedule) == null).collect(Collectors.toList());
-            map.put(date, resultDates);
-        }
-
-        return map;
     }
 
 }

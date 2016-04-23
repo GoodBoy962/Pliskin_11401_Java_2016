@@ -17,7 +17,6 @@ import static org.mockito.Mockito.*;
 public class CredentialsCreatorTest {
 
     CredentialsCreator credentialsCreator;
-
     Credentials credentials;
 
     @Before
@@ -28,7 +27,6 @@ public class CredentialsCreatorTest {
         credentialsCreator.credentialsRepository = mock(CredentialsRepository.class);
         when(credentialsCreator.credentialsRepository.save(any(Credentials.class))).thenReturn(credentials);
         credentials = credentialsCreator.createAndSaveCredentialsForUser("123456", "login", "email@sample.com", Role.ROLE_PATIENT);
-
     }
 
     @Test
