@@ -46,6 +46,7 @@ public class DoctorScheduleServiceImplTest {
         when(doctorScheduleService.doctorScheduleRepository.findByDoctor(doctor)).thenReturn(doctorSchedules);
         when(doctorScheduleService.doctorService.getDoctor(1L)).thenReturn(doctor);
         when(doctorScheduleService.transformer.apply("ds")).thenReturn(doctorSchedule);
+        when(doctorScheduleService.timeTransformer.apply("time")).thenReturn("09:00:00/10:00:00");
     }
 
     @Test
@@ -55,7 +56,17 @@ public class DoctorScheduleServiceImplTest {
 
     @Test
     public void createDoctorScheduleShouldCreateCorrectSchedule() {
-//        doctorScheduleService.createDoctorSchedule(1L, attachments);
+        doctorScheduleService.createDoctorSchedule(1L, attachments);
+    }
+
+    @Test(timeout = 100L)
+    public void getPossibleDatesShouldReturnCorrectDates() {
+        doctorScheduleService.getPossibleDates("w", "MONDAY", "time", "Doctor House");
+    }
+
+    @Test(timeout = 100L)
+    public void getAllPossibleDates() {
+        doctorScheduleService.getAllPossibleDates("city", "address", "sp", "w");
     }
 
 }

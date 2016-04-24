@@ -14,7 +14,8 @@ public class ServiceAspect {
     private static Logger log = Logger.getLogger(ServiceAspect.class);
 
     public void before() {
-        log.info("\n==========>" + new Date() + "\n" + "===============================================" + "\n");
+        log.info("\n==========>" + new Date() + "\n"
+                + "==========================================================================================" + "\n");
     }
 
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
