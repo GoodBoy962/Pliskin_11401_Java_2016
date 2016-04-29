@@ -16,8 +16,8 @@ import static org.mockito.Mockito.*;
  */
 public class CredentialsCreatorTest {
 
-    CredentialsCreator credentialsCreator;
-    Credentials credentials;
+    private static CredentialsCreator credentialsCreator;
+    private static Credentials credentials;
 
     @Before
     public void setUp() {

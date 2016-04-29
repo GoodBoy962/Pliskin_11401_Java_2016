@@ -59,12 +59,9 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         DateFormat formatter1 = new SimpleDateFormat("HH:mm:ss");
         try {
             patientHistory.setDate(formatter.parse(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String time = transformer.apply(time1);
-        long timeStart = 0;
-        try {
+            String time = transformer.apply(time1);
+            long timeStart = 0;
+
             timeStart = formatter1.parse(time.substring(0, 8)).getTime();
             long timeEnd = formatter1.parse(time.substring(9, time.length())).getTime();
             Time startTime = new Time(timeStart);
@@ -95,10 +92,9 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         String doctorFio = info.substring(0, info.indexOf('/') - 1);
         String fullDate = info.substring(info.indexOf('/') + 3);
         String date = fullDate.substring(0, fullDate.indexOf(' '));
-        String wDay = fullDate.substring(fullDate.indexOf(' ') + +1, fullDate.lastIndexOf(' '));
+        String wDay = fullDate.substring(fullDate.indexOf(' ') + 1, fullDate.lastIndexOf(' '));
         String time = fullDate.substring(fullDate.lastIndexOf(' ') + 1, fullDate.length());
         createHistory(doctorFio, wDay, time, date);
-
     }
 
     @Override
@@ -116,6 +112,7 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         return patientHistoryRepository.findOne(id);
     }
 
+    @Transactional
     @Override
     public Document changeAppointment(Long id, AppointmentChangeForm form) {
         PatientHistory patientHistory = patientHistoryRepository.findOne(id);
