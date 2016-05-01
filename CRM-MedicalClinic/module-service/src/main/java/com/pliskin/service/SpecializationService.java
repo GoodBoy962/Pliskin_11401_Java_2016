@@ -11,7 +11,9 @@ import java.util.Set;
  */
 public interface SpecializationService {
 
-    public List<Specialization> getAllSpecializations();
+    List<Specialization> getAllSpecializations();
+
+    Set<Specialization> getSpecializationsOfDoctorsInOfficeByCityLikeAndAddress(String city, String address);
 
     Set<Specialization> getSpecializationsOfDoctorsInOfficeByCityAndAddress(String city, String address);
 

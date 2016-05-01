@@ -88,7 +88,17 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
+    public Office getOfficeByCityLikeAndAddress(String city, String address) {
+        return officeRepository.findOneByCityLikeAndAddress("%" + city + "%", address);
+    }
+
+    @Override
     public Office getOfficeByCityAndAddress(String city, String address) {
         return officeRepository.findOneByCityAndAddress(city, address);
+    }
+
+    @Override
+    public List<Office> getOfficesLikeCity(String city) {
+        return officeRepository.findByCityLike("%" + city + "%");
     }
 }

@@ -73,7 +73,7 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
 
     @Override
     public Map<Doctor, Map<Date, List<DoctorSchedule>>> getAllPossibleDates(String city, String address, String specialization, String period) {
-        List<Doctor> doctors = doctorService.getDoctorsByOfficeAndSpecialization(officeService.getOfficeByCityAndAddress(city, address), specialization);
+        List<Doctor> doctors = doctorService.getDoctorsByOfficeAndSpecialization(officeService.getOfficeByCityLikeAndAddress(city, address), specialization);
         Map<Doctor, Map<Date, List<DoctorSchedule>>> doctorsDates = new HashMap<>();
         for (Doctor doctor : doctors) {
             Map<Date, List<DoctorSchedule>> dates = stringDoctorMapBiFunction.apply(period, doctor);

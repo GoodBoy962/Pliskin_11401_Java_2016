@@ -1,4 +1,3 @@
-<option>выбор:</option>
 <#list offices as of>
-<option id="${of.id}">${of.address}</option>
+<input type="radio" name="address" value="${of.address}">${of.address}</input>
 </#list>

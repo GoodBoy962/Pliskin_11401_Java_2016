@@ -16,7 +16,7 @@ function getMedClinicsAndOffices() {
 
 function getDoctorSpecialities() {
     var city = $("#city").val();
-    var address = $("#offices").find("option:selected").val();
+    var address = $("#offices").find(":checked").val();
     $.ajax({
         url: "specializations",
         type: "GET",
@@ -56,7 +56,7 @@ $(function () {
 
 function getDoctorsAndPossibleDates(specialization) {
     var city = $("#city").val();
-    var address = $("#offices").find("option:selected").val();
+    var address = $("#offices").find(":checked").val();
     var period = $("#js-period").find("option:selected").attr("id");
     $.ajax({
         url: "dates_doctors",

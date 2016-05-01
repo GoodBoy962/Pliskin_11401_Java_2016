@@ -35,6 +35,14 @@ public class SpecializationServiceImpl implements SpecializationService {
     }
 
     @Override
+    public Set<Specialization> getSpecializationsOfDoctorsInOfficeByCityLikeAndAddress(String city, String address) {
+        return doctorService.getDoctorsByOffice(
+                officeService.getOfficeByCityLikeAndAddress(city, address)).
+                stream().map(Doctor::getSpecialization).
+                collect(Collectors.toSet());
+    }
+
+    @Override
     public Set<Specialization> getSpecializationsOfDoctorsInOfficeByCityAndAddress(String city, String address) {
         return doctorService.getDoctorsByOffice(
                 officeService.getOfficeByCityAndAddress(city, address)).

@@ -10,15 +10,18 @@
                     <div class="col-md-8">
                         <h3>Выберите город</h3>
                         <input name="city" id="city" placeholder="город" type="text"
-                               onchange="getMedClinicsAndOffices()"/>
+                               oninput="getMedClinicsAndOffices()"/>
                     </div>
                 </div>
-                <div class="form-group text-left" id="medicalClinics" hidden>
+                <div class="form-group text-center" id="medicalClinics" hidden>
                     <div class="col-md-8">
                         <h3>Клиники и адреса</h3>
-                        <select id="offices" name="address">
+                        <div id="offices">
 
-                        </select>
+                        </div>
+                    <#--<select id="offices" name="address">-->
+                    <#---->
+                    <#--</select>-->
                     </div>
                 </div>
                 <div class="form-group text-left" id="specializations" hidden>

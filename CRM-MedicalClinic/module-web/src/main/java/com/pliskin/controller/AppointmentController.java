@@ -77,7 +77,7 @@ public class AppointmentController {
 
     @RequestMapping(value = "/offices", method = RequestMethod.GET)
     public String getOffices(@RequestParam("city") String city, Model model) {
-        List<Office> offices = officeService.getOfficesByCity(city);
+        List<Office> offices = officeService.getOfficesLikeCity(city);
         model.addAttribute("offices", offices);
         return "/offices-list";
     }
@@ -86,7 +86,7 @@ public class AppointmentController {
     public String getSpecializationsOfDoctorsInOffice(@RequestParam("city") String city,
                                                       @RequestParam("address") String address,
                                                       Model model) {
-        Set<Specialization> specializations = specializationService.getSpecializationsOfDoctorsInOfficeByCityAndAddress(city, address);
+        Set<Specialization> specializations = specializationService.getSpecializationsOfDoctorsInOfficeByCityLikeAndAddress(city, address);
         model.addAttribute("specializations", new ArrayList<>(specializations));
         return "/specializations-list";
     }

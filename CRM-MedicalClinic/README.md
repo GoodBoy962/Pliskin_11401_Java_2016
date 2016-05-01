@@ -10,6 +10,6 @@ Patient      : login patient , password 1234<br/>
 create properties files as their same-named properties.origin files
 
 they are:
-module-domain: liquibase.properties and database.properties
-module-log : log4j.properties
-module-service : pdf.properties
+module-domain: liquibase.properties and database.properties<br/>
+module-log : log4j.properties<br/>
+module-service : pdf.properties<br/>
