@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "proposals")
-@SequenceGenerator(sequenceName = "proposals_id_seq", name = "proposals_gen",allocationSize = 1)
+@SequenceGenerator(sequenceName = "proposals_id_seq", name = "proposals_gen", allocationSize = 1)
 public class Proposal {
 
     @Id

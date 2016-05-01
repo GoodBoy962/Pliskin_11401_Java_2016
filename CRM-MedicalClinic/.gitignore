@@ -79,3 +79,4 @@ local.properties
 *.idea
 *out/
 .DS_Store
+*.properties

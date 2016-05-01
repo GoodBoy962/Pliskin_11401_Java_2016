@@ -79,7 +79,7 @@
                         <h1>Контактная форма</h1>
                         <p>Напишите нам, если хотите зарегестрировать вашу Медицинскую клинику в нашем сервисе</p>
                         <div class="status alert alert-success" style="display: none"></div>
-                        <form class="contact-form" method="post" action="/proposal">
+                        <form class="contact---form" method="post" action="/proposal">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">

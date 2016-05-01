@@ -12,7 +12,6 @@ import com.pliskin.repository.PatientHistoryRepository;
 import com.pliskin.service.DoctorService;
 import com.pliskin.service.PatientHistoryService;
 import com.pliskin.service.PatientService;
-import com.pliskin.util.pdf.ReceiptGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
@@ -48,7 +47,7 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
     Function<String, String> transformer;
 
     @Autowired
-    ReceiptGenerator receiptGenerator;
+    Function<PatientHistory, Document> receiptGenerator;
 
     @Secured("hasRole('ROLE_PATIENT')")
     @Transactional
@@ -60,8 +59,7 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         try {
             patientHistory.setDate(formatter.parse(date));
             String time = transformer.apply(time1);
-            long timeStart = 0;
-
+            long timeStart;
             timeStart = formatter1.parse(time.substring(0, 8)).getTime();
             long timeEnd = formatter1.parse(time.substring(9, time.length())).getTime();
             Time startTime = new Time(timeStart);
@@ -120,7 +118,7 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         patientHistory.setDescription(form.getDescription());
         patientHistory.setStatus(true);
         patientHistoryRepository.save(patientHistory);
-        return receiptGenerator.create(patientHistory);
+        return receiptGenerator.apply(patientHistory);
     }
 
     @Override

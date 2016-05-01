@@ -85,7 +85,7 @@ public class PatientHistoryServiceImplTest {
                     Object[] args = invocation.getArguments();
                     return (PatientHistory) args[0];
                 });
-        when(patientHistoryService.receiptGenerator.create(patientHistory)).thenReturn(document);
+        when(patientHistoryService.receiptGenerator.apply(patientHistory)).thenReturn(document);
     }
 
     @Test
@@ -127,4 +127,4 @@ public class PatientHistoryServiceImplTest {
     public void changeAppointmentShouldWorkCorrect() {
         Assert.assertEquals(patientHistoryService.changeAppointment(1L, form), document);
     }
- }
+}
