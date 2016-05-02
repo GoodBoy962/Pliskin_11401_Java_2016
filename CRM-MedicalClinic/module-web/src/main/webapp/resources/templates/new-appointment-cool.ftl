@@ -19,9 +19,6 @@
                         <div id="offices">
 
                         </div>
-                    <#--<select id="offices" name="address">-->
-                    <#---->
-                    <#--</select>-->
                     </div>
                 </div>
                 <div class="form-group text-left" id="specializations" hidden>
@@ -32,7 +29,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group text-left" id="js-period" hidden>
+                <div class="form-group text-center" id="js-period" hidden>
                     <div class="col-md-8" id="period">
                         <h3>выберите период времени, чтобы узнать, когда можно записаться</h3>
                         <select id="period">
@@ -42,7 +39,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group text-left" id="js-doctorDates" hidden>
+                <div class="form-group text-center" id="js-doctorDates" hidden>
                     <div class="col-md-8" id="doctors">
                         <h3>Врач</h3>
                         <select id="js-dates" name="appointmentDate">
@@ -50,7 +47,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="form-group text-center">
                     <div class="col-md-8">
                         <button type="submit" id="js-appointment-create" class="btn btn-success" disabled>Записаться

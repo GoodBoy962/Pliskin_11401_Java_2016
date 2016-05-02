@@ -29,11 +29,11 @@
 
     <#include "footer.ftl"/>
 
-<script src="/js/jquery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.isotope.min.js"></script>
-<script src="/js/jquery.prettyPhoto.js"></script>
-<script src="/js/main.js"></script>
+<script src="/jquery/jquery.js"></script>
+<script src="/jquery/bootstrap.min.js"></script>
+<script src="/jquery/jquery.isotope.min.js"></script>
+<script src="/jquery/jquery.prettyPhoto.js"></script>
+<script src="/jquery/main.js"></script>
     <#list customScripts as script>
     <script src="${script}"></script>
     </#list>
