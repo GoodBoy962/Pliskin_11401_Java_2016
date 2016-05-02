@@ -45,6 +45,7 @@ public class SpecializationServiceImplTest {
         specializationService.doctorService = mock(DoctorService.class);
         when(specializationService.getAllSpecializations()).thenReturn(specializations);
         when(specializationService.officeService.getOfficeByCityAndAddress(anyString(), anyString())).thenReturn(office);
+        when(specializationService.officeService.getOfficeByCityLikeAndAddress(anyString(), anyString())).thenReturn(office);
         when(specializationService.doctorService.getDoctorsByOffice(office)).thenReturn(doctors);
         when(specializationService.specializationRepository.save(any(Specialization.class))).thenAnswer(
                 (Answer<Specialization>) invocation -> {
@@ -61,6 +62,11 @@ public class SpecializationServiceImplTest {
     @Test
     public void getSpecializationsOfDoctorsInOfficeByCityAndAddressShouldReturnCorrectSpecializations() {
         Assert.assertEquals(specializationSet, specializationService.getSpecializationsOfDoctorsInOfficeByCityAndAddress("", ""));
+    }
+
+    @Test
+    public void getSpecializationsOfDoctorsInOfficeByCityLikeAndAddressShouldReturnCorrectSpecializations() {
+        Assert.assertEquals(specializationSet, specializationService.getSpecializationsOfDoctorsInOfficeByCityLikeAndAddress("", ""));
     }
 
     @Test

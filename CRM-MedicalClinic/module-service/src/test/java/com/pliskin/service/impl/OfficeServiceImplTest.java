@@ -47,7 +47,9 @@ public class OfficeServiceImplTest {
         when(officeService.officeRepository.findByMedicalClinic(medicalClinic)).thenReturn(medClinicOffices);
         when(officeService.officeRepository.findOne(1L)).thenReturn(office);
         when(officeService.officeRepository.findByCity("NY")).thenReturn(medClinicOffices);
+        when(officeService.officeRepository.findByCity("%NY%")).thenReturn(medClinicOffices);
         when(officeService.officeRepository.findOneByCityAndAddress("NY", "TS")).thenReturn(office);
+        when(officeService.officeRepository.findOneByCityLikeAndAddress("%NY%", "TS")).thenReturn(office);
         when(officeService.medicalClinicRepository.findOne(1L)).thenReturn(medicalClinic);
         when(officeService.adminFunction.apply(any(OfficeAdminCreationForm.class))).thenReturn(new Admin());
         when(officeService.adminRepository.save(any(Admin.class))).thenAnswer(
@@ -88,6 +90,11 @@ public class OfficeServiceImplTest {
     }
 
     @Test
+    public void getOfficeByCityLikeAndAddressShouldReturnCorrectOffice() {
+        Assert.assertEquals(officeService.getOfficeByCityLikeAndAddress("NY", "TS"), office);
+    }
+
+    @Test
     public void createOfficeAdminShouldCreateCorrectOfficeAndAdmin() {
         officeService.createOfficeAndAdmin(new OfficeAdminCreationForm(), 1L);
     }
@@ -102,4 +109,8 @@ public class OfficeServiceImplTest {
         officeService.getOfficeByAdminCredentials();
     }
 
+    @Test
+    public void getOfficesLikeCityShouldReturnCorrectOffices() {
+        Assert.assertEquals(officeService.getOfficesLikeCity("NY"), medClinicOffices);
+    }
 }
