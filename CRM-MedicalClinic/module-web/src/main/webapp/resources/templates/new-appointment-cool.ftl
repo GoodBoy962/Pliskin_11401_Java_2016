@@ -24,7 +24,7 @@
                 <div class="form-group text-left" id="specializations" hidden>
                     <div class="col-md-8">
                         <h3>Специальность врача</h3>
-                        <select id="specs" name="specialization">
+                        <select id="specs" name="specialization" onchange="getPossibleDatesBySpecializationAndPeriod()">
 
                         </select>
                     </div>
@@ -32,7 +32,7 @@
                 <div class="form-group text-center" id="js-period" hidden>
                     <div class="col-md-8" id="period">
                         <h3>выберите период времени, чтобы узнать, когда можно записаться</h3>
-                        <select id="period">
+                        <select id="period" onchange="getPossibleDatesBySpecializationAndPeriod()">
                             <option id="w" name="w"> на две недели</option>
                             <option id="m" name="m"> на месяц</option>
                             <option id="2m" name="2m"> на два месяца</option>

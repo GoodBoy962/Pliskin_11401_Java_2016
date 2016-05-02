@@ -54,6 +54,15 @@ $(function () {
     })
 });
 
+function getPossibleDatesBySpecializationAndPeriod() {
+    var periodObject = $("#js-period");
+    var period = periodObject.find("option:selected").attr("id");
+    var specialization = $("#specs").find("option:selected").val();
+    periodObject.change(function () {
+        getDoctorsAndPossibleDates(specialization)
+    })
+}
+
 function getDoctorsAndPossibleDates(specialization) {
     var city = $("#city").val();
     var address = $("#offices").find(":checked").val();
