@@ -15,11 +15,11 @@
                     <input type="password" name="password" class="form-control" placeholder="пароль">
                 </div>
             </div>
-            <div class="form-group text-center">
-                <div class="col-md-5">
-                    Remember me <input type="checkbox" id="remember" name="_spring_security_remember_me" value="true">
-                </div>
-            </div>
+            <#--<div class="form-group text-center">-->
+                <#--<div class="col-md-5">-->
+                    <#--Remember me <input type="checkbox" id="remember" name="_spring_security_remember_me" value="true">-->
+                <#--</div>-->
+            <#--</div>-->
             <div class="form-group text-center">
                 <div class="col-md-5">
                     <button type="submit" class="btn btn-success">Войти</button>

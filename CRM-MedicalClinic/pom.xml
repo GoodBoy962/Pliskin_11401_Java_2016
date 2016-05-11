@@ -10,6 +10,7 @@
         <module>module-service</module>
         <module>module-web</module>
         <module>module-log</module>
+        <module>module-gwt</module>
     </modules>
     <packaging>pom</packaging>
 
