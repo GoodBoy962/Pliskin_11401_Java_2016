@@ -1,9 +1,7 @@
 package com.pliskin.api.controller;
 
 import com.pliskin.api.dto.ApiResponse;
-import com.pliskin.model.Office;
-import com.pliskin.model.PatientHistory;
-import com.pliskin.model.Specialization;
+import com.pliskin.model.*;
 import com.pliskin.service.*;
 import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -67,22 +65,19 @@ public class AppointmentRestController extends BaseApiController {
     }
 
     @RequestMapping(value = "/specializations", method = RequestMethod.GET)
-    public String getSpecializationsOfDoctorsInOffice(@RequestParam("city") String city,
-                                                      @RequestParam("address") String address,
-                                                      Model model) {
-        Set<Specialization> specializations = specializationService.getSpecializationsOfDoctorsInOfficeByCityLikeAndAddress(city, address);
-        model.addAttribute("specializations", new ArrayList<>(specializations));
-        return "/specializations-list";
+    public ResponseEntity<ApiResponse<Set<Specialization>>> getSpecializationsOfDoctorsInOffice(
+            @RequestParam("city") String city,
+            @RequestParam("address") String address) {
+        return createGoodResponse(specializationService.getSpecializationsOfDoctorsInOfficeByCityLikeAndAddress(city, address));
     }
 
     @RequestMapping(value = "/dates_doctors", method = RequestMethod.GET)
-    public String getPossibleDatesAndDoctors(@RequestParam("city") String city,
-                                             @RequestParam("address") String address,
-                                             @RequestParam("specialization") String specialization,
-                                             @RequestParam("period") String period,
-                                             Model model) {
-        model.addAttribute("dates_doctors", doctorScheduleService.getAllPossibleDates(city, address, specialization, period));
-        return "/doctors_dates";
+    public ResponseEntity<ApiResponse<Map<Doctor, Map<Date, List<DoctorSchedule>>>>> getPossibleDatesAndDoctors(
+            @RequestParam("city") String city,
+            @RequestParam("address") String address,
+            @RequestParam("specialization") String specialization,
+            @RequestParam("period") String period) {
+        return createGoodResponse(doctorScheduleService.getAllPossibleDates(city, address, specialization, period));
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
