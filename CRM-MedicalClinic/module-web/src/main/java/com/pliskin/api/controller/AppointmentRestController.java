@@ -7,7 +7,6 @@ import com.pliskin.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -82,11 +81,11 @@ public class AppointmentRestController extends BaseApiController {
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void createCoolAppointment(Model model,
-                                      @RequestParam("appointmentDate") String appointmentDate,
-                                      @RequestParam("city") String city,
-                                      @RequestParam("address") String address,
-                                      @RequestParam("specialization") String specialization
+    public void createCoolAppointment(
+            @RequestParam("appointmentDate") String appointmentDate,
+            @RequestParam("city") String city,
+            @RequestParam("address") String address,
+            @RequestParam("specialization") String specialization
     ) {
         patientHistoryService.createHistoryFromCoolForm(appointmentDate);
     }
