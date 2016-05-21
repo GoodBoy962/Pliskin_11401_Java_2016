@@ -7,11 +7,14 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,20 +28,22 @@ import java.util.Random;
  */
 public class BallGame extends Application {
 
-    private Group group;
+    Group group;
     private Scene scene;
     private int sceneLength = 800;
     private int sceneWidth = 1200;
     private Image image = new Image(getClass().getResourceAsStream("/1.png"));
     private ImageView imageView = new ImageView(image);
-    private Hero hero = new Hero(imageView);
+    private Hero hero;
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
     private static List<Ball> balls = new ArrayList<>();
     private static final int RADIUS = 20;
+    int score = 0;
+    Rectangle target;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        hero = new Hero(imageView, this);
         group = new Group();
         scene = new Scene(group, sceneWidth, sceneLength);
         balls = new ArrayList<>();
@@ -77,7 +82,7 @@ public class BallGame extends Application {
             timeline.setCycleCount(Animation.INDEFINITE);
             KeyFrame moveBall = new KeyFrame(Duration.seconds(.01),
                     event -> {
-                        checkHeroTouched(hero, circle);
+                        checkHeroTouched();
 
                         double xMin = circle.getBoundsInParent().getMinX();
                         double yMin = circle.getBoundsInParent().getMinY();
@@ -162,27 +167,26 @@ public class BallGame extends Application {
             return new Random().nextInt((param - 100) / 100) * 100 + 20;
         }
 
-        private void checkHeroTouched(Hero hero, Circle ball) {
-
-            double xMin = ball.getBoundsInParent().getMinX();
-            double yMin = ball.getBoundsInParent().getMinY();
-            double xMax = ball.getBoundsInParent().getMaxX();
-            double yMax = ball.getBoundsInParent().getMaxY();
-
-            double heroXMin = hero.getCurX();
-            double heroYMin = hero.getCurY();
-            double heroXMax = hero.getCurX();
-            double heroYMax = hero.getCurY();
-
-            if (((heroXMin >= xMin && heroXMin <= xMax) || (heroXMax >= xMin && heroXMax <= xMax)) && ((heroYMin >= yMin && heroYMin <= yMax) || (heroYMax >= yMin && heroYMax <= yMax))) {
-                System.out.println("hop");
+        private void checkHeroTouched() {
+            if (heroTouchCheck(circle)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You score is " + score);
+                alert.show();
             }
-
         }
     }
 
     private void initElements() {
+        target();
         createBalls(7);
+    }
+
+    void target() {
+        target = new Rectangle(20, 20, Color.GREEN);
+        int x = (int) Math.floor(Math.random() * sceneWidth);
+        int y = (int) Math.floor(Math.random() * sceneLength);
+        target.setX(x);
+        target.setY(y);
+        group.getChildren().addAll(target);
     }
 
     private void createBalls(int n) {
@@ -215,6 +219,21 @@ public class BallGame extends Application {
 
     private boolean isPressed(KeyCode key) {
         return keys.getOrDefault(key, false);
+    }
+
+    private boolean heroTouchCheck(Shape shape) {
+
+        double xMin = shape.getBoundsInParent().getMinX();
+        double yMin = shape.getBoundsInParent().getMinY();
+        double xMax = shape.getBoundsInParent().getMaxX();
+        double yMax = shape.getBoundsInParent().getMaxY();
+
+        double heroXMin = hero.getCurX();
+        double heroYMin = hero.getCurY();
+        double heroXMax = hero.getCurX();
+        double heroYMax = hero.getCurY();
+
+        return ((heroXMin >= xMin && heroXMin <= xMax) || (heroXMax >= xMin && heroXMax <= xMax)) && ((heroYMin >= yMin && heroYMin <= yMax) || (heroYMax >= yMin && heroYMax <= yMax));
     }
 
     public static void main(String[] args) {

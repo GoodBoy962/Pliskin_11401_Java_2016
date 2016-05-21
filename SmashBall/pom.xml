@@ -33,7 +33,6 @@
                     <mainClass>com.pliskin.BallGame</mainClass>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>
