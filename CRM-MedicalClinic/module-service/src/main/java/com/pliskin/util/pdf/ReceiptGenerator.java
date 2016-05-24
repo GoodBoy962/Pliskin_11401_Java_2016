@@ -22,7 +22,7 @@ import java.util.function.Function;
 public class ReceiptGenerator implements Function<PatientHistory, Document> {
 
     @Value("${pdf.folder}")
-    private String folder;
+    String folder;
 
     private Font font;
 

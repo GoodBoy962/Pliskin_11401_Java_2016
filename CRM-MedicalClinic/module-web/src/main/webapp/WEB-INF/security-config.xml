@@ -27,10 +27,15 @@
                 default-target-url="/default"
                 always-use-default-target="true"
                 authentication-failure-url="/login?error=true"/>
-        <security:logout logout-url="/logout" logout-success-url="/"/>
+        <security:logout logout-url="/logout" logout-success-url="/" delete-cookies="JSESSIONID"/>
         <security:csrf disabled="true"/>
         <security:access-denied-handler ref="accessDeniedHandler"/>
+        <security:remember-me key="uniqueAndSecret" token-validity-seconds="86400" remember-me-parameter="remember-me" user-service-ref="userDetailsService"/>
     </security:http>
+
+    <security:user-service id="userDetailsService">
+        <security:user name="patient" authorities="ROLE_PATIENT" password="1234"/>
+    </security:user-service>
 
     <security:authentication-manager>
         <security:authentication-provider ref="authProvider"/>
@@ -41,4 +46,7 @@
     </bean>
 
     <bean id="authProvider" class="com.pliskin.security.AuthProviderImpl"/>
+
+    <bean id="userDetailsService" class="com.pliskin.security.MyUserDetailsService"/>
+
 </beans>
