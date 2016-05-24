@@ -12,6 +12,4 @@
     <import resource="classpath*:configs/service-config.xml"/>
     <import resource="classpath*:configs/aop-config.xml"/>
 
-    <!--<import resource="api-security-config.xml"/>-->
-
 </beans>
