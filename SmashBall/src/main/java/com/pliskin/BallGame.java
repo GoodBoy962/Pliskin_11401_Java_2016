@@ -38,6 +38,7 @@ public class BallGame extends Application {
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
     private static List<Ball> balls = new ArrayList<>();
     private static final int RADIUS = 20;
+    private int targetSize = 40;
     int score = 0;
     Rectangle target;
 
@@ -181,7 +182,11 @@ public class BallGame extends Application {
     }
 
     void target() {
-        target = new Rectangle(20, 20, Color.GREEN);
+        target = new Rectangle(targetSize, targetSize, Color.GREEN);
+        targetSize--;
+        if (targetSize < 5) {
+            targetSize = 5;
+        }
         int x = (int) Math.floor(Math.random() * sceneWidth);
         int y = (int) Math.floor(Math.random() * sceneLength);
         target.setX(x);
