@@ -1,0 +1,4 @@
+driver=org.postgresql.Driver
+url=jdbc:postgresql://localhost:5432/medical-clinic-crm
+username=postgres
+password=postgres

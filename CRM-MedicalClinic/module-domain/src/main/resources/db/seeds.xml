@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="seeds_1" author="GoodBoy">
+        <loadUpdateData tableName="credentials" primaryKey="id" file="db/seeds/credentials.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="seeds_2" author="GoodBoy">
+        <loadUpdateData tableName="medical_clinics" primaryKey="id" file="db/seeds/medical_clinics.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="seeds_3" author="GoodBoy">
+        <loadUpdateData tableName="offices" primaryKey="id" file="db/seeds/offices.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="seeds_4" author="GoodBoy">
+        <loadUpdateData tableName="admins" primaryKey="id" file="db/seeds/admins.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="seeds_5" author="GoodBoy">
+        <loadUpdateData tableName="system_admins" primaryKey="id" file="db/seeds/system_admins.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+
+    <changeSet id="seeds_6" author="GoodBoy">
+        <loadUpdateData tableName="specializations" primaryKey="id" file="db/seeds/specializations.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="seeds_7" author="GoodBoy">
+        <loadUpdateData tableName="doctors" primaryKey="id" file="db/seeds/doctors.csv">
+            <column name="id" type="numeric"/>
+            <column name="birth_day" type="date"/>
+            <column name="employment_date" type="date"/>
+            <column name="inception_date" type="date"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="seeds_8" author="GoodBoy">
+        <loadUpdateData tableName="patients" primaryKey="id" file="db/seeds/patients.csv">
+            <column name="id" type="numeric"/>
+            <column name="birth_day" type="date"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="seeds_9" author="GoodBoy">
+        <loadUpdateData tableName="doctor_schedule" primaryKey="id" file="db/seeds/doctor_schedule.csv">
+            <column name="id" type="numeric"/>
+            <column name="week_day" type="string"/>
+            <column name="start_time" type="time"/>
+            <column name="end_time" type="time"/>
+        </loadUpdateData>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1606040119_1" author="GoodBoy">
+        <createTable tableName="credentials">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="login" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_2" author="GoodBoy">
+        <createSequence
+                sequenceName="credentials_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_3" author="GoodBoy">
+        <createTable tableName="medical_clinics">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="info" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_4" author="GoodBoy">
+        <createSequence
+                sequenceName="medical_clinics_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_5" author="GoodBoy">
+        <createTable tableName="offices">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="medical_clinic_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_6" author="GoodBoy">
+        <createSequence
+                sequenceName="offices_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_7" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="offices"
+                                 baseColumnNames="medical_clinic_id"
+                                 constraintName="offices_medical_clinics_fk"
+                                 referencedTableName="medical_clinics"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_8" author="GoodBoy">
+        <createTable tableName="admins">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fio" type="varchar(255)"/>
+            <column name="office_id" type="bigint"/>
+            <column name="credentials_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_9" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="admins"
+                                 baseColumnNames="office_id"
+                                 constraintName="admins_offices_fk"
+                                 referencedTableName="offices"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_10" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="admins"
+                                 baseColumnNames="credentials_id"
+                                 constraintName="admins_credentials_fk"
+                                 referencedTableName="credentials"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_11" author="GoodBoy">
+        <createSequence
+                sequenceName="admins_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_12" author="GoodBoy">
+        <createTable tableName="system_admins">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="credentials_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_13" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="system_admins"
+                                 baseColumnNames="credentials_id"
+                                 constraintName="system_admins_credentials_fk"
+                                 referencedTableName="credentials"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_14" author="GoodBoy">
+        <createSequence
+                sequenceName="system_admins_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_15" author="GoodBoy">
+        <createTable tableName="doctors">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fio" type="varchar(255)"/>
+            <column name="credentials_id" type="bigint"/>
+            <column name="birth_day" type="date"/>
+            <column name="employment_date" type="date"/>
+            <column name="inception_date" type="date"/>
+            <column name="office_id" type="bigint"/>
+            <column name="specialization_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_16" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="doctors"
+                                 baseColumnNames="credentials_id"
+                                 constraintName="doctors_credentials_fk"
+                                 referencedTableName="credentials"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_17" author="GoodBoy">
+        <createSequence
+                sequenceName="doctors_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_18" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="doctors"
+                                 baseColumnNames="office_id"
+                                 constraintName="doctors_offices_fk"
+                                 referencedTableName="offices"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_19" author="GoodBoy">
+        <createTable tableName="patients">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fio" type="varchar(255)"/>
+            <column name="credentials_id" type="bigint"/>
+            <column name="birth_day" type="date"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_20" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="patients"
+                                 baseColumnNames="credentials_id"
+                                 constraintName="patients_credentials_fk"
+                                 referencedTableName="credentials"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_21" author="GoodBoy">
+        <createSequence
+                sequenceName="patients_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_22" author="GoodBoy">
+        <createTable tableName="specializations">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_23" author="GoodBoy">
+        <createSequence
+                sequenceName="specializations_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_24" author="GoodBoy">
+        <createTable tableName="doctor_schedule">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="week_day" type="varchar(255)"/>
+            <column name="start_time" type="time"/>
+            <column name="end_time" type="time"/>
+            <column name="doctor_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_25" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="doctor_schedule"
+                                 baseColumnNames="doctor_id"
+                                 constraintName="doctor_schedule_doctors_fk"
+                                 referencedTableName="doctors"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_26" author="GoodBoy">
+        <createSequence
+                sequenceName="doctor_schedule_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_27" author="GoodBoy">
+        <createTable tableName="patient_histories">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="patient_id" type="bigint"/>
+            <column name="doctor_schedule_id" type="bigint"/>
+            <column name="cost" type="int"/>
+            <column name="status" type="varchar(255)"/>
+            <column name="description" type="varchar(255)" defaultValue="for doctor notice"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1606040119_28" author="GoodBoy">
+        <createSequence
+                sequenceName="patient_histories_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_29" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="patient_histories"
+                                 baseColumnNames="patient_id"
+                                 constraintName="patient_histories_patients_fk"
+                                 referencedTableName="patients"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_30" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="patient_histories"
+                                 baseColumnNames="doctor_schedule_id"
+                                 constraintName="patient_histories_doctor_schedule_fk"
+                                 referencedTableName="doctor_schedule"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1606040119_31" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="doctors"
+                                 baseColumnNames="specialization_id"
+                                 constraintName="doctors_specializations_fk"
+                                 referencedTableName="specializations"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+</databaseChangeLog>

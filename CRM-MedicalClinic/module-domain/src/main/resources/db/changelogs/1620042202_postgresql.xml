@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1620042202_1" author="GoodBoy">
+        <createTable tableName="proposals">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fio" type="varchar(255)"/>
+            <column name="email" type="varchar(255)"/>
+            <column name="message" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1620042202_2" author="GoodBoy">
+        <createSequence
+                sequenceName="proposals_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+</databaseChangeLog>
