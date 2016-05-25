@@ -1,8 +1,6 @@
 package com.pliskin.configs;
 
 import com.pliskin.Main;
-import com.pliskin.model.Doctor;
-import com.pliskin.model.DoctorSchedule;
 import com.pliskin.model.Patient;
 import com.pliskin.web.service.ApiService;
 import javafx.geometry.Insets;
@@ -21,10 +19,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 import static com.pliskin.Main.login;
 
@@ -50,35 +44,28 @@ public class AppConfiguration {
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(25, 25, 25, 25));
-
         Label emailLabel = new Label("Login");
         gridPane.add(emailLabel, 0, 1);
-
         TextField email = new TextField();
         gridPane.add(email, 1, 1);
-
         Label passLabel = new Label("Password");
         gridPane.add(passLabel, 0, 2);
-
         PasswordField pass = new PasswordField();
         gridPane.add(pass, 1, 2);
-
         final Text error = new Text();
         gridPane.add(error, 0, 6, 2, 1);
-
         Button signIn = new Button("Sign in");
         HBox hBox = new HBox(10);
         hBox.setAlignment(Pos.CENTER);
         hBox.getChildren().add(signIn);
         gridPane.add(hBox, 1, 4);
-
         signIn.setOnAction(e -> {
             ResponseEntity<Boolean> responseEntity = apiService.signIn(email.getText(), pass.getText());
             if (responseEntity.getBody()) {
                 Main.login = email.getText();
                 Main.mainScene();
             } else {
-                error.setText("error");
+                error.setText("no such user/or bad password");
             }
         });
 
@@ -91,26 +78,20 @@ public class AppConfiguration {
         editProfilePane.setHgap(10);
         editProfilePane.setVgap(10);
         editProfilePane.setPadding(new Insets(15, 15, 15, 15));
-
         ResponseEntity<Patient> responseEntity = apiService.home();
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             Patient patient = responseEntity.getBody();
             Text name = new Text("Login: " + login);
             editProfilePane.add(name, 0, 0, 2, 1);
-
             Text surname = new Text("Fio: " + patient.getFio());
             editProfilePane.add(surname, 0, 1, 2, 1);
-
             Text email = new Text("Email: " + patient.getCredentials().getEmail());
             editProfilePane.add(email, 0, 2, 2, 1);
-
             Text role = new Text("Role: " + patient.getCredentials().getRole().name());
             editProfilePane.add(role, 0, 3, 2, 1);
-
             Text status = new Text("Id: " + patient.getId());
             editProfilePane.add(status, 0, 4, 2, 1);
         }
-
         return editProfilePane;
     }
 
@@ -121,35 +102,37 @@ public class AppConfiguration {
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(25, 25, 25, 25));
-
         Label cityLabel = new Label("City");
         gridPane.add(cityLabel, 0, 1);
-
         TextField city = new TextField();
         gridPane.add(city, 1, 1);
-
         Label specializationLabel = new Label("Specialization");
         gridPane.add(specializationLabel, 0, 2);
-
         TextField specialization = new TextField();
         gridPane.add(specialization, 1, 2);
-
         Button get = new Button("Get");
         HBox hBox = new HBox(10);
         hBox.setAlignment(Pos.CENTER);
         hBox.getChildren().add(get);
         gridPane.add(hBox, 1, 4);
-
         get.setOnAction(e -> {
-            ResponseEntity<Map<Doctor, Map<Date, List<DoctorSchedule>>>> responseEntity
+            ResponseEntity<String[]> responseEntity
                     = apiService.getDates(city.getText(), specialization.getText());
             if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+                appointmentList(responseEntity.getBody());
             }
         });
         return gridPane;
-
     }
 
+    private GridPane appointmentList(String[] list) {
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(15, 15, 15, 15));
+        return gridPane;
+    }
 
     @Bean
     public Scene mainScene() {

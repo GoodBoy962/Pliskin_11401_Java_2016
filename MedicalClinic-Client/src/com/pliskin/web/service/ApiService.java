@@ -12,5 +12,5 @@ public interface ApiService {
 
     ResponseEntity<Patient> home();
 
-    ResponseEntity getDates(String city, String specialization);
+    ResponseEntity<String[]> getDates(String city, String specialization);
 }

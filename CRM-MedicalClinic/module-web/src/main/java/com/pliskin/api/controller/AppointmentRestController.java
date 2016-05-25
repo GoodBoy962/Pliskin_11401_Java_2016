@@ -4,10 +4,13 @@ import com.pliskin.model.Doctor;
 import com.pliskin.model.DoctorSchedule;
 import com.pliskin.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -34,58 +37,35 @@ public class AppointmentRestController extends BaseApiController {
     @Autowired
     SpecializationService specializationService;
 
-//    @RequestMapping(value = "/dates", method = RequestMethod.GET)
-//    public ResponseEntity<List<Date>> getDates(@RequestParam("period") String period,
-//                                                            @RequestParam("w_day") String weekDay,
-//                                                            @RequestParam("time") String time,
-//                                                            @RequestParam("doctorFio") String doctorFio) {
-//        return createGoodResponse(doctorScheduleService.getPossibleDates(period, weekDay, time, doctorFio));
-//    }
-//
-//    @RequestMapping(value = "", method = RequestMethod.POST)
-//    @ResponseStatus(HttpStatus.OK)
-//    public void createAppointment(@RequestParam("date") String date,
-//                                  @RequestParam("doctorFio") String doctorFio,
-//                                  @RequestParam("weekDay") String weekDay,
-//                                  @RequestParam("time") String time) {
-//        patientHistoryService.createHistory(doctorFio, weekDay, time, date);
-//    }
-//
-//    @RequestMapping(value = "", method = RequestMethod.GET)
-//    public ResponseEntity<List<PatientHistory>> getAppointmentsHistory() {
-//        return createGoodResponse(patientHistoryService.getHistories(SecurityUtils.getCurrentUser()));
-//    }
-//
-//    @RequestMapping(value = "/offices", method = RequestMethod.GET)
-//    public ResponseEntity<List<Office>> getOffices(@RequestParam("city") String city) {
-//        return createGoodResponse(officeService.getOfficesLikeCity(city));
-//    }
-//
-//    @RequestMapping(value = "/specializations", method = RequestMethod.GET)
-//    public ResponseEntity<Set<Specialization>> getSpecializationsOfDoctorsInOffice(
-//            @RequestParam("city") String city,
-//            @RequestParam("address") String address) {
-//        return createGoodResponse(specializationService.getSpecializationsOfDoctorsInOfficeByCityLikeAndAddress(city, address));
-//    }
-
-    @RequestMapping(value = "/dates", method = RequestMethod.GET)
-    public ResponseEntity<Map<Doctor, Map<Date, List<DoctorSchedule>>>> getPossibleDatesAndDoctors(
-            @RequestParam("city") String city,
-            @RequestParam("specialization") String specialization) {
-        String period = "w";
-        return createGoodResponse(doctorScheduleService.getAllPossibleDates(city, specialization, period));
+    @RequestMapping(value = "/dates/{city}/{specialization}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<String>> getPossibleDatesAndDoctors(
+            @PathVariable("city") String city,
+            @PathVariable("specialization") String specialization) {
+        String period = "2w";
+        Map<Doctor, Map<Date, List<DoctorSchedule>>> map = doctorScheduleService.getAllPossibleDates(city, specialization, period);
+        return createGoodResponse(createListOfDates(map));
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void createCoolAppointment(
-            @RequestParam("appointmentDate") String appointmentDate
-//            ,
-//            @RequestParam("city") String city,
-//            @RequestParam("address") String address,
-//            @RequestParam("specialization") String specialization
-    ) {
+            @RequestParam("appointmentDate") String appointmentDate) {
         patientHistoryService.createHistoryFromCoolForm(appointmentDate);
+    }
+
+    private List<String> createListOfDates(Map<Doctor, Map<Date, List<DoctorSchedule>>> map) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        List<String> list = new ArrayList<>();
+        for (Doctor doctor : map.keySet()) {
+            for (Date date : map.get(doctor).keySet()) {
+                for (DoctorSchedule doctorSchedule : map.get(doctor).get(date)) {
+                    String s = doctor.getFio() + " // " + sdf.format(date) + " "+ doctorSchedule.getWeekDay() + " " + doctorSchedule.getStartTime();
+                    list.add(s);
+                }
+            }
+        }
+        return list;
     }
 
 }

@@ -87,8 +87,10 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<Doctor> getDoctorsByOfficesAndSpecialization(List<Office> offices, String specialization) {
         List<Doctor> doctors = new ArrayList<>();
-        offices.stream()
-                .map(office -> doctors.addAll(getDoctorsByOfficeAndSpecialization(office, specialization)));
+        for (Office office : offices) {
+            List<Doctor> docs = getDoctorsByOfficeAndSpecialization(office, specialization);
+            doctors.addAll(docs);
+        }
         return doctors;
     }
 }
