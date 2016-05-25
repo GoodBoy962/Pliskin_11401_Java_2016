@@ -14,6 +14,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -81,5 +82,13 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<Doctor> getDoctorsByOfficeAndSpecialization(Office office, String specialization) {
         return doctorRepository.findByOfficeAndSpecialization(office, specializationRepository.findByName(specialization));
+    }
+
+    @Override
+    public List<Doctor> getDoctorsByOfficesAndSpecialization(List<Office> offices, String specialization) {
+        List<Doctor> doctors = new ArrayList<>();
+        offices.stream()
+                .map(office -> doctors.addAll(getDoctorsByOfficeAndSpecialization(office, specialization)));
+        return doctors;
     }
 }

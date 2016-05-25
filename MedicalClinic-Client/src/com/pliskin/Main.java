@@ -15,6 +15,8 @@ public class Main extends Application {
 
     public static Stage stage;
 
+    public static String login;
+
     public static void signInScene() {
         Scene signInScene = (Scene) context.getBean("signInScene");
         stage.setTitle("Medical clinic");

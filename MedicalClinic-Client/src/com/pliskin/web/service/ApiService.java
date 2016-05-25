@@ -1,6 +1,6 @@
 package com.pliskin.web.service;
 
-import com.pliskin.web.dto.ApiResponse;
+import com.pliskin.model.Patient;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -8,8 +8,9 @@ import org.springframework.http.ResponseEntity;
  */
 public interface ApiService {
 
-    ApiResponse signIn(String login, String password);
+    ResponseEntity<Boolean> signIn(String login, String password);
 
-    ApiResponse profile();
+    ResponseEntity<Patient> home();
 
+    ResponseEntity getDates(String city, String specialization);
 }

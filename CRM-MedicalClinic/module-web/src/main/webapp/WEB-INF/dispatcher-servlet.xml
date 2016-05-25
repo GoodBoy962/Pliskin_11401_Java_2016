@@ -12,6 +12,9 @@
                      http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
     <context:component-scan base-package="com.pliskin.controller"/>
+
+    <context:component-scan base-package="com.pliskin.api.controller"/>
+
     <mvc:resources mapping="**" location="resources/"/>
     <mvc:annotation-driven/>
 
@@ -33,11 +36,9 @@
         <property name="cache" value="false"/>
     </bean>
 
-    <context:component-scan base-package="com.pliskin.api.controller"/>
-
-    <bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
-        <property name="order" value="1"/>
-        <property name="basename" value="views"/>
-    </bean>
+    <!--<bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">-->
+        <!--<property name="order" value="1"/>-->
+        <!--<property name="basename" value="views"/>-->
+    <!--</bean>-->
 
 </beans>

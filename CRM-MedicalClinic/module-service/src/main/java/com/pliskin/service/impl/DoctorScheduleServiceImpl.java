@@ -82,6 +82,17 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
         return doctorsDates;
     }
 
+    @Override
+    public Map<Doctor, Map<Date, List<DoctorSchedule>>> getAllPossibleDates(String city, String specialization, String period) {
+        List<Doctor> doctors = doctorService.getDoctorsByOfficesAndSpecialization(officeService.getOfficeByCity(city), specialization);
+        Map<Doctor, Map<Date, List<DoctorSchedule>>> doctorsDates = new HashMap<>();
+        for (Doctor doctor : doctors) {
+            Map<Date, List<DoctorSchedule>> dates = stringDoctorMapBiFunction.apply(period, doctor);
+            doctorsDates.put(doctor, dates);
+        }
+        return doctorsDates;
+    }
+
     private List<Date> getRightDays(String period, String weekDay, Doctor doctor, String time) {
         DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         List<Date> dates = new ArrayList<>();

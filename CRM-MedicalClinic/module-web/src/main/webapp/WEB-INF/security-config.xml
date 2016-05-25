@@ -32,6 +32,8 @@
         <security:csrf disabled="true"/>
         <security:access-denied-handler ref="accessDeniedHandler"/>
         <security:remember-me key="uniqueAndSecret" token-validity-seconds="86400" remember-me-parameter="remember-me" user-service-ref="userDetailsService"/>
+
+
     </security:http>
 
     <security:user-service id="userDetailsService">

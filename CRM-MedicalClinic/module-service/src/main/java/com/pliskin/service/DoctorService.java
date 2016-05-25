@@ -24,4 +24,6 @@ public interface DoctorService {
     Doctor getDoctor();
 
     List<Doctor> getDoctorsByOfficeAndSpecialization(Office office, String specialization);
+
+    List<Doctor> getDoctorsByOfficesAndSpecialization(List<Office> officeByCity, String specialization);
 }

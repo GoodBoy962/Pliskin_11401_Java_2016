@@ -1,10 +1,10 @@
 package com.pliskin.configs;
 
 import com.pliskin.Main;
-import com.pliskin.model.Credentials;
-import com.pliskin.web.dto.ApiResponse;
+import com.pliskin.model.Doctor;
+import com.pliskin.model.DoctorSchedule;
+import com.pliskin.model.Patient;
 import com.pliskin.web.service.ApiService;
-import com.pliskin.web.service.impl.ApiServiceImpl;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,7 +19,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import static com.pliskin.Main.login;
 
 /**
  * Created by aleksandrpliskin on 22.05.16.
@@ -66,12 +73,12 @@ public class AppConfiguration {
         gridPane.add(hBox, 1, 4);
 
         signIn.setOnAction(e -> {
-            ApiResponse apiResponse = apiService.signIn(email.getText(), pass.getText());
-            if (apiResponse.getStatus() == HttpStatus.OK) {
-//                Main.token = apiResponse.getToken(); TODO
+            ResponseEntity<Boolean> responseEntity = apiService.signIn(email.getText(), pass.getText());
+            if (responseEntity.getBody()) {
+                Main.login = email.getText();
                 Main.mainScene();
             } else {
-                error.setText(String.valueOf(apiResponse.getErrors().get(0)));
+                error.setText("error");
             }
         });
 
@@ -85,28 +92,64 @@ public class AppConfiguration {
         editProfilePane.setVgap(10);
         editProfilePane.setPadding(new Insets(15, 15, 15, 15));
 
-        ApiResponse apiResponse = apiService.profile();
-        if (apiResponse.getStatus() == HttpStatus.OK) {
-            Credentials credentials = apiResponse.getCredentials();
-
-            Text name = new Text("Name: " + credentials.getLogin());
+        ResponseEntity<Patient> responseEntity = apiService.home();
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            Patient patient = responseEntity.getBody();
+            Text name = new Text("Login: " + login);
             editProfilePane.add(name, 0, 0, 2, 1);
 
-//            Text surname = new Text("Surname: " + user.getSurname());
-//            editProfilePane.add(surname, 0, 1, 2, 1);
-//
-//            Text email = new Text("Email: " + user.getEmail());
-//            editProfilePane.add(email, 0, 2, 2, 1);
-//
-//            Text role = new Text("Role: " + user.getRole().getRepresentation());
-//            editProfilePane.add(role, 0, 3, 2, 1);
-//
-//            Text status = new Text("Status: " + user.getStatus().getRepresentation());
-//            editProfilePane.add(status, 0, 4, 2, 1);
+            Text surname = new Text("Fio: " + patient.getFio());
+            editProfilePane.add(surname, 0, 1, 2, 1);
+
+            Text email = new Text("Email: " + patient.getCredentials().getEmail());
+            editProfilePane.add(email, 0, 2, 2, 1);
+
+            Text role = new Text("Role: " + patient.getCredentials().getRole().name());
+            editProfilePane.add(role, 0, 3, 2, 1);
+
+            Text status = new Text("Id: " + patient.getId());
+            editProfilePane.add(status, 0, 4, 2, 1);
         }
 
         return editProfilePane;
     }
+
+    @Bean
+    public GridPane appointmentCreationScene() {
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(25, 25, 25, 25));
+
+        Label cityLabel = new Label("City");
+        gridPane.add(cityLabel, 0, 1);
+
+        TextField city = new TextField();
+        gridPane.add(city, 1, 1);
+
+        Label specializationLabel = new Label("Specialization");
+        gridPane.add(specializationLabel, 0, 2);
+
+        TextField specialization = new TextField();
+        gridPane.add(specialization, 1, 2);
+
+        Button get = new Button("Get");
+        HBox hBox = new HBox(10);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().add(get);
+        gridPane.add(hBox, 1, 4);
+
+        get.setOnAction(e -> {
+            ResponseEntity<Map<Doctor, Map<Date, List<DoctorSchedule>>>> responseEntity
+                    = apiService.getDates(city.getText(), specialization.getText());
+            if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+            }
+        });
+        return gridPane;
+
+    }
+
 
     @Bean
     public Scene mainScene() {
@@ -120,9 +163,11 @@ public class AppConfiguration {
         Menu profileMenu = new Menu("Profile");
         MenuItem infoMenuItem = new MenuItem("Info");
         MenuItem exitMenuItem = new MenuItem("Exit");
-        profileMenu.getItems().addAll(infoMenuItem, new SeparatorMenuItem(), exitMenuItem);
+        MenuItem appotntmentForm = new MenuItem("Appointments");
+        profileMenu.getItems().addAll(infoMenuItem, new SeparatorMenuItem(), exitMenuItem, new SeparatorMenuItem(), appotntmentForm);
         infoMenuItem.setOnAction(e -> mainPane.setCenter(infoProfilePane()));
         exitMenuItem.setOnAction(e -> Main.signInScene());
+        appotntmentForm.setOnAction(e -> mainPane.setCenter(appointmentCreationScene()));
 
         // Home
         Menu homeMenu = new Menu("Home");
