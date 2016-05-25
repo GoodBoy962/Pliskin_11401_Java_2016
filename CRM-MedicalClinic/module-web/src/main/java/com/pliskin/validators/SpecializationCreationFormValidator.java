@@ -1,4 +1,4 @@
-package com.pliskin.util.validators;
+package com.pliskin.validators;
 
 import com.pliskin.forms.SpecializationCreationForm;
 import com.pliskin.repository.SpecializationRepository;

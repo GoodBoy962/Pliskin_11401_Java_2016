@@ -7,7 +7,6 @@ import com.pliskin.repository.AdminRepository;
 import com.pliskin.repository.OfficeRepository;
 import com.pliskin.repository.SpecializationRepository;
 import com.pliskin.util.CredentialsCreator;
-import com.pliskin.util.SecurityUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -83,10 +82,10 @@ public class DoctorCreationFormToDoctorTransformerTest {
         office = new Office();
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void transformerShouldCreateCorrectDoctor() {
-//        Doctor doctor = transformer.apply(form);
-//        Assert.assertEquals(doctor.getFio(), form.getName() + " " + form.getSurname() + " " + form.getLastname());
+        Doctor doctor = transformer.apply(form);
+        Assert.assertEquals(doctor.getFio(), form.getName() + " " + form.getSurname() + " " + form.getLastname());
     }
 
 

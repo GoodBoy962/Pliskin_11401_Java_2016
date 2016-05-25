@@ -8,6 +8,8 @@
     <context:property-placeholder location="classpath:pdf.properties" ignore-unresolvable="true"/>
     <util:properties id="contentProps" location="classpath:pdf.properties"/>
 
+    <context:component-scan base-package="com.pliskin.validators"/>
+
     <import resource="security-config.xml"/>
     <import resource="classpath*:configs/service-config.xml"/>
     <import resource="classpath*:configs/aop-config.xml"/>

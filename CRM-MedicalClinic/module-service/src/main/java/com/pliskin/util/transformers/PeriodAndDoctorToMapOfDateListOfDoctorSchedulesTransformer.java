@@ -42,7 +42,9 @@ public class PeriodAndDoctorToMapOfDateListOfDoctorSchedulesTransformer implemen
             curTime += interval;
         }
         for (Date date : dates) {
-            List<DoctorSchedule> resultDates = doctorScheduleRepository.findByDoctorAndWeekDay(doctor, WeekDay.valueOf(dateFormat.format(date).toUpperCase())).stream().filter(doctorSchedule -> patientHistoryRepository.findByDateAndDoctorSchedule(
+            List<DoctorSchedule> resultDates = doctorScheduleRepository
+                    .findByDoctorAndWeekDay(doctor, WeekDay.valueOf(dateFormat.format(date).toUpperCase()))
+                    .stream().filter(doctorSchedule -> patientHistoryRepository.findByDateAndDoctorSchedule(
                     date, doctorSchedule) == null).collect(Collectors.toList());
             map.put(date, resultDates);
         }
