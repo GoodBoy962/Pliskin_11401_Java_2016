@@ -5,9 +5,11 @@ package com.pliskin.util;
  */
 public interface WebUtils {
 
-    String DOMAIN = "http://localhost:8080/api/v1";
-    String SIGN_IN = DOMAIN + "/login";
-    String PROFILE = DOMAIN + "/patient";
-    String DATES = DOMAIN + "/appointment/dates";
+    String DOMAIN_URL = "http://localhost:8080/api/v1";
+    String SIGN_IN_URL = DOMAIN_URL + "/login";
+    String PROFILE_URL = DOMAIN_URL + "/patient";
+    String APPOINTMENT_DATES_URL = DOMAIN_URL + "/appointment/dates";
+    String APPOINTMENT_CREATION_URL = DOMAIN_URL + "/appointment/new";
+    String PATIENT_HISTORIES_URL = DOMAIN_URL + "/patient_histories";
 
 }

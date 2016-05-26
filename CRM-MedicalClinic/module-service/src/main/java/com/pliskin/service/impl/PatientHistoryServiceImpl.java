@@ -7,6 +7,7 @@ import com.pliskin.model.Doctor;
 import com.pliskin.model.DoctorSchedule;
 import com.pliskin.model.PatientHistory;
 import com.pliskin.model.enums.WeekDay;
+import com.pliskin.repository.CredentialsRepository;
 import com.pliskin.repository.DoctorScheduleRepository;
 import com.pliskin.repository.PatientHistoryRepository;
 import com.pliskin.service.DoctorService;
@@ -49,6 +50,9 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
     @Autowired
     Function<PatientHistory, Document> receiptGenerator;
 
+    @Autowired
+    CredentialsRepository credentialsRepository;
+
     @Secured("hasRole('ROLE_PATIENT')")
     @Transactional
     @Override
@@ -78,6 +82,33 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         }
     }
 
+    @Transactional
+    private void createHistory(String fio, String wDay, String time1, String date, String login) {
+        PatientHistory patientHistory = new PatientHistory();
+        DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        DateFormat formatter1 = new SimpleDateFormat("HH:mm:ss");
+        try {
+            patientHistory.setDate(formatter.parse(date));
+            String time = transformer.apply(time1);
+            long timeStart;
+            timeStart = formatter1.parse(time.substring(0, 8)).getTime();
+            long timeEnd = formatter1.parse(time.substring(9, time.length())).getTime();
+            Time startTime = new Time(timeStart);
+            Time endTime = new Time(timeEnd);
+            patientHistory.setStatus(Boolean.FALSE);
+            patientHistory.setPatient(patientService.getPatient(credentialsRepository.findOneByLogin(login)));
+            patientHistory.setDoctorSchedule(doctorScheduleRepository.findByDoctorAndWeekDayAndStartTimeAndEndTime(
+                    doctorService.getDoctor(fio),
+                    WeekDay.valueOf(wDay),
+                    startTime,
+                    endTime
+            ));
+            patientHistoryRepository.save(patientHistory);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public List<PatientHistory> getHistories(Credentials credentials) {
         return patientHistoryRepository.findByPatient(patientService.getPatient(credentials));
@@ -93,6 +124,17 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         String wDay = fullDate.substring(fullDate.indexOf(' ') + 1, fullDate.lastIndexOf(' '));
         String time = fullDate.substring(fullDate.lastIndexOf(' ') + 1, fullDate.length());
         createHistory(doctorFio, wDay, time, date);
+    }
+
+    @Override
+    @Transactional
+    public void createHistoryFromCoolForm(String info, String login) {
+        String doctorFio = info.substring(0, info.indexOf('/') - 1);
+        String fullDate = info.substring(info.indexOf('/') + 3);
+        String date = fullDate.substring(0, fullDate.indexOf(' '));
+        String wDay = fullDate.substring(fullDate.indexOf(' ') + 1, fullDate.lastIndexOf(' '));
+        String time = fullDate.substring(fullDate.lastIndexOf(' ') + 1, fullDate.length());
+        createHistory(doctorFio, wDay, time, date, login);
     }
 
     @Override
@@ -125,4 +167,5 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
     public List<PatientHistory> getHistories(Long id) {
         return patientHistoryRepository.findByPatient(patientService.getPatientById(id));
     }
+
 }

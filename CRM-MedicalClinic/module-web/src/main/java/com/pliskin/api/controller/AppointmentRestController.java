@@ -50,8 +50,8 @@ public class AppointmentRestController extends BaseApiController {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void createCoolAppointment(
-            @RequestParam("appointmentDate") String appointmentDate) {
-        patientHistoryService.createHistoryFromCoolForm(appointmentDate);
+            @RequestParam("appointmentDate") String appointmentDate, @RequestParam("login") String login) {
+        patientHistoryService.createHistoryFromCoolForm(appointmentDate, login);
     }
 
     private List<String> createListOfDates(Map<Doctor, Map<Date, List<DoctorSchedule>>> map) {

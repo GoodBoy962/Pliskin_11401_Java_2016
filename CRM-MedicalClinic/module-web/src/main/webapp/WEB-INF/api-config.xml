@@ -10,5 +10,6 @@
 
     <!--<context:component-scan base-package="com.pliskin.api.controller"/>-->
     <context:component-scan base-package="com.pliskin.api.service"/>
+    <context:component-scan base-package="com.pliskin.api.mapper"/>
 
 </beans>

@@ -13,4 +13,8 @@ public interface ApiService {
     ResponseEntity<Patient> home();
 
     ResponseEntity<String[]> getDates(String city, String specialization);
+
+    void createAnAppointment(String appointmentInfo);
+
+    ResponseEntity<String[]> getPatientHistories();
 }

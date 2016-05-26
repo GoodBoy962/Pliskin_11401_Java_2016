@@ -2,8 +2,6 @@ package com.pliskin;
 
 import com.pliskin.configs.AppConfiguration;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
@@ -28,6 +26,12 @@ public class Main extends Application {
         Scene homeScene = (Scene) context.getBean("mainScene");
         stage.setTitle("Home");
         stage.setScene(homeScene);
+    }
+
+    public static void appointmentListScene() {
+        Scene appointmentSceneList = (Scene) context.getBean("appointmentList");
+        stage.setTitle("Appointment list");
+        stage.setScene(appointmentSceneList);
     }
 
     @Override

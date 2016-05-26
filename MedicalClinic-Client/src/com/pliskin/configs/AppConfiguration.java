@@ -3,6 +3,8 @@ package com.pliskin.configs;
 import com.pliskin.Main;
 import com.pliskin.model.Patient;
 import com.pliskin.web.service.ApiService;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -95,6 +97,25 @@ public class AppConfiguration {
         return editProfilePane;
     }
 
+    private GridPane patientHistoriesPane() {
+        GridPane editProfilePane = new GridPane();
+        editProfilePane.setAlignment(Pos.CENTER);
+        editProfilePane.setHgap(10);
+        editProfilePane.setVgap(10);
+        editProfilePane.setPadding(new Insets(15, 15, 15, 15));
+        ResponseEntity<String[]> responseEntity = apiService.getPatientHistories();
+
+        int i = 0;
+
+        for (String s : responseEntity.getBody()) {
+            TextArea textArea = new TextArea(s);
+            editProfilePane.add(textArea, 1, i);
+            i++;
+        }
+
+        return editProfilePane;
+    }
+
     @Bean
     public GridPane appointmentCreationScene() {
         GridPane gridPane = new GridPane();
@@ -119,45 +140,74 @@ public class AppConfiguration {
             ResponseEntity<String[]> responseEntity
                     = apiService.getDates(city.getText(), specialization.getText());
             if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
-                appointmentList(responseEntity.getBody());
+                Main.stage.setScene(appointmentList(responseEntity.getBody()));
             }
         });
         return gridPane;
     }
 
-    private GridPane appointmentList(String[] list) {
+    private Scene appointmentList(String[] list) {
+
         GridPane gridPane = new GridPane();
+
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(15, 15, 15, 15));
-        return gridPane;
+        int i = 0;
+        final ToggleGroup group = new ToggleGroup();
+        for (String s : list) {
+            RadioButton radioButton = new RadioButton(s);
+            radioButton.setToggleGroup(group);
+            radioButton.setUserData(s);
+            gridPane.add(radioButton, 0, i);
+            i++;
+            if (i == 10) break;
+        }
+
+        Button createButton = new Button("create an appointment");
+        createButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                apiService.createAnAppointment(group.getSelectedToggle().getUserData().toString());
+                Main.mainScene();
+            }
+        });
+        HBox hBox = new HBox(10);
+        hBox.setAlignment(Pos.BOTTOM_LEFT);
+        hBox.getChildren().add(createButton);
+        Button back = new Button("back");
+        back.setOnAction(event -> Main.mainScene());
+        hBox.getChildren().addAll(back);
+        gridPane.add(hBox, 1, i);
+        return new Scene(gridPane);
     }
 
     @Bean
     public Scene mainScene() {
         BorderPane mainPane = new BorderPane();
-
         MenuBar menu = new MenuBar();
         menu.prefWidthProperty().bind(Main.stage.widthProperty());
         mainPane.setTop(menu);
-
-        // Profile
         Menu profileMenu = new Menu("Profile");
         MenuItem infoMenuItem = new MenuItem("Info");
         MenuItem exitMenuItem = new MenuItem("Exit");
-        MenuItem appotntmentForm = new MenuItem("Appointments");
-        profileMenu.getItems().addAll(infoMenuItem, new SeparatorMenuItem(), exitMenuItem, new SeparatorMenuItem(), appotntmentForm);
+        Menu appointmentsMenu = new Menu("Appointments");
+        MenuItem appointmentForm = new MenuItem("Appointments");
+        MenuItem patientHistories = new MenuItem("Patient Histories");
+        profileMenu.getItems().addAll(infoMenuItem, new SeparatorMenuItem(), exitMenuItem, new SeparatorMenuItem());
+        appointmentsMenu.getItems().addAll(appointmentForm, patientHistories);
         infoMenuItem.setOnAction(e -> mainPane.setCenter(infoProfilePane()));
-        exitMenuItem.setOnAction(e -> Main.signInScene());
-        appotntmentForm.setOnAction(e -> mainPane.setCenter(appointmentCreationScene()));
-
-        // Home
-        Menu homeMenu = new Menu("Home");
-//        homeMenu.setOnAction(e -> mainPane.setCenter());
-
+        exitMenuItem.setOnAction(e -> {
+            mainPane.setCenter(new Label("Welcome"));
+            Main.signInScene();
+        });
+        appointmentForm.setOnAction(e -> mainPane.setCenter(appointmentCreationScene()));
+        patientHistories.setOnAction(event -> mainPane.setCenter(patientHistoriesPane()));
         menu.getMenus().add(profileMenu);
-
+        menu.getMenus().addAll(appointmentsMenu);
+        Label greetingLabel = new Label("Welcome! Medical Clinics are waiting!");
+        mainPane.setCenter(greetingLabel);
         return new Scene(mainPane, 400, 350, Color.WHITE);
     }
 }

@@ -174,7 +174,10 @@ public class BallGame extends Application {
             if (heroTouchCheck(circle)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "You score is " + score);
                 alert.show();
-                alert.setOnCloseRequest(event -> primaryStage.close());
+                alert.setOnCloseRequest(event -> {
+                    primaryStage.close();
+                    alert.close();
+                });
             }
         }
     }
