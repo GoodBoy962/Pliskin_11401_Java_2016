@@ -39,11 +39,13 @@ public class BallGame extends Application {
     private static List<Ball> balls = new ArrayList<>();
     private static final int RADIUS = 20;
     private int targetSize = 40;
+    private Stage primaryStage;
     int score = 0;
     Rectangle target;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        this.primaryStage = primaryStage;
         hero = new Hero(imageView, this);
         group = new Group();
         scene = new Scene(group, sceneWidth, sceneLength);
@@ -172,6 +174,7 @@ public class BallGame extends Application {
             if (heroTouchCheck(circle)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "You score is " + score);
                 alert.show();
+                alert.setOnCloseRequest(event -> primaryStage.close());
             }
         }
     }
