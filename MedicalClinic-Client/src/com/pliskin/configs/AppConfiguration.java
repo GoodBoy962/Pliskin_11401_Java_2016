@@ -112,7 +112,6 @@ public class AppConfiguration {
             editProfilePane.add(textArea, 1, i);
             i++;
         }
-
         return editProfilePane;
     }
 
