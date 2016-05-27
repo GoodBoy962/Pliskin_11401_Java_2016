@@ -5,12 +5,15 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -42,11 +45,14 @@ public class BallGame extends Application {
     private Stage primaryStage;
     int score = 0;
     Rectangle target;
+    Label scoreLabel;
+    BallGame ballGame;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        ballGame = this;
         this.primaryStage = primaryStage;
-        hero = new Hero(imageView, this);
+        hero = createHero();
         group = new Group();
         scene = new Scene(group, sceneWidth, sceneLength);
         balls = new ArrayList<>();
@@ -60,19 +66,23 @@ public class BallGame extends Application {
             }
         };
         timer.start();
-
-        group.getChildren().addAll(hero);
+        scoreLabel = new Label("0");
+        group.getChildren().addAll(hero, scoreLabel);
         primaryStage.setTitle("Smash ball");
         primaryStage.setScene(scene);
         primaryStage.show();
 
     }
 
+    private Hero createHero() {
+        return new Hero(imageView, this);
+    }
+
     private class Ball {
 
         private int dx;
         private int dy;
-        private Timeline timeline;
+        Timeline timeline;
         Circle circle;
 
         Ball(Scene scene, Group group) {
@@ -172,12 +182,7 @@ public class BallGame extends Application {
 
         private void checkHeroTouched() {
             if (heroTouchCheck(circle)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You score is " + score);
-                alert.show();
-                alert.setOnCloseRequest(event -> {
-                    primaryStage.close();
-                    alert.close();
-                });
+                alert();
             }
         }
     }
@@ -228,6 +233,53 @@ public class BallGame extends Application {
         }
     }
 
+    private void alert() {
+
+        scoreLabel.setText("0");
+        balls.forEach(ball -> ball.timeline.stop());
+        hero.animation.stop();
+
+        group.getChildren().remove(target);
+        for (Ball ball : balls) {
+            group.getChildren().remove(ball.circle);
+        }
+
+        Stage stage = new Stage();
+
+//        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("The end!");
+        stage.setMinWidth(250);
+
+        Label label = new Label();
+        label.setText("your score is " + score);
+        score = 0;
+
+        Button restartButton = new Button("Restart");
+        restartButton.setOnAction(e -> {
+            stage.close();
+            balls = new ArrayList<>();
+            initElements();
+            scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
+            scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
+            AnimationTimer timer = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
+                    update();
+                }
+            };
+            timer.start();
+        });
+
+        VBox vBox = new VBox(10);
+        vBox.getChildren().addAll(label, restartButton);
+        vBox.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(vBox);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
     private boolean isPressed(KeyCode key) {
         return keys.getOrDefault(key, false);
     }
@@ -243,6 +295,8 @@ public class BallGame extends Application {
         double heroYMin = hero.getCurY();
         double heroXMax = hero.getCurX();
         double heroYMax = hero.getCurY();
+
+        scoreLabel.setText(String.valueOf(score));
 
         return ((heroXMin >= xMin && heroXMin <= xMax) || (heroXMax >= xMin && heroXMax <= xMax)) && ((heroYMin >= yMin && heroYMin <= yMax) || (heroYMax >= yMin && heroYMax <= yMax));
     }
