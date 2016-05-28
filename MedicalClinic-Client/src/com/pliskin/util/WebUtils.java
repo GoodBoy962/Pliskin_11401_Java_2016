@@ -11,5 +11,6 @@ public interface WebUtils {
     String APPOINTMENT_DATES_URL = DOMAIN_URL + "/appointment/dates";
     String APPOINTMENT_CREATION_URL = DOMAIN_URL + "/appointment/new";
     String PATIENT_HISTORIES_URL = DOMAIN_URL + "/patient_histories";
+    String PATIENT_INFO_URL = DOMAIN_URL + "/patient/info";
 
 }

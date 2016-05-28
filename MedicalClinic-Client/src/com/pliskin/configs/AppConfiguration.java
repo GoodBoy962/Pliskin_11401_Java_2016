@@ -83,16 +83,28 @@ public class AppConfiguration {
         ResponseEntity<Patient> responseEntity = apiService.home();
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             Patient patient = responseEntity.getBody();
-            Text name = new Text("Login: " + login);
+            TextArea name = new TextArea(login);
             editProfilePane.add(name, 0, 0, 2, 1);
-            Text surname = new Text("Fio: " + patient.getFio());
+            TextArea surname = new TextArea(patient.getFio());
             editProfilePane.add(surname, 0, 1, 2, 1);
-            Text email = new Text("Email: " + patient.getCredentials().getEmail());
+            TextArea email = new TextArea(patient.getCredentials().getEmail());
             editProfilePane.add(email, 0, 2, 2, 1);
             Text role = new Text("Role: " + patient.getCredentials().getRole().name());
             editProfilePane.add(role, 0, 3, 2, 1);
             Text status = new Text("Id: " + patient.getId());
             editProfilePane.add(status, 0, 4, 2, 1);
+            Button changeButton = new Button("change");
+            editProfilePane.add(changeButton, 0, 5, 2, 1);
+            changeButton.setOnAction(event -> {
+                if (apiService.changeInfo(name.getText(), surname.getText(), email.getText()).getBody()) {
+                    login = name.getText();
+                    Text success = new Text("Successfully!");
+                    editProfilePane.add(success, 0, 6, 2, 1);
+                } else {
+                    Text error = new Text("patient with such data already exists");
+                    editProfilePane.add(error, 0, 6, 2, 1);
+                }
+            });
         }
         return editProfilePane;
     }

@@ -17,4 +17,6 @@ public interface ApiService {
     void createAnAppointment(String appointmentInfo);
 
     ResponseEntity<String[]> getPatientHistories();
+
+    ResponseEntity<Boolean> changeInfo(String login, String fio, String email);
 }

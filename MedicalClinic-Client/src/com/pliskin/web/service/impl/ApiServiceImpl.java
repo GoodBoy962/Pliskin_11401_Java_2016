@@ -59,5 +59,15 @@ public class ApiServiceImpl implements ApiService {
         return restTemplate.getForEntity(WebUtils.PATIENT_HISTORIES_URL + "/" + login, String[].class);
     }
 
+    @Override
+    public ResponseEntity<Boolean> changeInfo(String login, String fio, String email) {
+        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+        params.add("oldLogin", Main.login);
+        params.add("login", login);
+        params.add("fio", fio);
+        params.add("email", email);
+        return restTemplate.postForEntity(WebUtils.PATIENT_INFO_URL, params, Boolean.class);
+    }
+
 
 }
