@@ -47,6 +47,7 @@ public class BallGame extends Application {
     Rectangle target;
     Label scoreLabel;
     BallGame ballGame;
+    private AnimationTimer timer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -59,7 +60,7 @@ public class BallGame extends Application {
         initElements();
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 update();
@@ -261,7 +262,9 @@ public class BallGame extends Application {
             initElements();
             scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
             scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
-            AnimationTimer timer = new AnimationTimer() {
+            timer.stop();
+            hero.animation.stop();
+            timer = new AnimationTimer() {
                 @Override
                 public void handle(long now) {
                     update();
