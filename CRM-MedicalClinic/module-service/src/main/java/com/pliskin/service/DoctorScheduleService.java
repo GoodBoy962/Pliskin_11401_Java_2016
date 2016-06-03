@@ -20,4 +20,6 @@ public interface DoctorScheduleService {
     List<Date> getPossibleDates(String period, String weekDay, String time, String doctorFio);
 
     Map<Doctor, Map<Date, List<DoctorSchedule>>> getAllPossibleDates(String city, String address, String specialization, String period);
+
+    Map<Doctor, Map<Date, List<DoctorSchedule>>> getAllPossibleDates(String city, String specialization, String period);
 }

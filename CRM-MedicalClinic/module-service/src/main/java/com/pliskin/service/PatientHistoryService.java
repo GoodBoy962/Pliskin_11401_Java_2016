@@ -28,4 +28,6 @@ public interface PatientHistoryService {
     Document changeAppointment(Long id, AppointmentChangeForm form);
 
     List<PatientHistory> getHistories(Long id);
+
+    void createHistoryFromCoolForm(String info, String login);
 }

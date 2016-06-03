@@ -26,4 +26,6 @@ public interface OfficeService {
     Office getOfficeByCityAndAddress(String city, String address);
 
     List<Office> getOfficesLikeCity(String city);
+
+    List<Office> getOfficeByCity(String city);
 }

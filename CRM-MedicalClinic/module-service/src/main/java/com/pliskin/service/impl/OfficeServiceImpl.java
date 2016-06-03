@@ -101,4 +101,9 @@ public class OfficeServiceImpl implements OfficeService {
     public List<Office> getOfficesLikeCity(String city) {
         return officeRepository.findByCityLike("%" + city + "%");
     }
+
+    @Override
+    public List<Office> getOfficeByCity(String city) {
+        return officeRepository.findByCity(city);
+    }
 }

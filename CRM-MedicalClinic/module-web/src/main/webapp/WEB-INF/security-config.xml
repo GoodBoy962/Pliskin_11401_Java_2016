@@ -19,6 +19,7 @@
         <security:intercept-url pattern="/medical_clinics/**" access="permitAll()"/>
         <security:intercept-url pattern="/medical_clinics/*/offices/new" access="hasRole('ROLE_SYSTEM_ADMIN')"/>
         <security:intercept-url pattern="/doctors/*/timetable/new" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/rest/**" access="hasRole('ROLE_PATIENT')"/>
         <security:form-login
                 login-page="/login"
                 login-processing-url="/login/process"
@@ -31,6 +32,8 @@
         <security:csrf disabled="true"/>
         <security:access-denied-handler ref="accessDeniedHandler"/>
         <security:remember-me key="uniqueAndSecret" token-validity-seconds="86400" remember-me-parameter="remember-me" user-service-ref="userDetailsService"/>
+
+
     </security:http>
 
     <security:user-service id="userDetailsService">
